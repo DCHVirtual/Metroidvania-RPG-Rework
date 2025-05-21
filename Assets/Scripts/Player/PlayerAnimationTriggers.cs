@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerAnimationTriggers : MonoBehaviour
 {
     Player player;
+    Entity_Combat entityCombat => GetComponentInParent<Entity_Combat>();
 
     private void Awake()
     {
@@ -16,6 +17,6 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     public void AttackTrigger()
     {
-
+        entityCombat.PerformAttack();
     }
 }

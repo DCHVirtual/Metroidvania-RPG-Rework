@@ -8,20 +8,22 @@ public class Player_BasicAttackState : PlayerState
     bool attackedBeforeEnd;
     float attackVelocityTime = 0.15f;
 
-    public Player_BasicAttackState(Player _player, StateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+    public Player_BasicAttackState(Player _player, StateMachine stateMachine, string animBoolName) : base(_player, stateMachine, animBoolName)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        player.SetVelocity(0, rb.linearVelocityY);
-        stateTimer = attackVelocityTime;
+        //player.SetVelocity(0, rb.linearVelocityY);
         if (comboCounter == numComboAttacks || !attackedBeforeEnd)
             comboCounter = 0;
         player.anim.SetInteger("comboCounter", comboCounter);
+
         float attackDir = player.moveInput.x == 0 ? player.xDir : player.moveInput.x;
         player.SetVelocity(player.attackMovement[comboCounter].x * attackDir, player.attackMovement[comboCounter].y);
+        stateTimer = attackVelocityTime;
+
         attackedBeforeEnd = false;
     }
 

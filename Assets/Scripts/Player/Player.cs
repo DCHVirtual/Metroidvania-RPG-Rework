@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
+    public static event Action OnPlayerDeath;
     public PlayerInputSet input { get; private set; }
 
     public Player_IdleState idleState { get; private set; }
@@ -14,25 +15,27 @@ public class Player : Entity
     public Player_DashState dashState { get; private set; }
     public Player_BasicAttackState basicAttackState { get; private set; }
     public Player_JumpAttackState jumpAttackState { get; private set; }
+    public Player_DeathState deathState { get; private set; }
+    public Player_CounterState counterState { get; private set; }
 
+    
+    [SerializeField] protected Transform wallCheck2;
 
     [field: Header("Movement")]
-    [field: SerializeField] public float moveSpeed { get; private set; }
     [field: SerializeField] public float jumpForce { get; private set; }
     [field: SerializeField] public Vector2 wallJumpForce { get; private set; }
     [field: SerializeField] public float airMoveMultiplier { get; private set; }
     [field: SerializeField] public float wallSlideMultiplier { get; private set; }
     [field: SerializeField] public Vector2[] attackMovement {  get; private set; }
     public Vector2 moveInput { get; private set; }
-    
 
-    void Awake()
+
+
+    protected override void Awake()
     {
+        base.Awake();
         input = new PlayerInputSet();
-        anim = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
 
-        stateMachine = new StateMachine();
         idleState = new Player_IdleState(this, stateMachine, "Idle");
         moveState = new Player_MoveState(this, stateMachine, "Move");
         jumpState = new Player_JumpState(this, stateMachine, "Jump");
@@ -42,6 +45,8 @@ public class Player : Entity
         dashState = new Player_DashState(this, stateMachine, "Dash");
         basicAttackState = new Player_BasicAttackState(this, stateMachine, "Attack");
         jumpAttackState = new Player_JumpAttackState(this, stateMachine, "JumpAttack");
+        deathState = new Player_DeathState(this, stateMachine, "Death");
+        counterState = new Player_CounterState(this, stateMachine, "CounterAttempt");
     }
 
     private void OnEnable()
@@ -57,13 +62,35 @@ public class Player : Entity
         input.Disable();
     }
 
-    protected override void Start()
+    protected void Start()
     {
         stateMachine.Initialize(idleState);
     }
 
-    protected override void Update()
+    public override void EntityDeath()
     {
-        base.Update();
+        base.EntityDeath();
+        OnPlayerDeath?.Invoke();
+        stateMachine.ChangeState(deathState);
+    }
+
+    //Either wallcheck must suffice in order to not clip through walls while dashing
+    public bool IsWallDetectedDash()
+    {
+        return Physics2D.Raycast(wallCheck1.position, xDir * Vector2.right, wallCheckDist, groundMask) ||
+                 Physics2D.Raycast(wallCheck2.position, xDir * Vector2.right, wallCheckDist, groundMask);
+    }
+
+    public override bool IsWallDetected()
+    {
+        return Physics2D.Raycast(wallCheck1.position, xDir * Vector2.right, wallCheckDist, groundMask) &&
+                 Physics2D.Raycast(wallCheck2.position, xDir * Vector2.right, wallCheckDist, groundMask);
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCheckDist));
+        Gizmos.DrawLine(wallCheck2.position, wallCheck2.position + new Vector3(xDir * wallCheckDist, 0));
     }
 }

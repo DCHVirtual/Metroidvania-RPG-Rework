@@ -21,11 +21,16 @@ public class Player_GroundedState : PlayerState
         base.Update();
 
         if (!player.IsGroundDetected())
+        {
             stateMachine.ChangeState(player.airState);
+            return;
+        }
 
-        if (inputAction.Jump.WasPerformedThisFrame())
+        if (inputAction.Jump.WasPressedThisFrame())
             stateMachine.ChangeState(player.jumpState);
-        else if (inputAction.Attack.WasPerformedThisFrame())
+        else if (inputAction.Attack.WasPressedThisFrame())
             stateMachine.ChangeState(player.basicAttackState);
+        else if (inputAction.CounterAttack.WasPressedThisFrame())
+            stateMachine.ChangeState(player.counterState);
     }
 }

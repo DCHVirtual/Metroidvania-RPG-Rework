@@ -1,3 +1,4 @@
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public abstract class PlayerState : EntityState
@@ -14,13 +15,11 @@ public abstract class PlayerState : EntityState
     public override void Enter()
     {
         base.Enter();
-        anim.SetBool(animBoolName, true);
     }
 
     public override void Exit()
     {
         base.Exit();
-        anim.SetBool(animBoolName, false);
     }
 
     public override void Update()
@@ -28,11 +27,15 @@ public abstract class PlayerState : EntityState
         base.Update();
         anim.SetFloat("yVelocity", rb.linearVelocityY);
         if (inputAction.Dash.WasPerformedThisFrame() && CanDashFromState())
+        {
+            if (player.IsWallDetected())
+                player.Flip();
             stateMachine.ChangeState(player.dashState);
+        }
     }
 
     bool CanDashFromState()
     {
-        return !player.IsWallDetected() && stateMachine.currentState != player.dashState;
+        return stateMachine.currentState != player.dashState;
     }
 }

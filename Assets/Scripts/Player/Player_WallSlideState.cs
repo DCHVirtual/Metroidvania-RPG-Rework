@@ -20,7 +20,13 @@ public class Player_WallSlideState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (player.moveInput.x != 0 && player.xDir != player.moveInput.x || player.IsGroundDetected() || !player.IsWallDetected())
+        
+        //If dashed from this state, need to ignore rest of update
+        if (stateMachine.currentState == player.dashState) return;
+
+        if (player.moveInput.x != 0 && player.xDir != player.moveInput.x || !player.IsWallDetected())
+            stateMachine.ChangeState(player.airState);
+        else if (player.IsGroundDetected())
             stateMachine.ChangeState(player.idleState);
         else if (rb.linearVelocityY < 0)
         {
