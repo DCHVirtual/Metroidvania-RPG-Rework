@@ -51,7 +51,7 @@ public class Entity_Health : MonoBehaviour, IDamageable
 
     bool AttackEvaded() => Random.Range(0, 100) < stats.GetEvasion();
 
-    protected void ReduceHP(float dmg)
+    public void ReduceHP(float dmg)
     {
         fx?.PlayDamageVFX();
         currentHP -= dmg;

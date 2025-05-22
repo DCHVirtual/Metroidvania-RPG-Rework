@@ -80,6 +80,32 @@ public class EntityFX : MonoBehaviour
         vfx.transform.localScale *= 1.5f;
     }
 
+    public void PlayStatusVFX(float duration, ElementType element)
+    {
+        StartCoroutine(PlayStatusVFX_Co(duration, ElementHitVFXColor(element)));
+    }
+
+    IEnumerator PlayStatusVFX_Co(float duration, Color color)
+    {
+        float tickInterval = .15f;
+        float timePassed = 0f;
+
+        Color lightColor = color * 1.5f;
+        Color darkColor = color * .75f;
+        Color[] colors = { lightColor, color, darkColor, color };
+        int colorIndex = 1;
+
+        while (timePassed < duration)
+        {
+            sr.color = colors[colorIndex++];
+            if (colorIndex == colors.Length) colorIndex = 0;
+            yield return new WaitForSeconds(tickInterval);
+            timePassed += tickInterval;
+        }
+
+        sr.color = Color.white;
+    }
+
     IEnumerator FlashFX()
     {
         sr.material = OnDmgVFX;

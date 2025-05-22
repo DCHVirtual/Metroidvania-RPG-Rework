@@ -26,7 +26,7 @@ public class Entity_Stats : MonoBehaviour
     #endregion
 
     #region Stat Calculations
-    public float GetPhysicalDamage(out bool isCrit)
+    public float GetPhysicalDamage(out bool isCrit, float scaleFactor = 1f)
     {
         float baseDamage = offense.damage.GetValue();
         float bonusDamage = major.strength.GetValue() * strengthDamageMult;
@@ -43,11 +43,11 @@ public class Entity_Stats : MonoBehaviour
         isCrit = Random.Range(0, 100) < critChance;
         float finalDamage = isCrit ? damage * critDamage : damage;
 
-        return finalDamage;
+        return finalDamage * scaleFactor;
     }
 
     //Highest stat applies 100% dmg and status effect, other stats apply 50% dmg
-    public float GetElementalDamage(out ElementType highestElement)
+    public float GetElementalDamage(out ElementType highestElement, float scaleFactor = 1f)
     {
 
         List<float> elementDamages = new List<float>();
@@ -71,7 +71,7 @@ public class Entity_Stats : MonoBehaviour
         }
 
         Debug.Log($"Elemental Damage: {totalElementalDamage} of type {highestElement}");
-        return totalElementalDamage;
+        return totalElementalDamage * scaleFactor;
     }
 
     public float GetArmorMitigation(float attackArmorReduction)

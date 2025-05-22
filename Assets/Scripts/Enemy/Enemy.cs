@@ -160,12 +160,10 @@ public class Enemy : Entity
     {
         moveSpeed *= speedMultiplier;
         anim.speed *= speedMultiplier;
-        sr.color = Color.cyan;
 
         yield return new WaitForSeconds(duration);
 
         moveSpeed = originalMoveSpeed;
         anim.speed = originalAnimSpeed;
-        sr.color = Color.white;
     }
 }

@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 176b1a42923f65840aa1b8f3e5320c02
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - burnVFX: {fileID: 3868516037238911815, guid: e2855778e1994c4459b5960b4d9c2929, type: 3}
+  - lightningVFX: {fileID: 3868516037238911815, guid: ef787c6a34e7e5b49bac7512bc868adb, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

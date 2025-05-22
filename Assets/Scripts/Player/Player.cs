@@ -119,7 +119,6 @@ public class Player : Entity
         anim.speed *= speedMultiplier;
         wallJumpForce *= speedMultiplier;
         dashSpeed *= speedMultiplier;
-        sr.color = Color.cyan;
 
         for (int i = 0; i < attackMovement.Length; i++)
             attackMovement[i] *= speedMultiplier;
@@ -131,7 +130,6 @@ public class Player : Entity
         anim.speed = originalAnimSpeed;
         wallJumpForce = originalWallJumpForce;
         dashSpeed = originalDashSpeed;
-        sr.color = originalColor;
 
         for (int i = 0; i < originalAttackMovement.Length; i++)
             attackMovement[i] = originalAttackMovement[i];

@@ -33,15 +33,16 @@ public class Entity_Combat : MonoBehaviour
             bool damaged = damageable.TakeDamage(physicalDamage, transform, elementalDamage, elemType);
             var vfxPos = (Vector2)target.transform.position + Random.insideUnitCircle * .5f;
 
-            if (elemType != ElementType.None)
-                ApplyStatusEffect(target.transform, elemType);
-
             if (damaged)
+            {
                 fx.PlayHitVFX(vfxPos, isCrit, elemType);
+                if (elemType != ElementType.None)
+                    ApplyStatusEffect(target.transform, elemType);
+            }
         }
     }
 
-    public void ApplyStatusEffect(Transform target, ElementType element)
+    public void ApplyStatusEffect(Transform target, ElementType element, float scaleFactor = 1f)
     {
         Entity_StatusHandler statusHandler = target.GetComponent<Entity_StatusHandler>();
 
@@ -49,6 +50,13 @@ public class Entity_Combat : MonoBehaviour
 
         if (element == ElementType.Ice && statusHandler.CanBeApplied(ElementType.Ice))
             statusHandler.ApplyChilledStatus(statusDuration, chillSlowMultiplier);
+        else if (element == ElementType.Fire && statusHandler.CanBeApplied(ElementType.Fire))
+        {
+            float fireDamage = stats.offense.fireDamage.GetValue() * scaleFactor;
+            statusHandler.ApplyBurnedStatus(statusDuration, fireDamage);
+        }
+        else if (element == ElementType.Lightning && statusHandler.CanBeApplied(ElementType.Lightning))
+            statusHandler.ApplyElectrifiedStatus(/*statusDuration, chillSlowMultiplier*/);
     }
 
     protected Collider2D[] GetDetectedColliders()

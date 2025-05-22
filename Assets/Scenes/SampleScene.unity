@@ -56221,6 +56221,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStatus: 3
+  burnVFX: {fileID: 0}
+  lightningVFX: {fileID: 0}
 --- !u!1001 &1062027231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56277,6 +56279,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6020859370422251312, guid: 54bf223548c37824b9db9e8aa1b977bb, type: 3}
+      propertyPath: burnVFX
+      value: 
+      objectReference: {fileID: 3868516037238911815, guid: e2855778e1994c4459b5960b4d9c2929, type: 3}
+    - target: {fileID: 6020859370422251312, guid: 54bf223548c37824b9db9e8aa1b977bb, type: 3}
+      propertyPath: lightningVFX
+      value: 
+      objectReference: {fileID: 3868516037238911815, guid: ef787c6a34e7e5b49bac7512bc868adb, type: 3}
     - target: {fileID: 7312581666784464436, guid: 54bf223548c37824b9db9e8aa1b977bb, type: 3}
       propertyPath: m_Name
       value: Enemy_Skeleton
