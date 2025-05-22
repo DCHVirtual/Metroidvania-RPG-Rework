@@ -15,12 +15,14 @@ public class Enemy_Health : Entity_Health
         enemy.EntityDeath();
     }
 
-    public override void TakeDamage(float dmg, Transform dmgDealer)
+    public override bool TakeDamage(float dmg, Transform dmgDealer, 
+        float elementalDmg = 0f, ElementType elemType = ElementType.None)
     {
-        base.TakeDamage(dmg, dmgDealer);
+        bool damaged = base.TakeDamage(dmg, dmgDealer, elementalDmg, elemType);
         enemy.attackTarget = dmgDealer;
         if (enemy.stateMachine.currentState != enemy.aggroState &&
             enemy.stateMachine.currentState != enemy.attackState)
                 enemy.stateMachine.ChangeState(enemy.aggroState);
+        return damaged;
     }
 }

@@ -11,18 +11,14 @@ public class Player_Combat : Entity_Combat
 
         foreach (var target in GetDetectedColliders())
         {
-            var counterable = target.GetComponent<ICounterable>();
-            if (counterable == null)
-                continue;
-
-            if (counterable.WasCountered())
+            var enemy = target.GetComponent<Enemy>();
+            if (enemy && enemy.DetectCounter())
             {
                 counteredEnemies++;
                 GetComponent<EntityFX>().PlayCounterVFX(target.transform.position);
             }
         }
 
-        Debug.Log($"Countered enemies: {counteredEnemies}");
         return counteredEnemies > 0;
     }
 }

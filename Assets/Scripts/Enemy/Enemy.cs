@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Enemy : Entity
 {
@@ -49,8 +50,9 @@ public class Enemy : Entity
         deathState = new Enemy_DeathState(this, stateMachine, "Death");
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         stateMachine.Initialize(idleState);
     }
 
@@ -102,6 +104,16 @@ public class Enemy : Entity
     #endregion
 
     #region Counter/Stun Window Functions
+    public bool DetectCounter()
+    {
+        if (counterWindowOpen)
+        {
+            stateMachine.ChangeState(stunnedState);
+            return true;
+        }
+        return false;
+    }
+
     public void OpenCounterWindow()
     {
         counterWindowOpen = true;
@@ -137,5 +149,23 @@ public class Enemy : Entity
         stateMachine.ChangeState(motionlessState);
         yield return new WaitForSeconds(_seconds);
         stateMachine.ChangeState(idleState);
+    }
+
+    public override void ChillEntity(float duration, float speedMultiplier)
+    {
+        StartCoroutine(ChillEntityCo(duration, speedMultiplier));
+    }
+
+    IEnumerator ChillEntityCo(float duration, float speedMultiplier)
+    {
+        moveSpeed *= speedMultiplier;
+        anim.speed *= speedMultiplier;
+        sr.color = Color.cyan;
+
+        yield return new WaitForSeconds(duration);
+
+        moveSpeed = originalMoveSpeed;
+        anim.speed = originalAnimSpeed;
+        sr.color = Color.white;
     }
 }

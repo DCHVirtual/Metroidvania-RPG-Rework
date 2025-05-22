@@ -1,8 +1,16 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Player : Entity
 {
+
+    #region Declarations
+    float originalJumpForce;
+    float originalDashSpeed;
+    Vector2 originalWallJumpForce;
+    Vector2[] originalAttackMovement;
+
     public static event Action OnPlayerDeath;
     public PlayerInputSet input { get; private set; }
 
@@ -27,9 +35,9 @@ public class Player : Entity
     [field: SerializeField] public float airMoveMultiplier { get; private set; }
     [field: SerializeField] public float wallSlideMultiplier { get; private set; }
     [field: SerializeField] public Vector2[] attackMovement {  get; private set; }
+    [field: SerializeField] public float dashSpeed {  get; private set; }
     public Vector2 moveInput { get; private set; }
-
-
+    #endregion
 
     protected override void Awake()
     {
@@ -62,9 +70,14 @@ public class Player : Entity
         input.Disable();
     }
 
-    protected void Start()
+    protected override void Start()
     {
+        base.Start();
         stateMachine.Initialize(idleState);
+        originalJumpForce = jumpForce;
+        originalWallJumpForce = wallJumpForce;
+        originalAttackMovement = attackMovement;
+        originalDashSpeed = dashSpeed;
     }
 
     public override void EntityDeath()
@@ -92,5 +105,35 @@ public class Player : Entity
         base.OnDrawGizmos();
         Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCheckDist));
         Gizmos.DrawLine(wallCheck2.position, wallCheck2.position + new Vector3(xDir * wallCheckDist, 0));
+    }
+
+    public override void ChillEntity(float duration, float speedMultiplier)
+    {
+        StartCoroutine(ChillEntityCo(duration, speedMultiplier));
+    }
+
+    IEnumerator ChillEntityCo(float duration, float speedMultiplier)
+    {
+        moveSpeed *= speedMultiplier;
+        jumpForce *= speedMultiplier;
+        anim.speed *= speedMultiplier;
+        wallJumpForce *= speedMultiplier;
+        dashSpeed *= speedMultiplier;
+        sr.color = Color.cyan;
+
+        for (int i = 0; i < attackMovement.Length; i++)
+            attackMovement[i] *= speedMultiplier;
+
+        yield return new WaitForSeconds(duration);
+
+        moveSpeed = originalMoveSpeed;
+        jumpForce = originalJumpForce;
+        anim.speed = originalAnimSpeed;
+        wallJumpForce = originalWallJumpForce;
+        dashSpeed = originalDashSpeed;
+        sr.color = originalColor;
+
+        for (int i = 0; i < originalAttackMovement.Length; i++)
+            attackMovement[i] = originalAttackMovement[i];
     }
 }

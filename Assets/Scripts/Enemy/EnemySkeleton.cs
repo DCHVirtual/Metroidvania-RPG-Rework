@@ -1,17 +1,7 @@
 using UnityEngine;
 
-public class EnemySkeleton : Enemy, ICounterable
+public class EnemySkeleton : Enemy
 {
-    public bool WasCountered()
-    {
-        if (counterWindowOpen)
-        {
-            stateMachine.ChangeState(stunnedState);
-            return true;
-        }
-        return false;
-    }
-
     protected override void Awake()
     {
         base.Awake();

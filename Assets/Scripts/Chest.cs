@@ -5,12 +5,15 @@ public class Chest : MonoBehaviour, IDamageable
     Animator anim => GetComponentInChildren<Animator>();
     Rigidbody2D rb => GetComponent<Rigidbody2D>();
     EntityFX fx => GetComponent<EntityFX>();
-    public void TakeDamage(float dmg, Transform dmgDealer)
+    public bool TakeDamage(float dmg, Transform dmgDealer, 
+        float elementalDmg = 0f, ElementType elemType = ElementType.None)
     {
         
         rb.linearVelocity = new Vector2(0, 5);
         rb.angularVelocity = Random.Range(-200f, 200f);
         fx.PlayDamageVFX();
         anim.SetBool("Open", true);
+
+        return true;
     }
 }

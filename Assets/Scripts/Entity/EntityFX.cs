@@ -10,10 +10,16 @@ public class EntityFX : MonoBehaviour
     [Header("Damage Dealt VFX")]
     [SerializeField] GameObject OnHitVFX;
     [SerializeField] Color OnHitVFXColor = Color.white;
+    //[SerializeField] Color OnCritVFXColor = Color.white;
 
     [Header("Counter Attack VFX")]
     [SerializeField] GameObject CounterVFX;
     [SerializeField] Color CounterVFXColor = Color.white;
+
+    [Header("Element Colors")]
+    Color fireVFXcolor = new Color(1,165f/255, 0);
+    Color iceVFXcolor = Color.cyan;
+    Color lightningVFXcolor = Color.yellow;
 
     Material originalMat;
     SpriteRenderer sr;
@@ -35,10 +41,36 @@ public class EntityFX : MonoBehaviour
         StartCoroutine(FlashFX());
     }
 
-    public void PlayHitVFX(Vector2 position)
+    public Color ElementHitVFXColor(ElementType element)
+    {
+        Color color;
+        switch (element)
+        {
+            case ElementType.Fire:
+                color = fireVFXcolor;
+                break;
+            case ElementType.Ice:
+                color = iceVFXcolor;
+                break;
+            case ElementType.Lightning:
+                color = lightningVFXcolor;
+                break;
+            default:
+                color = OnHitVFXColor;
+                break;
+        }
+        return color;
+    }
+
+    public void PlayHitVFX(Vector2 position, bool isCrit, ElementType element)
     {
         var vfx = Instantiate(OnHitVFX, position, Quaternion.identity);
-        vfx.GetComponentInChildren<SpriteRenderer>().color = OnHitVFXColor;
+        Color vfxColor = ElementHitVFXColor(element);
+
+        if (isCrit)
+            vfx.transform.localScale *= 1.5f;
+
+        vfx.GetComponentInChildren<SpriteRenderer>().color = vfxColor;
     }
     
     public void PlayCounterVFX(Vector2 position)

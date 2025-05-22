@@ -1,15 +1,23 @@
+using System;
 using System.Collections;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
+    public event Action OnFlip;
     public int xDir { get; protected set; } = 1;
     public StateMachine stateMachine { get; protected set; }
     public Animator anim { get; protected set; }
     public Rigidbody2D rb { get; protected set; }
+    public SpriteRenderer sr { get; protected set; }
+    public Entity_StatusHandler statusHandler { get; protected set; }
 
-    [field: SerializeField] public float moveSpeed { get; private set; }
+    protected float originalMoveSpeed;
+    protected float originalAnimSpeed;
+    protected Color originalColor;
+
+    [field: SerializeField] public float moveSpeed { get; protected set; }
 
     [Header("Collision Detection")]
     [SerializeField] protected float groundCheckDist;
@@ -25,7 +33,9 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        sr = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        statusHandler = GetComponent<Entity_StatusHandler>();
         stateMachine = new StateMachine();
     }
 
@@ -34,10 +44,22 @@ public abstract class Entity : MonoBehaviour
         stateMachine.UpdateState();
     }
 
+    protected virtual void Start()
+    {
+        originalMoveSpeed = moveSpeed;
+        originalAnimSpeed = anim.speed;
+        originalColor = sr.color;
+    }
+
     public virtual void EntityDeath()
     {
 
     }
+
+    public virtual void ChillEntity(float duration, float speedMultiplier)
+    {
+    }
+
     public void ReceiveKnockback(Vector2 force, float duration)
     {
         if (knockbackCoroutine != null)
@@ -78,6 +100,7 @@ public abstract class Entity : MonoBehaviour
     {
         xDir *= -1;
         transform.localScale = new Vector2(transform.localScale.x * -1, 1);
+        OnFlip?.Invoke();
     }
 
     public virtual bool IsGroundDetected() => Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, groundMask);
