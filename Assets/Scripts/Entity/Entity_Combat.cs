@@ -10,6 +10,7 @@ public class Entity_Combat : MonoBehaviour
     [Header("Status Effect Details")]
     [SerializeField] float statusDuration = 3f;
     [SerializeField] float chillSlowMultiplier = 0.4f;
+    [SerializeField] float electrifyChargeBuildup = 0.4f;
     EntityFX fx;
     Entity_Stats stats;
 
@@ -44,19 +45,22 @@ public class Entity_Combat : MonoBehaviour
 
     public void ApplyStatusEffect(Transform target, ElementType element, float scaleFactor = 1f)
     {
-        Entity_StatusHandler statusHandler = target.GetComponent<Entity_StatusHandler>();
+        Entity_StatusHandler status = target.GetComponent<Entity_StatusHandler>();
 
-        if (statusHandler == null) return;
+        if (status == null) return;
 
-        if (element == ElementType.Ice && statusHandler.CanBeApplied(ElementType.Ice))
-            statusHandler.ApplyChilledStatus(statusDuration, chillSlowMultiplier);
-        else if (element == ElementType.Fire && statusHandler.CanBeApplied(ElementType.Fire))
+        if (element == ElementType.Ice && status.CanBeApplied(ElementType.Ice))
+            status.ApplyChillStatus(statusDuration, chillSlowMultiplier);
+        else if (element == ElementType.Fire && status.CanBeApplied(ElementType.Fire))
         {
             float fireDamage = stats.offense.fireDamage.GetValue() * scaleFactor;
-            statusHandler.ApplyBurnedStatus(statusDuration, fireDamage);
+            status.ApplyBurnStatus(statusDuration, fireDamage);
         }
-        else if (element == ElementType.Lightning && statusHandler.CanBeApplied(ElementType.Lightning))
-            statusHandler.ApplyElectrifiedStatus(/*statusDuration, chillSlowMultiplier*/);
+        else if (element == ElementType.Lightning && status.CanBeApplied(ElementType.Lightning))
+        {
+            float lightningDamage = stats.offense.lightningDamage.GetValue() * scaleFactor;
+            status.ApplyElectrifyStatus(statusDuration, lightningDamage, electrifyChargeBuildup);
+        }
     }
 
     protected Collider2D[] GetDetectedColliders()

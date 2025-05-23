@@ -9,11 +9,13 @@ public class Player_JumpAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        rb.mass = 10000f;
     }
 
     public override void Exit()
     {
         base.Exit();
+        rb.mass = 1f;
     }
 
     public override void Update()

@@ -12,6 +12,7 @@ public abstract class Entity : MonoBehaviour
     public Rigidbody2D rb { get; protected set; }
     public SpriteRenderer sr { get; protected set; }
     public Entity_StatusHandler statusHandler { get; protected set; }
+    public Entity_Stats stats { get; protected set; }
 
     protected float originalMoveSpeed;
     protected float originalAnimSpeed;
@@ -36,6 +37,7 @@ public abstract class Entity : MonoBehaviour
         sr = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         statusHandler = GetComponent<Entity_StatusHandler>();
+        stats = GetComponent<Entity_Stats>();
         stateMachine = new StateMachine();
     }
 
@@ -49,6 +51,7 @@ public abstract class Entity : MonoBehaviour
         originalMoveSpeed = moveSpeed;
         originalAnimSpeed = anim.speed;
         originalColor = sr.color;
+        anim.SetFloat("attackSpeed", 1f);
     }
 
     public virtual void EntityDeath()
@@ -56,7 +59,7 @@ public abstract class Entity : MonoBehaviour
 
     }
 
-    public virtual void ChillEntity(float duration, float speedMultiplier)
+    public virtual void SlowEntity(float duration, float speedMultiplier)
     {
     }
 

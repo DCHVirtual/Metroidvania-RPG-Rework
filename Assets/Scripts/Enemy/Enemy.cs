@@ -151,12 +151,12 @@ public class Enemy : Entity
         stateMachine.ChangeState(idleState);
     }
 
-    public override void ChillEntity(float duration, float speedMultiplier)
+    public override void SlowEntity(float duration, float speedMultiplier)
     {
-        StartCoroutine(ChillEntityCo(duration, speedMultiplier));
+        StartCoroutine(SlowEntityCo(duration, speedMultiplier));
     }
 
-    IEnumerator ChillEntityCo(float duration, float speedMultiplier)
+    IEnumerator SlowEntityCo(float duration, float speedMultiplier)
     {
         moveSpeed *= speedMultiplier;
         anim.speed *= speedMultiplier;

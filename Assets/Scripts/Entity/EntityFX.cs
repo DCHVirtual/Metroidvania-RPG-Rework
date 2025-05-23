@@ -85,6 +85,13 @@ public class EntityFX : MonoBehaviour
         StartCoroutine(PlayStatusVFX_Co(duration, ElementHitVFXColor(element)));
     }
 
+    public void StopAllVFX()
+    {
+        StopAllCoroutines();
+        sr.color = Color.white;
+        sr.material = originalMat;
+    }
+
     IEnumerator PlayStatusVFX_Co(float duration, Color color)
     {
         float tickInterval = .15f;

@@ -3,12 +3,16 @@ using UnityEngine.UI;
 public class Entity_Health : MonoBehaviour, IDamageable
 {
     [Header("Life Details")]
-    [SerializeField] float currentHP;
+    [SerializeField] float currentHealth;
     [SerializeField] public bool isDead;
 
     [Header("On Damage Knockback")]
     [SerializeField] protected float knockbackDuration = 0.2f;
     [SerializeField] protected Vector2 knockbackForce = new Vector2(3,2);
+
+    [Header("Health Regen")]
+    [SerializeField] float regenInterval = 1f;
+    [SerializeField] bool canRegenHealth = true;
 
     protected EntityFX fx;
     Entity entity;
@@ -26,8 +30,9 @@ public class Entity_Health : MonoBehaviour, IDamageable
 
     protected virtual void Start()
     {
-        currentHP = stats.GetMaxHP();
+        currentHealth = stats.GetMaxHealth();
         UpdateHealthBar();
+        InvokeRepeating(nameof(RegenerateHealth), 0, regenInterval);
     }
 
     public virtual bool TakeDamage(float physicalDmg, Transform dmgDealer, 
@@ -45,19 +50,34 @@ public class Entity_Health : MonoBehaviour, IDamageable
 
         entity?.ReceiveKnockback(KnockbackDirectedForce(dmgDealer), knockbackDuration);
 
-        ReduceHP(finalDamage);
+        ReduceHealth(finalDamage);
         return true;
     }
 
-    bool AttackEvaded() => Random.Range(0, 100) < stats.GetEvasion();
+    void RegenerateHealth()
+    {
+        if (!canRegenHealth) return;
 
-    public void ReduceHP(float dmg)
+        Heal(stats.resource.healthRegen.GetValue());
+    }
+
+    public void ReduceHealth(float dmg)
     {
         fx?.PlayDamageVFX();
-        currentHP -= dmg;
+        currentHealth -= dmg;
         UpdateHealthBar();
-        if (currentHP <= 0)
+        if (currentHealth <= 0)
             Die();
+    }
+
+    public void Heal(float amount)
+    {
+        if (isDead) return;
+
+        float newHealth = currentHealth + amount;
+        float maxHealth = stats.GetMaxHealth();
+        currentHealth = Mathf.Min(newHealth, maxHealth);
+        UpdateHealthBar();
     }
 
     public virtual void Die()
@@ -66,8 +86,9 @@ public class Entity_Health : MonoBehaviour, IDamageable
         entity.EntityDeath();
     }
 
-    void UpdateHealthBar() => healthBar.value = currentHP / stats.GetMaxHP();
-    
+    void UpdateHealthBar() => healthBar.value = currentHealth / stats.GetMaxHealth();
+
+    bool AttackEvaded() => Random.Range(0, 100) < stats.GetEvasion();
 
     Vector2 KnockbackDirectedForce(Transform dmgDealer)
     {

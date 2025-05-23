@@ -465,6 +465,7 @@ MonoBehaviour:
     m_Bits: 64
   statusDuration: 2
   chillSlowMultiplier: 0.7
+  electrifyChargeBuildup: 0.4
 --- !u!114 &6113226456432668137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,10 +478,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8304cb1d829c0dc48940e10fd91ef1c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 0
+  currentHealth: 0
   isDead: 0
   knockbackDuration: 0.2
   knockbackForce: {x: 3, y: 2}
+  regenInterval: 1
+  canRegenHealth: 1
 --- !u!114 &8648712605348286052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,43 +496,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac9d12db6c98884b9eba9f315239eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <baseHealth>k__BackingField:
-    baseValue: 10000
-  <major>k__BackingField:
-    <strength>k__BackingField:
+  <defaultStats>k__BackingField: {fileID: 11400000, guid: ab2136fff6da6534da1532000734fee4, type: 2}
+  <resource>k__BackingField:
+    <maxHealth>k__BackingField:
+      baseValue: 50
+      modifiers: []
+    <healthRegen>k__BackingField:
       baseValue: 0
-    <agility>k__BackingField:
-      baseValue: 0
-    <intelligence>k__BackingField:
-      baseValue: 0
-    <vitality>k__BackingField:
-      baseValue: 0
+      modifiers: []
   <offense>k__BackingField:
     <damage>k__BackingField:
       baseValue: 10
+      modifiers: []
+    <attackSpeed>k__BackingField:
+      baseValue: 1
+      modifiers: []
     <critChance>k__BackingField:
       baseValue: 0
+      modifiers: []
     <critDamage>k__BackingField:
-      baseValue: 0
+      baseValue: 150
+      modifiers: []
     <armorReduction>k__BackingField:
       baseValue: 0
+      modifiers: []
     <fireDamage>k__BackingField:
       baseValue: 0
+      modifiers: []
     <iceDamage>k__BackingField:
       baseValue: 0
+      modifiers: []
     <lightningDamage>k__BackingField:
       baseValue: 0
+      modifiers: []
   <defense>k__BackingField:
     <armor>k__BackingField:
       baseValue: 0
+      modifiers: []
     <evasion>k__BackingField:
       baseValue: 0
+      modifiers: []
     <fireResist>k__BackingField:
       baseValue: 0
+      modifiers: []
     <iceResist>k__BackingField:
       baseValue: 0
+      modifiers: []
     <lightningResist>k__BackingField:
       baseValue: 0
+      modifiers: []
+  <major>k__BackingField:
+    <strength>k__BackingField:
+      baseValue: 0
+      modifiers: []
+    <agility>k__BackingField:
+      baseValue: 0
+      modifiers: []
+    <intelligence>k__BackingField:
+      baseValue: 0
+      modifiers: []
+    <vitality>k__BackingField:
+      baseValue: 0
+      modifiers: []
 --- !u!50 &5548034204539874102
 Rigidbody2D:
   serializedVersion: 5
@@ -623,7 +651,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176b1a42923f65840aa1b8f3e5320c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStatus: 3
+  burnVFX: {fileID: 3868516037238911815, guid: e2855778e1994c4459b5960b4d9c2929, type: 3}
+  lightningVFX: {fileID: 3868516037238911815, guid: ef787c6a34e7e5b49bac7512bc868adb, type: 3}
+  currentCharge: 0
+  maximumCharge: 1
 --- !u!1 &8733697975270596435
 GameObject:
   m_ObjectHideFlags: 0

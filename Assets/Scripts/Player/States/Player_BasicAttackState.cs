@@ -15,14 +15,10 @@ public class Player_BasicAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        //player.SetVelocity(0, rb.linearVelocityY);
-        if (comboCounter == numComboAttacks || !attackedBeforeEnd)
-            comboCounter = 0;
-        player.anim.SetInteger("comboCounter", comboCounter);
 
-        float attackDir = player.moveInput.x == 0 ? player.xDir : player.moveInput.x;
-        player.SetVelocity(player.attackMovement[comboCounter].x * attackDir, player.attackMovement[comboCounter].y);
-        stateTimer = attackVelocityTime;
+        SyncAttackSpeed();
+        UpdateCombo();
+        SetAttackVelocity();
 
         attackedBeforeEnd = false;
     }
@@ -55,5 +51,19 @@ public class Player_BasicAttackState : PlayerState
             attackedBeforeEnd = true;
             comboCounter++;
         }
+    }
+
+    void UpdateCombo()
+    {
+        if (comboCounter == numComboAttacks || !attackedBeforeEnd)
+            comboCounter = 0;
+        player.anim.SetInteger("comboCounter", comboCounter);
+    }
+
+    void SetAttackVelocity()
+    {
+        float attackDir = player.moveInput.x == 0 ? player.xDir : player.moveInput.x;
+        player.SetVelocity(player.attackMovement[comboCounter].x * attackDir, player.attackMovement[comboCounter].y);
+        stateTimer = attackVelocityTime;
     }
 }

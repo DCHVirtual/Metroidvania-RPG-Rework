@@ -107,12 +107,12 @@ public class Player : Entity
         Gizmos.DrawLine(wallCheck2.position, wallCheck2.position + new Vector3(xDir * wallCheckDist, 0));
     }
 
-    public override void ChillEntity(float duration, float speedMultiplier)
+    public override void SlowEntity(float duration, float speedMultiplier)
     {
-        StartCoroutine(ChillEntityCo(duration, speedMultiplier));
+        StartCoroutine(SlowEntityCo(duration, speedMultiplier));
     }
 
-    IEnumerator ChillEntityCo(float duration, float speedMultiplier)
+    IEnumerator SlowEntityCo(float duration, float speedMultiplier)
     {
         moveSpeed *= speedMultiplier;
         jumpForce *= speedMultiplier;
@@ -131,7 +131,7 @@ public class Player : Entity
         wallJumpForce = originalWallJumpForce;
         dashSpeed = originalDashSpeed;
 
-        for (int i = 0; i < originalAttackMovement.Length; i++)
+        for (int i = 0; i < attackMovement.Length; i++)
             attackMovement[i] = originalAttackMovement[i];
     }
 }
