@@ -4,15 +4,15 @@ using UnityEngine;
 public class UI_Tooltip : MonoBehaviour
 {
     RectTransform rect;
-    [SerializeField] Vector2 offset = new Vector2(300, 20);
+    [SerializeField] Vector2 offset = new Vector2(250, 50);
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rect = GetComponent<RectTransform>();
         ShowTooltip(false, rect);
     }
 
-    public void ShowTooltip(bool show, RectTransform targetRect)
+    public virtual void ShowTooltip(bool show, RectTransform hoverRect)
     {
         if (!show)
         {
@@ -20,17 +20,17 @@ public class UI_Tooltip : MonoBehaviour
             return;
         }
 
-        UpdatePosition(targetRect);
+        UpdatePosition(hoverRect);
     }
 
-    void UpdatePosition(RectTransform targetRect)
+    void UpdatePosition(RectTransform hoverRect)
     {
         float screenCenterX = Screen.width / 2f;
         float screenTop = Screen.height;
         float screenBottom = 0;
         
 
-        var targetPosition = targetRect.position;
+        var targetPosition = hoverRect.position;
         targetPosition.x += targetPosition.x > screenCenterX ? -offset.x : offset.x;
         
         float tooltipHalfHeight = rect.sizeDelta.y / 2f;
@@ -44,5 +44,10 @@ public class UI_Tooltip : MonoBehaviour
 
 
         rect.position = targetPosition;
+    }
+
+    protected string GetColoredText(string text, string hexColor)
+    {
+        return $"<color={hexColor}>{text}</color>";
     }
 }
