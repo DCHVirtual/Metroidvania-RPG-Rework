@@ -22,7 +22,7 @@ public class SkillObject : MonoBehaviour, IAttackerTransform
 
     protected void DamageEnemiesInRadius(Transform t, float radius)
     {
-        foreach (var target in EnemiesAround(t, radius))
+        foreach (var target in GetEnemiesAround(t, radius))
             DamageEnemy(target);
     }
 
@@ -50,7 +50,7 @@ public class SkillObject : MonoBehaviour, IAttackerTransform
 
     public Transform ClosestTarget()
     {
-        var closestEnemy = EnemiesAround(transform, 15)
+        var closestEnemy = GetEnemiesAround(transform, 15)
             .Where(enemy => enemy.GetComponent<Enemy>() != null)
             .OrderBy(enemy => Vector2.Distance(transform.position, enemy.transform.position))
             .FirstOrDefault();
@@ -58,7 +58,7 @@ public class SkillObject : MonoBehaviour, IAttackerTransform
         return closestEnemy.transform;
     }
 
-    protected Collider2D[] EnemiesAround(Transform t, float radius)
+    protected Collider2D[] GetEnemiesAround(Transform t, float radius)
     {
         return Physics2D.OverlapCircleAll(t.position, radius, enemyLayer);
     }

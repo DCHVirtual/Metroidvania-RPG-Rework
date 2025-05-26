@@ -19,6 +19,11 @@ public class Skill_SwordThrow : Skill
     public float attacksPerSecond = 3;
     public float autoReturnTimer = 5f;
 
+    [Header("Bounce Sword Upgrade")]
+    [SerializeField] GameObject swordBouncePrefab;
+    public int bounceCount;
+    public float bounceSpeed;
+
     [Header("Trajectory")]
     [SerializeField] GameObject dot;
     [SerializeField] int numDots;
@@ -58,6 +63,8 @@ public class Skill_SwordThrow : Skill
             return swordPiercePrefab;
         else if (Unlocked(SkillUpgradeType.SwordThrow_Spin))
             return swordSpinPrefab;
+        else if (Unlocked(SkillUpgradeType.SwordThrow_Bounce)) 
+            return swordBouncePrefab;
 
         return swordPrefab;
     }

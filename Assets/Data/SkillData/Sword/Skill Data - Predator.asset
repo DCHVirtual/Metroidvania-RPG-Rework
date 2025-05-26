@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dfc09776305dce46823ac9cd9d9ae6f, type: 3}
-  m_Name: Skill Data - The Chainsaw
+  m_Name: Skill Data - Predator
   m_EditorClassIdentifier: 
-  displayName: The Chainsaw
+  displayName: Predator
   cost: 3
   skillType: 3
   unlockedByDefault: 0
   upgradeData:
-    upgradeType: 12
+    upgradeType: 14
     cooldown: 4
     damageScale:
-      physical: 0.35
-      elemental: 0.35
+      physical: 1
+      elemental: 1
       chillDuration: 3
       chillSlowMultiplier: 0.4
       burnDuration: 3
@@ -29,6 +29,6 @@ MonoBehaviour:
       shockDuration: 3
       shockDamageScale: 1
       shockCharge: 0.4
-  description: The sword spins in place like a raging chainsaw, dealing constant
-    damage to nearby enemies.
-  icon: {fileID: -2385301393397935394, guid: 77dafeb0c0e04d046b6f85734ff23ac2, type: 3}
+  description: The sword will hunt for targets after the first enemy is hit and bounce
+    between them.
+  icon: {fileID: -1491132093, guid: 77dafeb0c0e04d046b6f85734ff23ac2, type: 3}
