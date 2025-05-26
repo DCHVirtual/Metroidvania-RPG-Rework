@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class Player : Entity
 {
-
+    public static Transform playerTransform;
     #region Declarations
     float originalJumpForce;
     float originalDashSpeed;
     Vector2 originalWallJumpForce;
     Vector2[] originalAttackMovement;
 
+    public float dashDuration { get; private set; } = 0.3f;
+
     UI ui;
 
-    public static event Action OnPlayerDeath;
     public PlayerInputSet input { get; private set; }
+    public Vector2 moveInput { get; private set; }
+    public Vector2 cursorPos { get; private set; }
+
+    public static event Action OnPlayerDeath;
     public Player_SkillManager skillManager { get; private set; }
+    public PlayerFX fx { get; private set; }
+    public Entity_Health health { get; private set; }
 
     #region States
     public Player_IdleState idleState { get; private set; }
@@ -29,6 +36,7 @@ public class Player : Entity
     public Player_JumpAttackState jumpAttackState { get; private set; }
     public Player_DeathState deathState { get; private set; }
     public Player_CounterState counterState { get; private set; }
+    public Player_SwordThrowState throwSwordState { get; private set; }
     #endregion
 
     [SerializeField] protected Transform wallCheck2;
@@ -40,9 +48,9 @@ public class Player : Entity
     [field: SerializeField] public float wallSlideMultiplier { get; private set; }
     [field: SerializeField] public Vector2[] attackMovement {  get; private set; }
     [field: SerializeField] public float dashSpeed {  get; private set; }
-    public Vector2 moveInput { get; private set; }
     #endregion
 
+    #region Monobehaviors
     protected override void Awake()
     {
         base.Awake();
@@ -50,6 +58,8 @@ public class Player : Entity
         ui = FindAnyObjectByType<UI>();
         input = new PlayerInputSet();
         skillManager = GetComponent<Player_SkillManager>();
+        fx = GetComponent<PlayerFX>();
+        health = GetComponent<Entity_Health>();
 
         idleState = new Player_IdleState(this, stateMachine, "Idle");
         moveState = new Player_MoveState(this, stateMachine, "Move");
@@ -62,6 +72,9 @@ public class Player : Entity
         jumpAttackState = new Player_JumpAttackState(this, stateMachine, "JumpAttack");
         deathState = new Player_DeathState(this, stateMachine, "Death");
         counterState = new Player_CounterState(this, stateMachine, "CounterAttempt");
+        throwSwordState = new Player_SwordThrowState(this, stateMachine, "AimSword");
+
+        playerTransform = transform;
     }
 
     private void OnEnable()
@@ -72,6 +85,9 @@ public class Player : Entity
         input.Player.Movement.canceled += ctx => moveInput = Vector2.zero;
 
         input.Player.ToggleSkillTreeUI.performed += ctx => ui.ToggleSkillTreeUI();
+        input.Player.Spell.performed += ctx => skillManager.shard.TryUseSkill();
+
+        input.Player.Cursor.performed += ctx => cursorPos = ctx.ReadValue<Vector2>();
     }
 
     private void OnDisable()
@@ -88,14 +104,9 @@ public class Player : Entity
         originalAttackMovement = attackMovement;
         originalDashSpeed = dashSpeed;
     }
+    #endregion
 
-    public override void EntityDeath()
-    {
-        base.EntityDeath();
-        OnPlayerDeath?.Invoke();
-        stateMachine.ChangeState(deathState);
-    }
-
+    #region Detections and Gizmos
     //Either wallcheck must suffice in order to not clip through walls while dashing
     public bool IsWallDetectedDash()
     {
@@ -114,6 +125,19 @@ public class Player : Entity
         base.OnDrawGizmos();
         Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCheckDist));
         Gizmos.DrawLine(wallCheck2.position, wallCheck2.position + new Vector3(xDir * wallCheckDist, 0));
+    }
+    #endregion
+
+    public void TeleportPlayer(Vector3 pos)
+    {
+        transform.position = pos;
+    }
+
+    public override void EntityDeath()
+    {
+        base.EntityDeath();
+        OnPlayerDeath?.Invoke();
+        stateMachine.ChangeState(deathState);
     }
 
     public override void SlowEntity(float duration, float speedMultiplier)

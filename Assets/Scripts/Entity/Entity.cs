@@ -3,7 +3,7 @@ using System.Collections;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public abstract class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour, IAttackerTransform
 {
     public event Action OnFlip;
     public int xDir { get; protected set; } = 1;
@@ -115,5 +115,10 @@ public abstract class Entity : MonoBehaviour
     protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(wallCheck1.position, wallCheck1.position + new Vector3(xDir * wallCheckDist, 0));
+    }
+
+    public Transform GetAttackerTransform()
+    {
+        return transform;
     }
 }

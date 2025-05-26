@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfc09776305dce46823ac9cd9d9ae6f, type: 3}
+  m_Name: Skill Data - Phantom Recall
+  m_EditorClassIdentifier: 
+  displayName: Phantom Recall
+  cost: 2
+  skillType: 2
+  unlockedByDefault: 0
+  upgradeData:
+    upgradeType: 9
+    cooldown: 3
+  description: 'Using skill with active shard swaps player with shard.
+
+    Increased
+    duration of shard.'
+  icon: {fileID: 81767132, guid: 77dafeb0c0e04d046b6f85734ff23ac2, type: 3}

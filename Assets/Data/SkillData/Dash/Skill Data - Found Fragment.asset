@@ -15,7 +15,9 @@ MonoBehaviour:
   displayName: Found Fragment
   cost: 3
   skillType: 0
-  upgradeType: 4
+  upgradeData:
+    upgradeType: 5
+    cooldown: 3
   description: 'Create a time shard on arrival.
 
     Inherits all time shard upgrades.'

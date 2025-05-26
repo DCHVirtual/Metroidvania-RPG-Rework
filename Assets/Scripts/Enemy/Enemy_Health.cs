@@ -20,6 +20,7 @@ public class Enemy_Health : Entity_Health
     {
         bool damaged = base.TakeDamage(dmg, dmgDealer, elementalDmg, elemType);
         enemy.attackTarget = dmgDealer;
+        Debug.Log($"Attack target is {dmgDealer}");
         if (enemy.stateMachine.currentState != enemy.aggroState &&
             enemy.stateMachine.currentState != enemy.attackState)
                 enemy.stateMachine.ChangeState(enemy.aggroState);

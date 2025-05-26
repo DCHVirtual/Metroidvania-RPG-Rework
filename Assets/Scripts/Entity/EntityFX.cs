@@ -22,7 +22,7 @@ public class EntityFX : MonoBehaviour
     Color lightningVFXcolor = Color.yellow;
 
     Material originalMat;
-    SpriteRenderer sr;
+    protected SpriteRenderer sr;
     Entity entity;
 
     private void Awake()
@@ -65,7 +65,7 @@ public class EntityFX : MonoBehaviour
     public void PlayHitVFX(Vector2 position, bool isCrit, ElementType element)
     {
         var vfx = Instantiate(OnHitVFX, position, Quaternion.identity);
-        Color vfxColor = ElementHitVFXColor(element);
+        Color vfxColor = Color.white;// ElementHitVFXColor(element);
 
         if (isCrit)
             vfx.transform.localScale *= 1.5f;

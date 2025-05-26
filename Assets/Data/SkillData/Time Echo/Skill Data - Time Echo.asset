@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dfc09776305dce46823ac9cd9d9ae6f, type: 3}
   m_Name: Skill Data - Time Echo
   m_EditorClassIdentifier: 
-  cost: 1
   displayName: Time Echo
+  cost: 1
+  skillType: 1
+  upgradeData:
+    upgradeType: 0
+    cooldown: 0
   description: 'Create a time echo of yourself.
 
     The echo will distract enemies.'

@@ -15,6 +15,11 @@ public class PlayerAnimationTriggers : MonoBehaviour
         player.stateMachine.currentState.CallAnimationTrigger();
     }
 
+    public void ThrowSword()
+    {
+        player.skillManager.swordThrow.ThrowSword();
+    }
+
     public void AttackTrigger()
     {
         entityCombat.PerformAttack();

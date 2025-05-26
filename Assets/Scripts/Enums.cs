@@ -34,14 +34,29 @@ public enum StatType
 public enum SkillType
 {
     Dash,
-    TimeEcho
+    TimeEcho,
+    TimeShard,
+    SwordThrow
 }
 
 public enum SkillUpgradeType
 {
+    None,
+
     Dash,
     Dash_CloneOnStart,
     Dash_CloneOnStartAndArrival,
     Dash_ShardOnStart,
-    Dash_ShardOnStartAndArrival
+    Dash_ShardOnStartAndArrival,
+
+    Shard,
+    Shard_MoveToEnemy,
+    Shard_MultiCast,
+    Shard_Teleport,
+    Shard_TeleportHpRewind,
+
+    SwordThrow,
+    SwordThrow_Spin,
+    SwordThrow_Pierce,
+    SwordThrow_Bounce
 }

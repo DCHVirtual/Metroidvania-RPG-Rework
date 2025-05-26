@@ -9,6 +9,14 @@ public class Enemy_AggroState : EnemyState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        stateTimer = enemy.aggroTime;
+        Debug.Log("Entered aggro state!");
+    }
+
     public override void Update()
     {
         base.Update();
@@ -20,14 +28,14 @@ public class Enemy_AggroState : EnemyState
             return;
         }
 
+        if (stateTimer < 0 || AggroDistanceExceeded())
+            stateMachine.ChangeState(enemy.idleState);
+
         if (!enemy.WithinAttackRange())
             MoveTowardsPlayer();
 
         if (enemy.IsPlayerDetected())
             AttemptAttack();
-
-        else if (stateTimer < 0 || AggroDistanceExceeded())
-            stateMachine.ChangeState(enemy.idleState);
     }
 
     void MoveTowardsPlayer()

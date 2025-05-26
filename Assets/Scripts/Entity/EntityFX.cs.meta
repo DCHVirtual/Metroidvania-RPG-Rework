@@ -4,7 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - flashMat: {fileID: 2100000, guid: 4db9b0a86f2197b43a587773ff2f58be, type: 2}
+  - OnDmgVFX: {fileID: 2100000, guid: 4db9b0a86f2197b43a587773ff2f58be, type: 2}
+  - OnHitVFX: {fileID: 3868516037238911815, guid: edfc8da0eeaeb3d47b00ade21e961542, type: 3}
+  - CounterVFX: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

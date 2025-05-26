@@ -3,7 +3,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class Player_DashState : PlayerState
 {
-    float dashDuration = 0.3f;
+    float originalGravityScale;
 
     public Player_DashState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -12,15 +12,27 @@ public class Player_DashState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        skillManager.dash.OnStartEffect();
+        player.fx.AfterImageEffect(player.dashDuration);
+
         player.GetComponent<CapsuleCollider2D>().enabled = false;
-        stateTimer = dashDuration;//player.skill.dash.duration;
+        stateTimer = player.dashDuration;//player.skill.dash.duration;
+
+        originalGravityScale = rb.gravityScale;
+        rb.gravityScale = 0;
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        skillManager.dash.OnEndEffect();
+
         player.GetComponent<CapsuleCollider2D>().enabled = true;
         player.SetVelocity(0f, rb.linearVelocityY);
+
+        rb.gravityScale = originalGravityScale;
     }
 
     public override void Update()

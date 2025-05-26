@@ -98,6 +98,7 @@ public class Enemy : Entity
         if (collision.gameObject.GetComponent<Enemy>() && stateMachine.currentState is Enemy_MoveState)
         {
             SetZeroVelocity();
+            Flip();
             stateMachine.ChangeState(idleState);
         }
     }

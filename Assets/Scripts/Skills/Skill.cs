@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
+    public Player player {  get; private set; }
+    public Player_SkillManager skillManager { get; private set; }
+
+    public Data_DamageScale damageScale { get; private set; }
+
     [Header("General Details")]
     [SerializeField] protected SkillType skillType;
     [SerializeField] protected SkillUpgradeType upgradeType;
@@ -11,16 +16,31 @@ public class Skill : MonoBehaviour
 
     protected virtual void Awake()
     {
+        skillManager = GetComponentInParent<Player_SkillManager>();
         lastTimeUsed = lastTimeUsed - cooldown;
+        player = GetComponentInParent<Player>();
+        damageScale = new Data_DamageScale();
     }
 
-    public void SetSkillUpgrade(SkillUpgradeType upgrade)
+    public virtual void TryUseSkill()
     {
-        upgradeType = upgrade; 
+
     }
 
-    public bool CanUseSkill()
+    public void SetSkillUpgrade(UpgradeData upgrade)
     {
+        upgradeType = upgrade.upgradeType;
+        cooldown = upgrade.cooldown;
+        damageScale = upgrade.damageScale;
+    }
+
+    protected bool Unlocked(SkillUpgradeType upgradeToCheck) => upgradeType == upgradeToCheck;
+
+    public virtual bool CanUseSkill()
+    {
+        if (upgradeType == SkillUpgradeType.None) 
+            return false;
+
         if (OnCooldown())
             return false;
 

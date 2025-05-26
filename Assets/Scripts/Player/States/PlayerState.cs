@@ -5,13 +5,13 @@ public abstract class PlayerState : EntityState
 {
     protected Player player;
     protected PlayerInputSet.PlayerActions inputAction;
-    protected Player_SkillManager skills;
+    protected Player_SkillManager skillManager;
 
     public PlayerState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
         this.player = player;
         inputAction = player.input.Player;
-        skills = player.GetComponent<Player_SkillManager>();
+        skillManager = player.GetComponent<Player_SkillManager>();
     }
 
     public override void Enter()
@@ -32,14 +32,14 @@ public abstract class PlayerState : EntityState
         {
             if (player.IsWallDetected())
                 player.Flip();
-            skills.dash.SetSkillOnCooldown();
+            skillManager.dash.SetSkillOnCooldown();
             stateMachine.ChangeState(player.dashState);
         }
     }
 
     bool CanDash()
     {
-        if (!skills.dash.CanUseSkill())
+        if (!skillManager.dash.CanUseSkill())
             return false;
 
         if (stateMachine.currentState == player.dashState)

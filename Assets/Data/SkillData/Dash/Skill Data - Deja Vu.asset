@@ -15,7 +15,9 @@ MonoBehaviour:
   displayName: Deja Vu
   cost: 3
   skillType: 0
-  upgradeType: 2
+  upgradeData:
+    upgradeType: 3
+    cooldown: 3
   description: 'Create a time echo on arrival
 
     Inherits all time echo upgrades.'

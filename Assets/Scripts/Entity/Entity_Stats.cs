@@ -133,6 +133,11 @@ public class Entity_Stats : MonoBehaviour
     }
     #endregion
 
+    public Data_Attack GetAttackData(Data_DamageScale scaleData)
+    {
+        return new Data_Attack(this, scaleData);
+    }
+
     #region Helper Functions
     ElementType GetHighestDamageElement(List<float> elements)
     {

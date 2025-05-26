@@ -15,7 +15,9 @@ MonoBehaviour:
   displayName: Echo Step
   cost: 2
   skillType: 0
-  upgradeType: 1
+  upgradeData:
+    upgradeType: 2
+    cooldown: 3
   description: 'Create a time echo before you dash.
 
     Inherits all time echo upgrades.'

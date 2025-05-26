@@ -30,6 +30,13 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         skillTree = GetComponentInParent<UI_SkillTree>();
         connectHandler = GetComponent<UI_NodeConnectHandler>();
         UpdateIconColor(skillLockedColor);
+        
+    }
+
+    private void Start()
+    {
+        if (skillData.unlockedByDefault)
+            UnlockSkill();
     }
 
     void UnlockSkill()
@@ -43,7 +50,7 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         skillTree.ApplyRedToDisabledConnex();
 
         Skill skill = skillTree.skillManager.GetSkillByType(skillData.skillType);
-        skill.SetSkillUpgrade(skillData.upgradeType);
+        skill.SetSkillUpgrade(skillData.upgradeData);
     }
 
     public void RefundSkill()
