@@ -24,7 +24,7 @@ public class Enemy_IdleState : Enemy_GroundedState
         base.Update();
         if (stateTimer < 0)
         {
-            if (!enemy.IsGroundDetected() || enemy.IsWallDetected())
+            if (!enemy.IsGroundDetected() || enemy.IsWallDetected() || enemy.IsEnemyDetected())
                 enemy.Flip();
             stateMachine.ChangeState(enemy.moveState);
         }

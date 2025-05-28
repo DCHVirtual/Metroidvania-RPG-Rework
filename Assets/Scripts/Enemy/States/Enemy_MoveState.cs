@@ -22,7 +22,7 @@ public class Enemy_MoveState : Enemy_GroundedState
 
         enemy.SetVelocity(enemy.moveSpeed * enemy.xDir, enemy.rb.linearVelocityY);
 
-        if (enemy.IsWallDetected() || !enemy.IsGroundDetected())
+        if (enemy.IsWallDetected() || !enemy.IsGroundDetected() || enemy.IsEnemyDetected())
         {
             enemy.SetZeroVelocity();
             stateMachine.ChangeState(enemy.idleState);

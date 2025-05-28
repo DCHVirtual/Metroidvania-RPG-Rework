@@ -15,9 +15,20 @@ MonoBehaviour:
   displayName: Deja Vu
   cost: 3
   skillType: 0
+  unlockedByDefault: 0
   upgradeData:
     upgradeType: 3
     cooldown: 3
+    damageScale:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.4
+      burnDuration: 3
+      burnDamageScale: 1
+      shockDuration: 3
+      shockDamageScale: 1
+      shockCharge: 0.4
   description: 'Create a time echo on arrival
 
     Inherits all time echo upgrades.'

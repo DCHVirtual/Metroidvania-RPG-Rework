@@ -22,7 +22,6 @@ public class Player : Entity
     public static event Action OnPlayerDeath;
     public Player_SkillManager skillManager { get; private set; }
     public PlayerFX fx { get; private set; }
-    public Entity_Health health { get; private set; }
 
     #region States
     public Player_IdleState idleState { get; private set; }
@@ -37,9 +36,14 @@ public class Player : Entity
     public Player_DeathState deathState { get; private set; }
     public Player_CounterState counterState { get; private set; }
     public Player_SwordThrowState throwSwordState { get; private set; }
+    public Player_DomainState domainState { get; private set; }
     #endregion
 
     [SerializeField] protected Transform wallCheck2;
+
+    [Header("Ultimate Ability Details")]
+    public float riseSpeed = 25;
+    public float riseMaxDistance = 3;
 
     [field: Header("Movement")]
     [field: SerializeField] public float jumpForce { get; private set; }
@@ -73,7 +77,7 @@ public class Player : Entity
         deathState = new Player_DeathState(this, stateMachine, "Death");
         counterState = new Player_CounterState(this, stateMachine, "CounterAttempt");
         throwSwordState = new Player_SwordThrowState(this, stateMachine, "AimSword");
-
+        domainState = new Player_DomainState(this, stateMachine, "Jump");
         playerTransform = transform;
     }
 
@@ -84,8 +88,10 @@ public class Player : Entity
         input.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         input.Player.Movement.canceled += ctx => moveInput = Vector2.zero;
 
-        input.Player.ToggleSkillTreeUI.performed += ctx => ui.ToggleSkillTreeUI();
+        //input.Player.ToggleSkillTreeUI.performed += ctx => ui.ToggleSkillTreeUI();
+        
         input.Player.Spell.performed += ctx => skillManager.shard.TryUseSkill();
+        input.Player.Spell.performed += ctx => skillManager.timeEcho.TryUseSkill();
 
         input.Player.Cursor.performed += ctx => cursorPos = ctx.ReadValue<Vector2>();
     }
@@ -140,12 +146,12 @@ public class Player : Entity
         stateMachine.ChangeState(deathState);
     }
 
-    public override void SlowEntity(float duration, float speedMultiplier)
+    /*public override void SlowEntity(float duration, float speedMultiplier)
     {
         StartCoroutine(SlowEntityCo(duration, speedMultiplier));
-    }
+    }*/
 
-    IEnumerator SlowEntityCo(float duration, float speedMultiplier)
+    protected override IEnumerator SlowEntityCo(float duration, float speedMultiplier)
     {
         moveSpeed *= speedMultiplier;
         jumpForce *= speedMultiplier;

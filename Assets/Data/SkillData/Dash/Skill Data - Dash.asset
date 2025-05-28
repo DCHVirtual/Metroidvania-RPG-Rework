@@ -19,6 +19,16 @@ MonoBehaviour:
   upgradeData:
     upgradeType: 1
     cooldown: 3
+    damageScale:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.4
+      burnDuration: 3
+      burnDamageScale: 1
+      shockDuration: 3
+      shockDamageScale: 1
+      shockCharge: 0.4
   description: 'Dash to avoid incoming attacks.
 
     You cannot take damage while

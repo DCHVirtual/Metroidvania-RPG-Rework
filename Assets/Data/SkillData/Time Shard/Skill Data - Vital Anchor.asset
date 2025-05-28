@@ -19,6 +19,16 @@ MonoBehaviour:
   upgradeData:
     upgradeType: 10
     cooldown: 4
+    damageScale:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.4
+      burnDuration: 3
+      burnDamageScale: 1
+      shockDuration: 3
+      shockDamageScale: 1
+      shockCharge: 0.4
   description: Swapping with the shard reverts your health to the percentage it was
     upon shard creation.
   icon: {fileID: 1619506981, guid: 77dafeb0c0e04d046b6f85734ff23ac2, type: 3}

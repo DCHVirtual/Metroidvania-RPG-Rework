@@ -36,7 +36,8 @@ public enum SkillType
     Dash,
     TimeEcho,
     TimeShard,
-    SwordThrow
+    SwordThrow,
+    Domain
 }
 
 public enum SkillUpgradeType
@@ -58,5 +59,25 @@ public enum SkillUpgradeType
     SwordThrow,
     SwordThrow_Spin,
     SwordThrow_Pierce,
-    SwordThrow_Bounce
+    SwordThrow_Bounce,
+
+    TimeEcho,
+    TimeEcho_SingleAttack,
+    TimeEcho_MultiAttack,
+    TimeEcho_Multiply,
+    TimeEcho_HealingWisp,
+    TimeEcho_CleanseWisp,
+    TimeEcho_CooldownWisp,
+
+    Domain_Slowdown,
+    Domain_EchoSpam,
+    Domain_ShardSpam
+}
+
+public enum ItemType
+{
+    Material,
+    Weapon,
+    Armor,
+    Trinket
 }

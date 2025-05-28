@@ -85,6 +85,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Ultimate",
+                    "type": "Button",
+                    "id": "d6f22f53-ad87-4a55-84f0-7cd1d0468fd9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -327,6 +336,45 @@
                     "processors": "",
                     "groups": ";Keyboard and Mouse",
                     "action": "Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c76122c-def2-4d59-96f7-2bc682c881e9",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard and Mouse",
+                    "action": "Ultimate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "425f503a-d1b7-428d-80d1-47435b5b2856",
+            "actions": [
+                {
+                    "name": "SkillTree",
+                    "type": "Button",
+                    "id": "8fd7ba80-d3f0-4365-bf94-8fd061c39004",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4bbdf03f-5e73-4910-acd7-5b05202ae552",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard and Mouse",
+                    "action": "SkillTree",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

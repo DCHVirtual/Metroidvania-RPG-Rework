@@ -17,20 +17,21 @@ public class Entity_Combat : MonoBehaviour
         stats = GetComponent<Entity_Stats>();
     }
 
-    public void PerformAttack()
+    public void PerformAttack(/*Eventually write functionality to pass attack data here depending on attack*/)
     {
         foreach (var target in GetDetectedColliders())
         {
-            var damageable = target.GetComponent<IDamageable>();
+            IDamageable damageable = target.GetComponent<IDamageable>();
+
             if (damageable == null)
                 continue;
 
             Data_Attack attackData = stats.GetAttackData(basicAttackScale);
 
-            bool damaged = damageable.TakeDamage(attackData.physicalDamage, transform, attackData.elementalDamage, attackData.element);
+            bool targetGotHit = damageable.TakeDamage(attackData.physicalDamage, transform, attackData.elementalDamage, attackData.element);
             var vfxPos = (Vector2)target.transform.position + Random.insideUnitCircle * .5f;
 
-            if (damaged)
+            if (targetGotHit)
             {
                 fx.PlayHitVFX(vfxPos, attackData.isCrit, attackData.element);
                 if (attackData.element != ElementType.None)

@@ -35,19 +35,19 @@ public class Entity_StatusHandler : MonoBehaviour
             ApplyShockStatus(elementData.shockDuration, elementData.shockDamage, elementData.shockCharge);
     }
 
-    public void ApplyChillStatus(float duration, float speedMultiplier)
+    void ApplyChillStatus(float duration, float speedMultiplier)
     {
         duration *= (1 - entityStats.GetElementalResistance(ElementType.Ice));
-        StartCoroutine(ApplyChillCo(duration, speedMultiplier));
+        StartCoroutine(ApplyChillCo(duration, 1 - speedMultiplier));
 
     }
-    public void ApplyBurnStatus(float duration, float damage)
+    void ApplyBurnStatus(float duration, float damage)
     {
         damage *= (1 - entityStats.GetElementalResistance(ElementType.Fire));
         StartCoroutine(ApplyBurnCo(duration, damage));
     }
 
-    public void ApplyShockStatus(float duration, float damage, float charge)
+    void ApplyShockStatus(float duration, float damage, float charge)
     {
         charge *= (1 - entityStats.GetElementalResistance(ElementType.Lightning));
         currentCharge += charge;
@@ -64,6 +64,12 @@ public class Entity_StatusHandler : MonoBehaviour
             StopCoroutine(shockCo);
 
         shockCo = StartCoroutine(ApplyShockCo(duration));
+    }
+
+    public void StopAllStatusEffects()
+    {
+        StopShockEffect();
+        StopAllCoroutines();
     }
 
     void StopShockEffect()

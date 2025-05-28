@@ -21,7 +21,7 @@ public class Player_AirState : PlayerState
         base.Update();
 
         //Ground Check
-        if (/*rb.linearVelocityY <= 0.01 && */player.IsGroundDetected()) 
+        if (player.IsGroundDetected()) 
         {
             player.SetZeroVelocity();
             stateMachine.ChangeState(player.idleState);
@@ -39,14 +39,10 @@ public class Player_AirState : PlayerState
             return;
         }
 
+        //Input checks
         if (inputAction.Attack.WasPerformedThisFrame())
             stateMachine.ChangeState(player.jumpAttackState);
-        /*
-        if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
-            stateMachine.ChangeState(player.aimSwordState);
-        else if (Input.GetKeyDown(KeyCode.Q) && player.skill.blackhole.CheckUseSkill())
-            stateMachine.ChangeState(player.blackholeState);
-
-        DashCheck();*/
+        else if (inputAction.Ultimate.WasPressedThisFrame())
+            CreateDomain();
     }
 }

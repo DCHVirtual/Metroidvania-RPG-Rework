@@ -20,6 +20,7 @@ public class Skill : MonoBehaviour
         lastTimeUsed = lastTimeUsed - cooldown;
         player = GetComponentInParent<Player>();
         damageScale = new Data_DamageScale();
+        ResetCooldown();
     }
 
     public virtual void TryUseSkill()
@@ -50,5 +51,6 @@ public class Skill : MonoBehaviour
     protected bool OnCooldown() => Time.time < lastTimeUsed + cooldown;
     public void SetSkillOnCooldown() => lastTimeUsed = Time.time;
     public void ReduceCooldown(float reduction) => lastTimeUsed -= reduction;
+    public void ResetCooldown() => lastTimeUsed = Time.time - cooldown;
 
 }

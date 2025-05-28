@@ -86,22 +86,15 @@ public class Enemy : Entity
         RaycastHit2D hit =
          Physics2D.Raycast(wallCheck1.position, Vector2.right * xDir, 15, playerMask | groundMask);
 
-        if (hit.collider == null || hit.collider.gameObject.GetComponent<Player>() == false)
+        if (hit.collider == null || hit.collider.gameObject.layer != LayerMask.NameToLayer("Player"))
             return default;
 
         return hit;
     }
     public virtual RaycastHit2D IsPlayerBehind() => Physics2D.Raycast(transform.position, Vector2.left * xDir, aggroBehindDist, playerMask);
     public virtual bool WithinAttackRange() => Physics2D.Raycast(attackCheck.position, Vector2.right * xDir, attackCheckDist, playerMask);
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<Enemy>() && stateMachine.currentState is Enemy_MoveState)
-        {
-            SetZeroVelocity();
-            Flip();
-            stateMachine.ChangeState(idleState);
-        }
-    }
+    public virtual bool IsEnemyDetected() => Physics2D.Raycast(wallCheck1.position, xDir * Vector2.right, wallCheckDist, enemyMask);
+
     #endregion
 
     #region Counter/Stun Window Functions
@@ -152,17 +145,19 @@ public class Enemy : Entity
         stateMachine.ChangeState(idleState);
     }
 
-    public override void SlowEntity(float duration, float speedMultiplier)
+    /*public override void SlowEntity(float duration, float speedMultiplier, bool canOverride = false)
     {
-        StartCoroutine(SlowEntityCo(duration, speedMultiplier));
-    }
+        base.SlowEntity(duration, speedMultiplier, canOverride);
+    }*/
 
-    IEnumerator SlowEntityCo(float duration, float speedMultiplier)
+    protected override IEnumerator SlowEntityCo(float duration, float speedMultiplier)
     {
-        moveSpeed *= speedMultiplier;
-        anim.speed *= speedMultiplier;
+        moveSpeed = originalMoveSpeed * speedMultiplier;
+        anim.speed = originalAnimSpeed * speedMultiplier;
 
         yield return new WaitForSeconds(duration);
+
+        slowDownCo = null;
 
         moveSpeed = originalMoveSpeed;
         anim.speed = originalAnimSpeed;

@@ -15,9 +15,20 @@ MonoBehaviour:
   displayName: Time Echo
   cost: 1
   skillType: 1
+  unlockedByDefault: 0
   upgradeData:
-    upgradeType: 0
-    cooldown: 0
+    upgradeType: 15
+    cooldown: 4
+    damageScale:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.4
+      burnDuration: 3
+      burnDamageScale: 1
+      shockDuration: 3
+      shockDamageScale: 1
+      shockCharge: 0.4
   description: 'Create a time echo of yourself.
 
     The echo will distract enemies.'

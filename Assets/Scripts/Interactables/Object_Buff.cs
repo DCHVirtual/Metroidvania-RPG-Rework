@@ -44,6 +44,7 @@ public class Object_Buff : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!canBeUsed) return;
+        if (collision.GetComponent<SkillObject_TimeEcho>() == true) return;
         stats = collision.GetComponent<Entity_Stats>();
         StartCoroutine(BuffCo(buffDuration));
     }

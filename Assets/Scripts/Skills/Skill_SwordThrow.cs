@@ -29,7 +29,7 @@ public class Skill_SwordThrow : Skill
     [SerializeField] int numDots;
     [SerializeField] float spaceBetweenDots = .05f;
     float swordGravity;
-    [SerializeField] Transform[] dots;
+    Transform[] dots;
     Vector2 confirmedDirection;
 
     protected override void Awake()

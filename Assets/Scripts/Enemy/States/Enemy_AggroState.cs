@@ -14,7 +14,6 @@ public class Enemy_AggroState : EnemyState
         base.Enter();
 
         stateTimer = enemy.aggroTime;
-        Debug.Log("Entered aggro state!");
     }
 
     public override void Update()
@@ -46,6 +45,7 @@ public class Enemy_AggroState : EnemyState
 
     private void AttemptAttack()
     {
+        enemy.attackTarget = enemy.IsPlayerDetected().collider.transform;
         stateTimer = enemy.aggroTime;
         if (enemy.WithinAttackRange() && CanAttack())
             stateMachine.ChangeState(enemy.attackState);

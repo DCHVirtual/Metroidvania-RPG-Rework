@@ -107,6 +107,15 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Ultimate"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6f22f53-ad87-4a55-84f0-7cd1d0468fd9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -351,6 +360,45 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""action"": ""Cursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c76122c-def2-4d59-96f7-2bc682c881e9"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""Ultimate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""425f503a-d1b7-428d-80d1-47435b5b2856"",
+            ""actions"": [
+                {
+                    ""name"": ""SkillTree"",
+                    ""type"": ""Button"",
+                    ""id"": ""8fd7ba80-d3f0-4365-bf94-8fd061c39004"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4bbdf03f-5e73-4910-acd7-5b05202ae552"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""SkillTree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -396,11 +444,16 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         m_Player_Spell = m_Player.FindAction("Spell", throwIfNotFound: true);
         m_Player_RangeAttack = m_Player.FindAction("RangeAttack", throwIfNotFound: true);
         m_Player_Cursor = m_Player.FindAction("Cursor", throwIfNotFound: true);
+        m_Player_Ultimate = m_Player.FindAction("Ultimate", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_SkillTree = m_UI.FindAction("SkillTree", throwIfNotFound: true);
     }
 
     ~@PlayerInputSet()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerInputSet.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerInputSet.UI.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -471,6 +524,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Spell;
     private readonly InputAction m_Player_RangeAttack;
     private readonly InputAction m_Player_Cursor;
+    private readonly InputAction m_Player_Ultimate;
     public struct PlayerActions
     {
         private @PlayerInputSet m_Wrapper;
@@ -484,6 +538,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         public InputAction @Spell => m_Wrapper.m_Player_Spell;
         public InputAction @RangeAttack => m_Wrapper.m_Player_RangeAttack;
         public InputAction @Cursor => m_Wrapper.m_Player_Cursor;
+        public InputAction @Ultimate => m_Wrapper.m_Player_Ultimate;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -520,6 +575,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Cursor.started += instance.OnCursor;
             @Cursor.performed += instance.OnCursor;
             @Cursor.canceled += instance.OnCursor;
+            @Ultimate.started += instance.OnUltimate;
+            @Ultimate.performed += instance.OnUltimate;
+            @Ultimate.canceled += instance.OnUltimate;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -551,6 +609,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Cursor.started -= instance.OnCursor;
             @Cursor.performed -= instance.OnCursor;
             @Cursor.canceled -= instance.OnCursor;
+            @Ultimate.started -= instance.OnUltimate;
+            @Ultimate.performed -= instance.OnUltimate;
+            @Ultimate.canceled -= instance.OnUltimate;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -568,6 +629,52 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_SkillTree;
+    public struct UIActions
+    {
+        private @PlayerInputSet m_Wrapper;
+        public UIActions(@PlayerInputSet wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SkillTree => m_Wrapper.m_UI_SkillTree;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @SkillTree.started += instance.OnSkillTree;
+            @SkillTree.performed += instance.OnSkillTree;
+            @SkillTree.canceled += instance.OnSkillTree;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @SkillTree.started -= instance.OnSkillTree;
+            @SkillTree.performed -= instance.OnSkillTree;
+            @SkillTree.canceled -= instance.OnSkillTree;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -597,5 +704,10 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         void OnSpell(InputAction.CallbackContext context);
         void OnRangeAttack(InputAction.CallbackContext context);
         void OnCursor(InputAction.CallbackContext context);
+        void OnUltimate(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnSkillTree(InputAction.CallbackContext context);
     }
 }

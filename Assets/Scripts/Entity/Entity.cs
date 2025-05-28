@@ -13,16 +13,18 @@ public abstract class Entity : MonoBehaviour, IAttackerTransform
     public SpriteRenderer sr { get; protected set; }
     public Entity_StatusHandler statusHandler { get; protected set; }
     public Entity_Stats stats { get; protected set; }
+    public Entity_Health health { get; protected set; }
 
     protected float originalMoveSpeed;
     protected float originalAnimSpeed;
     protected Color originalColor;
+    protected Coroutine slowDownCo;
 
     [field: SerializeField] public float moveSpeed { get; protected set; }
 
     [Header("Collision Detection")]
     [SerializeField] protected float groundCheckDist;
-    [SerializeField] protected LayerMask groundMask;
+    public LayerMask groundMask;
     [SerializeField] protected Transform wallCheck1;
     [SerializeField] protected float wallCheckDist;
 
@@ -38,6 +40,7 @@ public abstract class Entity : MonoBehaviour, IAttackerTransform
         rb = GetComponent<Rigidbody2D>();
         statusHandler = GetComponent<Entity_StatusHandler>();
         stats = GetComponent<Entity_Stats>();
+        health = GetComponent<Entity_Health>();
         stateMachine = new StateMachine();
     }
 
@@ -59,8 +62,24 @@ public abstract class Entity : MonoBehaviour, IAttackerTransform
 
     }
 
-    public virtual void SlowEntity(float duration, float speedMultiplier)
+    public virtual void SlowEntity(float duration, float speedMultiplier, bool canOverride = false)
     {
+        if (slowDownCo != null)
+        {
+            if (canOverride)
+            {
+                StopCoroutine(slowDownCo);
+                slowDownCo = null;
+            }
+            else
+                return;
+        }
+        slowDownCo = StartCoroutine(SlowEntityCo(duration, speedMultiplier));
+    }
+
+    protected virtual IEnumerator SlowEntityCo(float duration, float speedMultiplier)
+    {
+        yield return null;
     }
 
     public void ReceiveKnockback(Vector2 force, float duration)
@@ -107,10 +126,7 @@ public abstract class Entity : MonoBehaviour, IAttackerTransform
     }
 
     public virtual bool IsGroundDetected() => Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, groundMask);
-    public virtual bool IsWallDetected()
-    {
-        return Physics2D.Raycast(wallCheck1.position, xDir * Vector2.right, wallCheckDist, groundMask);
-    }
+    public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck1.position, xDir * Vector2.right, wallCheckDist, groundMask);
 
     protected virtual void OnDrawGizmos()
     {

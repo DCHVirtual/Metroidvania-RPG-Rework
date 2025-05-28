@@ -4,7 +4,7 @@ public class Entity_Health : MonoBehaviour, IDamageable
 {
     [Header("Life Details")]
     [SerializeField] float currentHealth;
-    [SerializeField] public bool isDead;
+    [HideInInspector] public bool isDead;
 
     [Header("On Damage Knockback")]
     [SerializeField] protected float knockbackDuration = 0.2f;
@@ -18,6 +18,7 @@ public class Entity_Health : MonoBehaviour, IDamageable
     Entity entity;
     Slider healthBar;
     Entity_Stats stats;
+    public float damageTaken { get; private set; }
 
     protected virtual void Awake()
     {
@@ -30,9 +31,12 @@ public class Entity_Health : MonoBehaviour, IDamageable
 
     protected virtual void Start()
     {
-        currentHealth = stats.GetMaxHealth();
-        UpdateHealthBar();
-        InvokeRepeating(nameof(RegenerateHealth), 0, regenInterval);
+        if (stats != null)
+        {
+            currentHealth = stats.GetMaxHealth();
+            UpdateHealthBar();
+            InvokeRepeating(nameof(RegenerateHealth), 0, regenInterval);
+        }
     }
 
     public virtual bool TakeDamage(float physicalDmg, Transform dmgDealer, 
@@ -43,8 +47,11 @@ public class Entity_Health : MonoBehaviour, IDamageable
         var attackerStats = dmgDealer.GetComponent<Entity_Stats>();
         float armorReduction = attackerStats != null ? attackerStats.GetArmorReduction() : 0;
 
-        physicalDmg *= (1 - stats.GetArmorMitigation(armorReduction));
-        elementalDmg *= (1 - stats.GetElementalResistance(elemType));
+        if (stats != null)
+        {
+            physicalDmg *= (1 - stats.GetArmorMitigation(armorReduction));
+            elementalDmg *= (1 - stats.GetElementalResistance(elemType));
+        }
 
         float finalDamage = physicalDmg + elementalDmg;
 
@@ -61,10 +68,11 @@ public class Entity_Health : MonoBehaviour, IDamageable
         Heal(stats.resource.healthRegen.GetValue());
     }
 
-    public void ReduceHealth(float dmg)
+    public void ReduceHealth(float damage)
     {
         fx?.PlayDamageVFX();
-        currentHealth -= dmg;
+        currentHealth -= damage;
+        damageTaken += damage;
         UpdateHealthBar();
         if (currentHealth <= 0)
             Die();
@@ -81,7 +89,7 @@ public class Entity_Health : MonoBehaviour, IDamageable
     }
 
 
-    public virtual void Die()
+    protected virtual void Die()
     {
         isDead = true;
         entity.EntityDeath();
@@ -94,10 +102,17 @@ public class Entity_Health : MonoBehaviour, IDamageable
         UpdateHealthBar();
     }
 
-    void UpdateHealthBar() => healthBar.value = currentHealth / stats.GetMaxHealth();
+    void UpdateHealthBar() 
+    {
+        if (stats == null) return;
+        healthBar.value = currentHealth / stats.GetMaxHealth(); 
+    }
 
-    bool AttackEvaded() => Random.Range(0, 100) < stats.GetEvasion();
-
+    bool AttackEvaded()
+    {
+        if (stats == null) return false;
+        return Random.Range(0, 100) < stats.GetEvasion();
+    }
     Vector2 KnockbackDirectedForce(Transform dmgDealer)
     {
         int dir = transform.position.x > dmgDealer.position.x ? 1 : -1;

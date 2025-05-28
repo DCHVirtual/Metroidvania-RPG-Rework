@@ -1,4 +1,3 @@
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public abstract class PlayerState : EntityState
@@ -35,6 +34,32 @@ public abstract class PlayerState : EntityState
             skillManager.dash.SetSkillOnCooldown();
             stateMachine.ChangeState(player.dashState);
         }
+        
+    }
+
+    protected void CreateDomain()
+    {
+        if (CanCreateDomain())
+        {
+            if (skillManager.domain.InstantDomain())
+                skillManager.domain.CreateDomain();
+            else
+                stateMachine.ChangeState(player.domainState);
+
+            skillManager.domain.SetSkillOnCooldown();
+        }
+    }
+
+    bool CanCreateDomain()
+    {
+        if (!skillManager.domain.CanUseSkill())
+            return false;
+
+        if (stateMachine.currentState == player.dashState ||
+            stateMachine.currentState == player.basicAttackState)
+            return false;
+
+        return true;
     }
 
     bool CanDash()
@@ -42,7 +67,8 @@ public abstract class PlayerState : EntityState
         if (!skillManager.dash.CanUseSkill())
             return false;
 
-        if (stateMachine.currentState == player.dashState)
+        if (stateMachine.currentState == player.dashState ||
+            stateMachine.currentState == player.domainState)
             return false;
 
         return true;

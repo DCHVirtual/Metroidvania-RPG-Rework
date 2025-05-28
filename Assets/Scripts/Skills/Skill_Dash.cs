@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Skill_Dash : Skill
@@ -27,7 +28,7 @@ public class Skill_Dash : Skill
 
     void CreateClone()
     {
-        Debug.Log("Create Time Echo!");
+        skillManager.timeEcho.CreateTimeEcho();
     }
 
 }

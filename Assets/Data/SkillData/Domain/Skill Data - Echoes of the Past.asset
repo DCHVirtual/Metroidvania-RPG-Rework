@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfc09776305dce46823ac9cd9d9ae6f, type: 3}
+  m_Name: Skill Data - Echoes of the Past
+  m_EditorClassIdentifier: 
+  displayName: Echoes of the Past
+  cost: 4
+  skillType: 4
+  unlockedByDefault: 0
+  upgradeData:
+    upgradeType: 23
+    cooldown: 120
+    damageScale:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.4
+      burnDuration: 3
+      burnDamageScale: 1
+      shockDuration: 3
+      shockDamageScale: 1
+      shockCharge: 0.4
+  description: Enemies slowed by 100%. Continuously create Time Echoes next to trapped
+    targets.
+  icon: {fileID: -1489099448, guid: 77dafeb0c0e04d046b6f85734ff23ac2, type: 3}

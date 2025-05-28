@@ -12,7 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dfc09776305dce46823ac9cd9d9ae6f, type: 3}
   m_Name: Skill Data - Quick Thinking
   m_EditorClassIdentifier: 
-  cost: 3
   displayName: Quick Thinking
+  cost: 3
+  skillType: 1
+  unlockedByDefault: 0
+  upgradeData:
+    upgradeType: 21
+    cooldown: 4
+    damageScale:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.4
+      burnDuration: 3
+      burnDamageScale: 1
+      shockDuration: 3
+      shockDamageScale: 1
+      shockCharge: 0.4
   description: The wisp reduces cooldowns of your other skills by 1 second
   icon: {fileID: 728875417, guid: 77dafeb0c0e04d046b6f85734ff23ac2, type: 3}
