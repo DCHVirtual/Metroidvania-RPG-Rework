@@ -5,14 +5,39 @@ using UnityEngine;
 public class UI_Inventory : MonoBehaviour
 {
     UI_ItemSlot[] uiItemSlots;
-    Inventory inventory;
+    UI_EquipSlot[] uiEquipSlots;
+    Inventory_Player inventory;
+
+    [SerializeField] Transform uiItemSlotParent;
+    [SerializeField] Transform uiEquipSlotParent;
+
 
     private void Awake()
     {
-        uiItemSlots = GetComponentsInChildren<UI_ItemSlot>();
-        inventory = FindFirstObjectByType<Inventory>();
-        inventory.OnInventoryChange += UpdateInventorySlots;
+        uiItemSlots = uiItemSlotParent.GetComponentsInChildren<UI_ItemSlot>();
+        uiEquipSlots = uiEquipSlotParent.GetComponentsInChildren<UI_EquipSlot>();
+        inventory = FindFirstObjectByType<Inventory_Player>();
+        inventory.OnInventoryChange += UpdateUI;
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
         UpdateInventorySlots();
+        UpdateEquipmentSlots();
+    }
+
+    void UpdateEquipmentSlots()
+    {
+        var equipList = inventory.equipList;
+
+        for (int i = 0; i < uiEquipSlots.Length; i++)
+        {
+            if (!equipList[i].HasItem())
+                uiEquipSlots[i].UpdateSlot(null);
+            else
+                uiEquipSlots[i].UpdateSlot(equipList[i].equipedItem);
+        }
     }
 
     void UpdateInventorySlots()

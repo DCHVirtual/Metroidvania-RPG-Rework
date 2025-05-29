@@ -10,15 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd5aa9aafd206204eb905051d977de03, type: 3}
-  m_Name: Equipment Data - Wooden Sword
+  m_Name: Equipment Data - Amulet of Doom
   m_EditorClassIdentifier: 
-  itemName: Wooden Sword
-  icon: {fileID: -5365385695610608141, guid: dff235a67a926e54891eaa41fb107979, type: 3}
-  type: 1
-  rarity: 0
+  itemName: Amulet of Doom
+  icon: {fileID: -5155006954947433709, guid: dff235a67a926e54891eaa41fb107979, type: 3}
+  type: 3
+  rarity: 1
   maxStackSize: 1
   modifiers:
-  - statType: 6
+  - statType: 2
+    value: 10
+  - statType: 4
     value: 4
-  - statType: 3
-    value: 3
+  - statType: 11
+    value: 15
+  - statType: 1
+    value: 2.5

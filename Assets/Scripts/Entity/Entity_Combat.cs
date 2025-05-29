@@ -35,7 +35,7 @@ public class Entity_Combat : MonoBehaviour
             {
                 fx.PlayHitVFX(vfxPos, attackData.isCrit, attackData.element);
                 if (attackData.element != ElementType.None)
-                    target.GetComponent<Entity_StatusHandler>().ApplyStatusEffect(attackData.element, attackData.elementData);
+                    target.GetComponent<Entity_StatusHandler>()?.ApplyStatusEffect(attackData.element, attackData.elementData);
             }
         }
     }

@@ -6,7 +6,7 @@ public class Inventory_Item
 {
     public Data_ItemSO itemData;
     public int stackSize = 1;
-    Guid ID;
+    public Guid ID { get; private set; }
 
     public ItemModifier[] modifiers { get; private set; }
 

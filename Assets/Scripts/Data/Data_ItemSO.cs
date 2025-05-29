@@ -4,7 +4,8 @@ using UnityEngine;
 public class Data_ItemSO : ScriptableObject
 {
     public string itemName;
-    public Sprite itemIcon;
-    public ItemType itemType;
+    public Sprite icon;
+    public ItemType type;
+    public ItemRarity rarity;
     public int maxStackSize = 1;
 }

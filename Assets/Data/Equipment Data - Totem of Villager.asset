@@ -10,15 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd5aa9aafd206204eb905051d977de03, type: 3}
-  m_Name: Equipment Data - Wooden Sword
+  m_Name: Equipment Data - Totem of Villager
   m_EditorClassIdentifier: 
-  itemName: Wooden Sword
-  icon: {fileID: -5365385695610608141, guid: dff235a67a926e54891eaa41fb107979, type: 3}
-  type: 1
-  rarity: 0
+  itemName: Totem of Villager
+  icon: {fileID: 1018383391595562092, guid: dff235a67a926e54891eaa41fb107979, type: 3}
+  type: 2
+  rarity: 2
   maxStackSize: 1
   modifiers:
-  - statType: 6
-    value: 4
-  - statType: 3
-    value: 3
+  - statType: 13
+    value: 100000
+  - statType: 2
+    value: 2e+9
+  - statType: 9
+    value: 1
+  - statType: 7
+    value: 1

@@ -47,8 +47,8 @@ public class Stat
 [Serializable]
 public class StatModifier
 {
-    public float value { get; private set; }
-    public string source { get; private set; }
+    [field: SerializeField] public float value { get; private set; }
+    [field: SerializeField] public string source { get; private set; }
     public Guid ID { get; private set; }
 
     public StatModifier(float value, string source, Guid ID)

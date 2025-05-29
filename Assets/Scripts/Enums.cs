@@ -81,3 +81,10 @@ public enum ItemType
     Armor,
     Trinket
 }
+
+public enum ItemRarity
+{
+    Common,
+    Rare,
+    Legendary
+}

@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd5aa9aafd206204eb905051d977de03, type: 3}
-  m_Name: Equipment Data - Wooden Sword
+  m_Name: Equipment Data - Iron Sword
   m_EditorClassIdentifier: 
-  itemName: Wooden Sword
-  icon: {fileID: -5365385695610608141, guid: dff235a67a926e54891eaa41fb107979, type: 3}
+  itemName: Iron Sword
+  icon: {fileID: -6447425667752118579, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 1
-  rarity: 0
+  rarity: 1
   maxStackSize: 1
   modifiers:
   - statType: 6
-    value: 4
-  - statType: 3
-    value: 3
+    value: 10
+  - statType: 2
+    value: 5
+  - statType: 5
+    value: 5

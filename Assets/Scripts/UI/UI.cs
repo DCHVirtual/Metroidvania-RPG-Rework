@@ -4,6 +4,7 @@ public class UI : MonoBehaviour
 {
     public UI_SkillTree skillTree;
     public UI_SkillTooltip skillTooltip;
+    public UI_ItemToolTip itemTooltip;
     PlayerInputSet UI_Input;
     bool skillTreeEnabled = true;
     Player player;
@@ -13,6 +14,7 @@ public class UI : MonoBehaviour
         player = FindAnyObjectByType<Player>();
         skillTree = GetComponentInChildren<UI_SkillTree>(true);
         skillTooltip = GetComponentInChildren<UI_SkillTooltip>();
+        itemTooltip = GetComponentInChildren<UI_ItemToolTip>();
         UI_Input = new PlayerInputSet();
         player.input.Player.Disable();
         Time.timeScale = 0;

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Material Data - Leather
   m_EditorClassIdentifier: 
   itemName: Leather
-  itemIcon: {fileID: -7913775737931201815, guid: dff235a67a926e54891eaa41fb107979, type: 3}
-  itemType: 0
+  icon: {fileID: -7913775737931201815, guid: dff235a67a926e54891eaa41fb107979, type: 3}
+  type: 0
+  rarity: 0
   maxStackSize: 10

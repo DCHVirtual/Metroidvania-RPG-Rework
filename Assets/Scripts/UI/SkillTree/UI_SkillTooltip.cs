@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class UI_SkillTooltip : UI_Tooltip
+public class UI_SkillTooltip : UI_ToolTip
 {
     UI ui;
     UI_SkillTree skillTree;
