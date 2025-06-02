@@ -12,16 +12,16 @@ public class UI_Inventory : MonoBehaviour
     Player player;
 
     [SerializeField] UI_ItemSlotParent uiItemSlotParent;
-    [SerializeField] Transform uiEquipSlotParent;
+    [SerializeField] UI_EquipSlotParent uiEquipSlotParent;
     [SerializeField] Transform uiStatSlotParent;
     [SerializeField] Slider uiHealthBar;
 
 
     private void Awake()
     {
-        uiItemSlots = uiItemSlotParent.GetComponentsInChildren<UI_ItemSlot>();
-        uiEquipSlots = uiEquipSlotParent.GetComponentsInChildren<UI_EquipSlot>();
-        uiStatSlots = uiStatSlotParent.GetComponentsInChildren<UI_StatSlot>();
+        uiItemSlots = uiItemSlotParent.GetComponentsInChildren<UI_ItemSlot>(true);
+        uiEquipSlots = uiEquipSlotParent.GetComponentsInChildren<UI_EquipSlot>(true);
+        uiStatSlots = uiStatSlotParent.GetComponentsInChildren<UI_StatSlot>(true);
         inventory = FindFirstObjectByType<Inventory_Player>();
         player = FindFirstObjectByType<Player>();
         inventory.OnInventoryChange += UpdateUI;
@@ -43,7 +43,7 @@ public class UI_Inventory : MonoBehaviour
     {
         uiHealthBar.value = player.health.GetHealthPercent();
         uiItemSlotParent.UpdateSlots(inventory.itemList);
-        UpdateEquipmentSlots();
+        uiEquipSlotParent.UpdateEquipmentSlots(inventory.equipList);
         UpdateStatSlots();
     }
 
@@ -53,19 +53,6 @@ public class UI_Inventory : MonoBehaviour
         {
             slot.UpdateStatValue();
             
-        }
-    }
-
-    void UpdateEquipmentSlots()
-    {
-        var equipList = inventory.equipList;
-
-        for (int i = 0; i < uiEquipSlots.Length; i++)
-        {
-            if (!equipList[i].HasItem())
-                uiEquipSlots[i].UpdateSlot(null);
-            else
-                uiEquipSlots[i].UpdateSlot(equipList[i].equipedItem);
         }
     }
 }

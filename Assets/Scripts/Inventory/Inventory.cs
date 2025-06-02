@@ -67,6 +67,8 @@ public class Inventory : MonoBehaviour
     {
         var itemInInventory = FindItem(item);
 
+        if (itemInInventory == null) return;
+
         if (itemInInventory.stackSize > 1)
             itemInInventory.RemoveStack();
         else

@@ -12,7 +12,6 @@ public class UI_Storage : MonoBehaviour
         this.storage = storage;
         playerInventory = storage.playerInventory;
         storage.OnInventoryChange += UpdateUI;
-        UpdateUI();
 
         var storageSlots = GetComponentsInChildren<UI_StorageSlot>();
 
@@ -20,7 +19,15 @@ public class UI_Storage : MonoBehaviour
         {
             slot.SetStorage(storage);
         }
+        
+        UpdateUI();
     }
+
+    private void OnEnable()
+    {
+        UpdateUI();
+    }
+
 
     void UpdateUI()
     {

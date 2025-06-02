@@ -28,7 +28,7 @@ public class NPC : MonoBehaviour
         interactToolTip.SetActive(true);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         HandleToolTipFloat();
         FacePlayer();

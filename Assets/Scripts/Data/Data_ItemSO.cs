@@ -14,4 +14,9 @@ public class Data_ItemSO : ScriptableObject
 
     [Header("Craft Details")]
     public Inventory_Item[] craftRecipe;
+
+    [Header("Merchant Details")]
+    public int price = 100;
+    public int minShopStackSize = 1;
+    public int maxShopStackSize = 1;
 }

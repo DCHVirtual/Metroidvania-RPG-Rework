@@ -3,17 +3,18 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    public UI_SkillTree skillTree;
-    public UI_Inventory uiInventory;
-    public UI_Storage uiStorage;
-    public UI_Craft uiCraft;
-    public UI_SkillTooltip skillTooltip;
-    public UI_ItemToolTip itemTooltip;
-    public UI_StatToolTip statTooltip;
-    public PlayerInputSet UI_Input;
+    [HideInInspector] public UI_SkillTree skillTree;
+    [HideInInspector] public UI_Inventory uiInventory;
+    [HideInInspector] public UI_Storage uiStorage;
+    [HideInInspector] public UI_Craft uiCraft;
+    [HideInInspector] public UI_Merchant uiMerchant;
+    [HideInInspector] public UI_SkillTooltip skillTooltip;
+    [HideInInspector] public UI_ItemToolTip itemToolTip;
+    [HideInInspector] public UI_StatToolTip statTooltip;
+    [HideInInspector] public PlayerInputSet UI_Input;
     bool skillTreeEnabled = true;
     bool inventoryEnabled = true;
-    public Player player;
+    [HideInInspector] public Player player;
 
     private void Awake()
     {
@@ -22,8 +23,9 @@ public class UI : MonoBehaviour
         uiInventory = GetComponentInChildren<UI_Inventory>(true);
         uiStorage = GetComponentInChildren<UI_Storage>(true);
         uiCraft = GetComponentInChildren<UI_Craft>(true);
+        uiMerchant = GetComponentInChildren<UI_Merchant>(true);
         skillTooltip = GetComponentInChildren<UI_SkillTooltip>();
-        itemTooltip = GetComponentInChildren<UI_ItemToolTip>();
+        itemToolTip = GetComponentInChildren<UI_ItemToolTip>();
         statTooltip = GetComponentInChildren<UI_StatToolTip>();
         UI_Input = new PlayerInputSet();
     }
@@ -32,6 +34,13 @@ public class UI : MonoBehaviour
     {
         ToggleSkillTreeUI();
         ToggleInventoryUI();
+    }
+
+    public void SwitchOffAllTooltips()
+    {
+        skillTooltip.ShowTooltip(false, null);
+        itemToolTip.ShowTooltip(false, null);
+        statTooltip.ShowTooltip(false, null);
     }
 
     private void OnEnable()     
@@ -77,7 +86,7 @@ public class UI : MonoBehaviour
     {
         inventoryEnabled = !inventoryEnabled;
         uiInventory.gameObject.SetActive(inventoryEnabled);
-        itemTooltip.ShowTooltip(false, null);
+        itemToolTip.ShowTooltip(false, null);
         statTooltip.ShowTooltip(false, null);
         Time.timeScale = 1 - Time.timeScale;
 

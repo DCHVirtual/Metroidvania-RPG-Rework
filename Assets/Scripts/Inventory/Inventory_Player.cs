@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Inventory_Player : Inventory
 {
+    public int gold = 10000;
+
     Entity_Stats stats;
     Player player;
     public Inventory_Storage storage { get; private set; }
@@ -33,7 +35,7 @@ public class Inventory_Player : Inventory
             {
                 RemoveItemFromInventory(item);
                 UnequipItem(slot.equipedItem);
-                EquipItem(item, slot, true);
+                EquipItem(item, slot);
             }
         }
     }
@@ -48,8 +50,7 @@ public class Inventory_Player : Inventory
 
         player.health.SetHealthPercent(currentHealthPercent);
 
-        if (!swap)
-            RemoveItemFromInventory(itemToEquip);
+        RemoveItemFromInventory(itemToEquip);
 
         UpdateUI();
     }

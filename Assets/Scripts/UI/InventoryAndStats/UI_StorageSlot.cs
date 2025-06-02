@@ -26,7 +26,7 @@ public class UI_StorageSlot : UI_ItemSlot
         else
             storage.FromPlayerToStorage(itemInSlot, transferFullStack);
 
-        ui.itemTooltip.ShowTooltip(false, null);
+        ui.itemToolTip.ShowTooltip(false, null);
     }
 
 }

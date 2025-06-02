@@ -16,6 +16,6 @@ public class UI_EquipSlot : UI_ItemSlot
 
         inventory.UnequipItem(itemInSlot);
 
-        ui.itemTooltip.ShowTooltip(false, null);
+        ui.itemToolTip.ShowTooltip(false, null);
     }
 }

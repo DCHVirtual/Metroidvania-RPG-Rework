@@ -20,10 +20,15 @@ public class UI_Craft : MonoBehaviour
         UpdateUI();
     }
 
+    private void OnEnable()
+    {
+        UpdateUI();
+    }
+
     void SetupCraftCategoryButtons()
     {
-        craftSlots = GetComponentsInChildren<UI_CraftBookSlot>();
-        craftCategoryButtons = GetComponentsInChildren<UI_CraftCategoryButton>();
+        craftSlots = GetComponentsInChildren<UI_CraftBookSlot>(true);
+        craftCategoryButtons = GetComponentsInChildren<UI_CraftCategoryButton>(true);
 
         foreach (var craftSlot in craftSlots)
             craftSlot.gameObject.SetActive(false);

@@ -53,20 +53,20 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         else
             inventory.TryEquipItem(itemInSlot);
         
-        ui.itemTooltip.ShowTooltip(false, null);
+        ui.itemToolTip.ShowTooltip(false, null);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         if (itemInSlot == null) return;
 
-        ui.itemTooltip.ShowTooltip(true, rect, itemInSlot);
+        ui.itemToolTip.ShowTooltip(true, rect, itemInSlot);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (itemInSlot == null) return;
 
-        ui.itemTooltip.ShowTooltip(false, null);
+        ui.itemToolTip.ShowTooltip(false, null);
     }
 }

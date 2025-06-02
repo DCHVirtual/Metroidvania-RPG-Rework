@@ -40,7 +40,7 @@ public class UI_CraftPreview : MonoBehaviour
     {
         this.storage = storage;
 
-        materialSlots = GetComponentsInChildren<UI_CraftMaterialSlot>();
+        materialSlots = GetComponentsInChildren<UI_CraftMaterialSlot>(true);
         foreach (var slot in materialSlots)
             slot.gameObject.SetActive(false);
     }

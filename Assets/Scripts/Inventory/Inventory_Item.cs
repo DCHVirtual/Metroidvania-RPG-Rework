@@ -11,11 +11,16 @@ public class Inventory_Item
 
     public ItemModifier[] modifiers { get; private set; }
 
+    public int buyPrice { get; private set; }
+    public int sellPrice { get; private set; }
+
     public Inventory_Item(Data_ItemSO itemData)
     {
         stackSize = 1;
         this.itemData = itemData;
         itemEffect = itemData.effect;
+        buyPrice = itemData.price;
+        sellPrice = (int)(0.35f * buyPrice);
         ID = Guid.NewGuid();
         modifiers = (itemData as Data_EquipmentSO)?.modifiers;
     }
@@ -51,5 +56,10 @@ public class Inventory_Item
         stackSize -= Mathf.Min(amount, stackSize);
 
         return startSize - stackSize; //returns amount removed
+    }
+
+    public void SetStacks(int size)
+    {
+        stackSize = Mathf.Clamp(size,0, itemData.maxStackSize);
     }
 }
