@@ -12,10 +12,12 @@ public class UI_Craft : MonoBehaviour
     public void SetupCraftUI(Inventory_Storage storage)
     {
         inventory = storage.playerInventory;
-        inventory.OnInventoryChange += UpdateUI;
         craftPreviewUI = GetComponentInChildren<UI_CraftPreview>();
         craftPreviewUI.SetupCraftPreview(storage);
         SetupCraftCategoryButtons();
+
+        inventory.OnInventoryChange += UpdateUI;
+        UpdateUI();
     }
 
     void SetupCraftCategoryButtons()

@@ -13,10 +13,27 @@ public class UI_CraftPreview : MonoBehaviour
     [SerializeField] Image itemIcon;
     [SerializeField] TextMeshProUGUI itemName;
     [SerializeField] TextMeshProUGUI itemInfo;
+    [SerializeField] TextMeshProUGUI craftButton;
 
     private void Awake()
     {
         ui = GetComponentInParent<UI>();
+    }
+
+    public void AttemptCraft()
+    {
+        if (itemToCraft == null)
+        {
+            craftButton.text = "Pick an item";
+            return;
+        }
+
+        if (storage.HasEnoughToCraft(itemToCraft) && storage.playerInventory.CanAddItemToInventory(itemToCraft))
+        {
+            storage.CraftItem(itemToCraft);
+        }
+
+        UpdateCraftPreviewSlots();
     }
 
     public void SetupCraftPreview(Inventory_Storage storage)
@@ -35,7 +52,11 @@ public class UI_CraftPreview : MonoBehaviour
         itemIcon.sprite = itemData.icon;
         itemName.text = itemData.itemName;
         itemInfo.text = ui.GetItemInfo(itemToCraft);
+        UpdateCraftPreviewSlots();
+    }
 
+    private void UpdateCraftPreviewSlots()
+    {
         foreach (var slot in materialSlots)
             slot.gameObject.SetActive(false);
 

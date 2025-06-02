@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 13658333}
   - component: {fileID: 13658332}
   m_Layer: 9
-  m_Name: Object_ItemPickup - Small Health Potion
+  m_Name: Object_ItemPickup - Iron Ore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -739,7 +739,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3237844493445452581, guid: dff235a67a926e54891eaa41fb107979, type: 3}
+  m_Sprite: {fileID: 6142543257898026600, guid: fb18c8fc98ae8544bb390e4fefa0df65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -762,7 +762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d82dd0c82c96044888d1520de8036e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 7885a2452281ecf4da8e6949fec2caa7, type: 2}
+  itemData: {fileID: 11400000, guid: 5132f0e98d0e8a646bde41802bfabf0c, type: 2}
 --- !u!4 &13658335
 Transform:
   m_ObjectHideFlags: 0
@@ -2230,7 +2230,7 @@ GameObject:
   - component: {fileID: 64448905}
   - component: {fileID: 64448904}
   m_Layer: 9
-  m_Name: Object_ItemPickup - Small Health Potion
+  m_Name: Object_ItemPickup - Iron Ore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2326,7 +2326,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3237844493445452581, guid: dff235a67a926e54891eaa41fb107979, type: 3}
+  m_Sprite: {fileID: 6142543257898026600, guid: fb18c8fc98ae8544bb390e4fefa0df65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2349,7 +2349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d82dd0c82c96044888d1520de8036e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 7885a2452281ecf4da8e6949fec2caa7, type: 2}
+  itemData: {fileID: 11400000, guid: 5132f0e98d0e8a646bde41802bfabf0c, type: 2}
 --- !u!4 &64448907
 Transform:
   m_ObjectHideFlags: 0
@@ -5537,7 +5537,7 @@ GameObject:
   - component: {fileID: 175882888}
   - component: {fileID: 175882887}
   m_Layer: 9
-  m_Name: Object_ItemPickup - Small Health Potion
+  m_Name: Object_ItemPickup - Iron Ore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5633,7 +5633,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3237844493445452581, guid: dff235a67a926e54891eaa41fb107979, type: 3}
+  m_Sprite: {fileID: 6142543257898026600, guid: fb18c8fc98ae8544bb390e4fefa0df65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5656,7 +5656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d82dd0c82c96044888d1520de8036e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 7885a2452281ecf4da8e6949fec2caa7, type: 2}
+  itemData: {fileID: 11400000, guid: 5132f0e98d0e8a646bde41802bfabf0c, type: 2}
 --- !u!4 &175882890
 Transform:
   m_ObjectHideFlags: 0
@@ -6853,7 +6853,7 @@ GameObject:
   - component: {fileID: 213784825}
   - component: {fileID: 213784824}
   m_Layer: 9
-  m_Name: Object_ItemPickup - Small Health Potion
+  m_Name: Object_ItemPickup - Iron Ore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6949,7 +6949,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3237844493445452581, guid: dff235a67a926e54891eaa41fb107979, type: 3}
+  m_Sprite: {fileID: 6142543257898026600, guid: fb18c8fc98ae8544bb390e4fefa0df65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6972,7 +6972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d82dd0c82c96044888d1520de8036e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 7885a2452281ecf4da8e6949fec2caa7, type: 2}
+  itemData: {fileID: 11400000, guid: 5132f0e98d0e8a646bde41802bfabf0c, type: 2}
 --- !u!4 &213784827
 Transform:
   m_ObjectHideFlags: 0
@@ -17920,6 +17920,7 @@ MonoBehaviour:
   itemIcon: {fileID: 354784266}
   itemName: {fileID: 1536390037}
   itemInfo: {fileID: 1182242319}
+  craftButton: {fileID: 799945463}
 --- !u!114 &521980098 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4294290132636510821, guid: 1f028d1febdc7c44f93bc364306e006b, type: 3}
@@ -20868,7 +20869,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610809857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.85}
   m_LocalScale: {x: 0.17, y: 0.17, z: 0.17}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -21415,7 +21416,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -45.60846, y: 134.70381}
+  m_AnchoredPosition: {x: -45.6084, y: 134.70381}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &622058191
@@ -23411,7 +23412,7 @@ Transform:
   m_GameObject: {fileID: 678930713}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.94, z: 0}
+  m_LocalPosition: {x: 0, y: 1.94, z: 0.01}
   m_LocalScale: {x: 0.61404, y: 0.61404, z: 0.61404}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26311,7 +26312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -44.194275, y: -148.84604}
+  m_AnchoredPosition: {x: -44.194336, y: -148.84605}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &768763040
@@ -39246,7 +39247,7 @@ GameObject:
   - component: {fileID: 1131371525}
   - component: {fileID: 1131371524}
   m_Layer: 9
-  m_Name: Object_ItemPickup - Small Health Potion
+  m_Name: Object_ItemPickup - Iron Ore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39342,7 +39343,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3237844493445452581, guid: dff235a67a926e54891eaa41fb107979, type: 3}
+  m_Sprite: {fileID: 6142543257898026600, guid: fb18c8fc98ae8544bb390e4fefa0df65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -39365,7 +39366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d82dd0c82c96044888d1520de8036e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 7885a2452281ecf4da8e6949fec2caa7, type: 2}
+  itemData: {fileID: 11400000, guid: 5132f0e98d0e8a646bde41802bfabf0c, type: 2}
 --- !u!4 &1131371527
 Transform:
   m_ObjectHideFlags: 0
@@ -50451,7 +50452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fd2c611dfd459499d52dd8c0ac1bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryParent: {fileID: 613169281}
+  inventoryParent: {fileID: 1672033198}
 --- !u!1 &1494989049
 GameObject:
   m_ObjectHideFlags: 0
@@ -54892,7 +54893,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00002861023, y: -121.5}
+  m_AnchoredPosition: {x: 0.0000019073486, y: -121.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1638707083
@@ -67315,7 +67316,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2009743791}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 520776122}
+        m_TargetAssemblyTypeName: UI_CraftPreview, Assembly-CSharp
+        m_MethodName: AttemptCraft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2009743791
 MonoBehaviour:
   m_ObjectHideFlags: 0

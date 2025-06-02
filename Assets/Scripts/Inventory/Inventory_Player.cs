@@ -33,12 +33,12 @@ public class Inventory_Player : Inventory
             {
                 RemoveItemFromInventory(item);
                 UnequipItem(slot.equipedItem);
-                EquipItem(item, slot);
+                EquipItem(item, slot, true);
             }
         }
     }
 
-    void EquipItem(Inventory_Item itemToEquip, Inventory_EquipmentSlot slot)
+    void EquipItem(Inventory_Item itemToEquip, Inventory_EquipmentSlot slot, bool swap = false)
     {
         float currentHealthPercent = player.health.GetHealthPercent();
 
@@ -48,7 +48,10 @@ public class Inventory_Player : Inventory
 
         player.health.SetHealthPercent(currentHealthPercent);
 
-        RemoveItemFromInventory(itemToEquip);
+        if (!swap)
+            RemoveItemFromInventory(itemToEquip);
+
+        UpdateUI();
     }
 
     public void UnequipItem(Inventory_Item itemToUnequip)
