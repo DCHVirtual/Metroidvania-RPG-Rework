@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd5aa9aafd206204eb905051d977de03, type: 3}
+  m_Name: Equipment Data - Iron Sword
+  m_EditorClassIdentifier: 
+  itemName: Iron Sword
+  icon: {fileID: -6447425667752118579, guid: dff235a67a926e54891eaa41fb107979, type: 3}
+  type: 1
+  rarity: 1
+  maxStackSize: 1
+  effect: {fileID: 0}
+  craftRecipe:
+  - <itemData>k__BackingField: {fileID: 11400000, guid: 273ae041412daf549847b396f59685a4, type: 2}
+    <stackSize>k__BackingField: 1
+  - <itemData>k__BackingField: {fileID: 11400000, guid: 5132f0e98d0e8a646bde41802bfabf0c, type: 2}
+    <stackSize>k__BackingField: 5
+  - <itemData>k__BackingField: {fileID: 11400000, guid: 3a54e9fd9ae8e1c4a8d3ae1d375c2f4e, type: 2}
+    <stackSize>k__BackingField: 5
+  modifiers:
+  - statType: 6
+    value: 10
+  - statType: 2
+    value: 5
+  - statType: 5
+    value: 5

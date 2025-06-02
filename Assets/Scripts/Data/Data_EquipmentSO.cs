@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "RPG Setup/Item Data/Equipment Data", fileName = "Equipment Data - ")]
+[CreateAssetMenu(menuName = "RPG Setup/Item Data/Equipment Item", fileName = "Equipment Data - ")]
 public class Data_EquipmentSO : Data_ItemSO
 {
     [Header("Item modifiers")]

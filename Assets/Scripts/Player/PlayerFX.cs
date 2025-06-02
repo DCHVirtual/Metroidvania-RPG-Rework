@@ -9,6 +9,11 @@ public class PlayerFX : EntityFX
     [SerializeField] GameObject afterImagePrefab;
     Coroutine afterImageCo;
 
+    public void CreateVFX(GameObject VFX, Transform transform)
+    {
+        Instantiate(VFX, transform.position, Quaternion.identity);
+    }
+
     public void AfterImageEffect(float duration)
     {
         if (afterImageCo != null)

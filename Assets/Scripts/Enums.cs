@@ -28,7 +28,8 @@ public enum StatType
     Evasion,
     IceResistance,
     FireResistance,
-    LightningResistance
+    LightningResistance,
+    ElementalDamage
 }
 
 public enum SkillType
@@ -79,7 +80,8 @@ public enum ItemType
     Material,
     Weapon,
     Armor,
-    Trinket
+    Trinket,
+    Consumable
 }
 
 public enum ItemRarity

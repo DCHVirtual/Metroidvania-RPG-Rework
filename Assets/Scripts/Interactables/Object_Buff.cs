@@ -1,25 +1,14 @@
-using System;
-using System.Collections;
 using UnityEngine;
-
-[Serializable]
-public class Buff
-{
-    public StatType type;
-    public float value;
-}
 
 public class Object_Buff : MonoBehaviour
 {
-    SpriteRenderer sr;
-    Entity_Stats stats;
-    Guid uniqueID;
+    Player_Stats stats;
+    Data_BuffEffect buffEffect;
 
     [Header("Buff details")]
     [SerializeField] Buff[] buffs;
-    [SerializeField] string buffName;
-    [SerializeField] float buffDuration = 4f;
-    [SerializeField] bool canBeUsed = true;
+    [SerializeField] string source;
+    [SerializeField] float duration;
 
 
     [Header("Floaty Movement")]
@@ -29,9 +18,8 @@ public class Object_Buff : MonoBehaviour
 
     private void Awake()
     {
-        sr = GetComponentInChildren<SpriteRenderer>();
         startPos = transform.position;
-        uniqueID = Guid.NewGuid();
+        buffEffect = new Data_BuffEffect(buffs, duration, source);
     }
 
     // Update is called once per frame
@@ -43,27 +31,10 @@ public class Object_Buff : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!canBeUsed) return;
         if (collision.GetComponent<SkillObject_TimeEcho>() == true) return;
-        stats = collision.GetComponent<Entity_Stats>();
-        StartCoroutine(BuffCo(buffDuration));
-    }
 
-    IEnumerator BuffCo(float duration)
-    {
-        canBeUsed = false;
-        sr.color = Color.clear;
-
-        //Apply buffs
-        foreach (var buff in buffs)
-            stats.GetStatByType(buff.type).AddModifier(buff.value, buffName, uniqueID);
-
-        yield return new WaitForSeconds(duration);
-
-        //Remove Buffs
-        foreach (var buff in buffs)
-            stats.GetStatByType(buff.type).RemoveModifier(uniqueID);
-
+        stats = collision.GetComponent<Player_Stats>();
+        stats.ApplyBuff(buffEffect);
         Destroy(gameObject);
     }
 }

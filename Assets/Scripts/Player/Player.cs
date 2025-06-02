@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class Player : Entity
@@ -14,6 +15,7 @@ public class Player : Entity
     public float dashDuration { get; private set; } = 0.3f;
 
     UI ui;
+    
 
     public PlayerInputSet input { get; private set; }
     public Vector2 moveInput { get; private set; }
@@ -21,6 +23,7 @@ public class Player : Entity
 
     public static event Action OnPlayerDeath;
     public Player_SkillManager skillManager { get; private set; }
+    public Player_Combat combat { get; private set; }
     public PlayerFX fx { get; private set; }
 
     #region States
@@ -64,6 +67,7 @@ public class Player : Entity
         skillManager = GetComponent<Player_SkillManager>();
         fx = GetComponent<PlayerFX>();
         health = GetComponent<Entity_Health>();
+        combat = GetComponent<Player_Combat>();
 
         idleState = new Player_IdleState(this, stateMachine, "Idle");
         moveState = new Player_MoveState(this, stateMachine, "Move");
@@ -94,11 +98,26 @@ public class Player : Entity
         input.Player.Spell.performed += ctx => skillManager.timeEcho.TryUseSkill();
 
         input.Player.Cursor.performed += ctx => cursorPos = ctx.ReadValue<Vector2>();
+
+        input.Player.Interact.performed += ctx => TryInteract();
     }
 
     private void OnDisable()
     {
         input.Disable();
+    }
+
+    void TryInteract()
+    {
+        IInteractable closestInteractable =
+            Physics2D.OverlapCircleAll(transform.position, 1.5f)
+            .Where(hit => hit.GetComponent<IInteractable>() != null)
+            .OrderBy(hit => Vector2.Distance(transform.position, hit.transform.position))
+            .Select(hit => hit.GetComponent<IInteractable>())
+            .FirstOrDefault();
+
+        if (closestInteractable != null)
+            closestInteractable.Interact();
     }
 
     protected override void Start()

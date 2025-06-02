@@ -31,4 +31,8 @@ public class Skill_Dash : Skill
         skillManager.timeEcho.CreateTimeEcho();
     }
 
+    public override void ResetSkill()
+    {
+        upgradeType = SkillUpgradeType.Dash;
+    }
 }

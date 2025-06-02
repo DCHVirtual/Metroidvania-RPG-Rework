@@ -1,13 +1,15 @@
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class UI_Tooltip : MonoBehaviour
+public class UI_ToolTip : MonoBehaviour
 {
     RectTransform rect;
+    protected UI ui;
     [SerializeField] Vector2 offset = new Vector2(250, 50);
 
     protected virtual void Awake()
     {
+        ui = GetComponentInParent<UI>();
         rect = GetComponent<RectTransform>();
         ShowTooltip(false, rect);
     }

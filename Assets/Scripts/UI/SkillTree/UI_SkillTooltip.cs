@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class UI_SkillTooltip : UI_ToolTip
 {
-    UI ui;
     UI_SkillTree skillTree;
 
     [SerializeField] TextMeshProUGUI skillName;
@@ -22,7 +21,6 @@ public class UI_SkillTooltip : UI_ToolTip
     protected override void Awake()
     {
         base.Awake();
-        ui = GetComponentInParent<UI>();
         skillTree = ui.GetComponentInChildren<UI_SkillTree>(true);
     }
     public override void ShowTooltip(bool show, RectTransform hoverRect)

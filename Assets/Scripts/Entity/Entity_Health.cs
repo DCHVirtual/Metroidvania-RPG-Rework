@@ -1,7 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+
 public class Entity_Health : MonoBehaviour, IDamageable
 {
+    public event Action OnTakingDamage;
+
     [Header("Life Details")]
     [SerializeField] float currentHealth;
     [HideInInspector] public bool isDead;
@@ -58,6 +63,9 @@ public class Entity_Health : MonoBehaviour, IDamageable
         entity?.ReceiveKnockback(KnockbackDirectedForce(dmgDealer), knockbackDuration);
 
         ReduceHealth(finalDamage);
+
+        OnTakingDamage?.Invoke();
+
         return true;
     }
 

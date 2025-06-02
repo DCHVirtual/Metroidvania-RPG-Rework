@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd5aa9aafd206204eb905051d977de03, type: 3}
+  m_Name: Equipment Data - Dracula's Fang
+  m_EditorClassIdentifier: 
+  itemName: Dracula's Fang
+  icon: {fileID: 8796641721362945431, guid: dff235a67a926e54891eaa41fb107979, type: 3}
+  type: 1
+  rarity: 2
+  maxStackSize: 1
+  effect: {fileID: 11400000, guid: b37b288adda375843915f64e12d385c7, type: 2}
+  craftRecipe:
+  - <itemData>k__BackingField: {fileID: 11400000, guid: 840085947a94f1142b3f4b033c324f19, type: 2}
+    <stackSize>k__BackingField: 1
+  - <itemData>k__BackingField: {fileID: 11400000, guid: 5132f0e98d0e8a646bde41802bfabf0c, type: 2}
+    <stackSize>k__BackingField: 10
+  - <itemData>k__BackingField: {fileID: 11400000, guid: 3a54e9fd9ae8e1c4a8d3ae1d375c2f4e, type: 2}
+    <stackSize>k__BackingField: 15
+  - <itemData>k__BackingField: {fileID: 11400000, guid: 054d5e85528038841bb8aea53905a0ba, type: 2}
+    <stackSize>k__BackingField: 1
+  modifiers:
+  - statType: 6
+    value: 35
+  - statType: 7
+    value: 0.15
+  - statType: 8
+    value: 0.2
+  - statType: 3
+    value: 6

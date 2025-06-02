@@ -29,24 +29,18 @@ public class Entity_Stats : MonoBehaviour
     #region Stat Calculations
     public float GetPhysicalDamage(out bool isCrit, float scaleFactor = 1f)
     {
-        float baseDamage = offense.damage.GetValue();
-        float bonusDamage = major.strength.GetValue() * strengthDamageMult;
-        float damage = baseDamage + bonusDamage;
-
-        float baseCritChance = offense.critChance.GetValue();
-        float bonusCritChance = major.agility.GetValue() * agilityCritChanceMult;
-        float critChance = baseCritChance + bonusCritChance;
-
-        float baseCritDamage = offense.critDamage.GetValue();
-        float bonusCritDamage = major.strength.GetValue() * strengthCritDamageMult;
-        float critDamage =  (baseCritDamage + bonusCritDamage) / 100;
+        float damage = GetBaseDamage();
+        float critChance = GetCritChance();
+        float critDamage =  GetCritDamage() / 100;
 
         isCrit = Random.Range(0, 100) < critChance;
         float finalDamage = isCrit ? damage * critDamage : damage;
 
         return finalDamage * scaleFactor;
     }
-
+    public float GetBaseDamage() => offense.damage.GetValue() + major.strength.GetValue() * strengthDamageMult;
+    public float GetCritChance() => offense.critChance.GetValue() + major.agility.GetValue() * agilityCritChanceMult;
+    public float GetCritDamage() => offense.critDamage.GetValue() + major.strength.GetValue() * strengthCritDamageMult;
     //Highest stat applies 100% dmg and status effect, other stats apply 50% dmg
     public float GetElementalDamage(out ElementType highestElement, float scaleFactor = 1f)
     {
@@ -71,21 +65,19 @@ public class Entity_Stats : MonoBehaviour
                 totalElementalDamage += elementDamages[i] * secondaryElementalDmgMult;
         }
 
-        Debug.Log($"Elemental Damage: {totalElementalDamage} of type {highestElement}");
         return totalElementalDamage * scaleFactor;
     }
 
     public float GetArmorMitigation(float attackArmorReduction)
     {
-        float baseArmor = defense.armor.GetValue();
-        float bonusArmor = major.vitality.GetValue() * vitalityArmorMult;
-        float armor = (baseArmor + bonusArmor);
-
-        float reducedArmor = (baseArmor + bonusArmor) * (1 - attackArmorReduction);
+        float armor = GetBaseArmor();
+        float reducedArmor = armor * (1 - attackArmorReduction);
         float mitigation = reducedArmor / (reducedArmor + armorMitigationFactor);
 
         return mitigation;
     }
+
+    public float GetBaseArmor() => defense.armor.GetValue() + major.vitality.GetValue() * vitalityArmorMult;
 
     public float GetArmorReduction()
     {
@@ -136,6 +128,11 @@ public class Entity_Stats : MonoBehaviour
     public Data_Attack GetAttackData(Data_DamageScale scaleData)
     {
         return new Data_Attack(this, scaleData);
+    }
+
+    protected virtual void Awake()
+    {
+
     }
 
     #region Helper Functions

@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Entity_Combat : MonoBehaviour
 {
+    public event Action<float> OnDamageDealt;
+
     [Header("Hit Detection")]
     [SerializeField] Transform hitCheck;
     [SerializeField] float hitCheckRadius;
@@ -25,6 +29,7 @@ public class Entity_Combat : MonoBehaviour
 
             if (damageable == null)
                 continue;
+            
 
             Data_Attack attackData = stats.GetAttackData(basicAttackScale);
 
@@ -33,6 +38,7 @@ public class Entity_Combat : MonoBehaviour
 
             if (targetGotHit)
             {
+                OnDamageDealt?.Invoke(attackData.physicalDamage);
                 fx.PlayHitVFX(vfxPos, attackData.isCrit, attackData.element);
                 if (attackData.element != ElementType.None)
                     target.GetComponent<Entity_StatusHandler>()?.ApplyStatusEffect(attackData.element, attackData.elementData);

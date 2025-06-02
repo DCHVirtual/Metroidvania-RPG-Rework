@@ -80,6 +80,8 @@ public class UI_NodeConnectHandler : MonoBehaviour
     {
         if (treeNode.isDisabled && connectionImage != null)
             connectionImage.color = Color.red;
+        else if (connectionImage != null)
+            connectionImage.color = originalConnectionColor;
 
         foreach (var detail in connectDetails)
         {

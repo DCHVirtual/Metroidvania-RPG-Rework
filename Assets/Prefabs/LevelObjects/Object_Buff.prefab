@@ -46,7 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795dce3a4202e354c8f98c5beba784d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffDuration: 4
+  buffs:
+  - type: 7
+    value: 0.25
+  - type: 11
+    value: 10
+  source: Buff Of Doom
+  duration: 10
   canBeUsed: 1
   floatSpeed: 2
   floatRange: 0.2

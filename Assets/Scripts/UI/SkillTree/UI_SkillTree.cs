@@ -18,15 +18,7 @@ public class UI_SkillTree : MonoBehaviour
         UpdateAllConnections();
     }
 
-    public void RefundAllSkills()
-    {
-        var skillNodes = GetComponentsInChildren<UI_TreeNode>();
-
-        foreach (var node in skillNodes)
-        {
-            node.RefundSkill();
-        }
-    }
+    
 
     [ContextMenu("Update All Connections")]
     public void UpdateAllConnections()

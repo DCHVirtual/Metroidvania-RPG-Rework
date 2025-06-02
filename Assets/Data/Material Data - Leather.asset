@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f862aed1c22c8b34c904136b74068337, type: 3}
   m_Name: Material Data - Leather
   m_EditorClassIdentifier: 
-  itemName: Leather
+  itemName: Animal Leather
   icon: {fileID: -7913775737931201815, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 0
   rarity: 0
   maxStackSize: 10
+  effect: {fileID: 0}
+  craftRecipe: []

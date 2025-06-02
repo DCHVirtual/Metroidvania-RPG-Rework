@@ -14,7 +14,8 @@ public class Enemy_DeathState : EnemyState
     {
         base.Enter();
         stateMachine.TurnOffStateMachine();
-        enemy.GetComponentInChildren<BoxCollider2D>().enabled = false;
+        //enemy.GetComponentInChildren<BoxCollider2D>().enabled = false;
+        rb.simulated = false;
         enemy.GetComponentInChildren<Canvas>().enabled = false;
         sr = enemy.GetComponentInChildren<SpriteRenderer>();
     }

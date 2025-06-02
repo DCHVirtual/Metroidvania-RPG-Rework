@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084e7028401d5494da5ee9588b0e8044, type: 3}
+  m_Name: Item Effect Data - Winters Touch
+  m_EditorClassIdentifier: 
+  description: "When taking damage that brings health below 25%, release an Ice Blast
+    dealing 150 damage. \nCooldown 40s."
+  iceBlastVfx: {fileID: 8089884842967717190, guid: f7134261824633a458721271ea123119, type: 3}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  effectData:
+    chillDuration: 3
+    chillSlowMultiplier: 0.6
+    burnDuration: 0
+    burnDamage: 0
+    shockDuration: 0
+    shockDamage: 0
+    shockCharge: 0
+  healthPercentTrigger: 0.25
+  iceDamage: 150
+  cooldown: 40

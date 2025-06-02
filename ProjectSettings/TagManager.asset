@@ -14,7 +14,7 @@ TagManager:
   - Player
   - Enemy
   - EnemyCollision
-  - Pickups
+  - Interactables
   - Chests
   - PlayerProjectiles
   - 
