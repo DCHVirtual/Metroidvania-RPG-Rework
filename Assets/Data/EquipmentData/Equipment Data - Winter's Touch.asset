@@ -15,9 +15,13 @@ MonoBehaviour:
   itemName: Winter's Touch
   icon: {fileID: -3548245318124798596, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 2
-  rarity: 2
   maxStackSize: 1
   effect: {fileID: 11400000, guid: c697adcb909bcbd4f8e9beb6416cdbe0, type: 2}
+  craftRecipe: []
+  price: 100
+  minShopStackSize: 1
+  itemRarity: 1000
+  dropChance: 1.5
   modifiers:
   - statType: 0
     value: 60

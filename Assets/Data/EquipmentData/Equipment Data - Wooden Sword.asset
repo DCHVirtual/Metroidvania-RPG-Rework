@@ -15,16 +15,17 @@ MonoBehaviour:
   itemName: Wooden Sword
   icon: {fileID: -5365385695610608141, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 1
-  rarity: 0
   maxStackSize: 1
   effect: {fileID: 0}
   craftRecipe:
   - <itemData>k__BackingField: {fileID: 11400000, guid: fc51c98c3ee88b54dbf38d4d525d23cc, type: 2}
-    <itemEffect>k__BackingField: {fileID: 0}
     <stackSize>k__BackingField: 3
   - <itemData>k__BackingField: {fileID: 11400000, guid: 3a54e9fd9ae8e1c4a8d3ae1d375c2f4e, type: 2}
-    <itemEffect>k__BackingField: {fileID: 0}
     <stackSize>k__BackingField: 2
+  price: 100
+  minShopStackSize: 1
+  itemRarity: 100
+  dropChance: 12
   modifiers:
   - statType: 6
     value: 4

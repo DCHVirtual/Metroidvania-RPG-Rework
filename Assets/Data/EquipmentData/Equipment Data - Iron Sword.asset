@@ -15,7 +15,6 @@ MonoBehaviour:
   itemName: Iron Sword
   icon: {fileID: -6447425667752118579, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 1
-  rarity: 1
   maxStackSize: 1
   effect: {fileID: 0}
   craftRecipe:
@@ -25,6 +24,10 @@ MonoBehaviour:
     <stackSize>k__BackingField: 5
   - <itemData>k__BackingField: {fileID: 11400000, guid: 3a54e9fd9ae8e1c4a8d3ae1d375c2f4e, type: 2}
     <stackSize>k__BackingField: 5
+  price: 500
+  minShopStackSize: 1
+  itemRarity: 200
+  dropChance: 8
   modifiers:
   - statType: 6
     value: 10

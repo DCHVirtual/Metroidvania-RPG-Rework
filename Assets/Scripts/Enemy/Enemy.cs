@@ -25,6 +25,7 @@ public class Enemy : Entity
     [SerializeField] protected GameObject counterImage;
 
     [HideInInspector] public Transform attackTarget;
+    public Entity_Stats stats { get; protected set; }
     #endregion
 
     #region States
@@ -41,6 +42,7 @@ public class Enemy : Entity
     protected override void Awake()
     {
         base.Awake();
+        stats = GetComponent<Entity_Stats>();
         idleState = new Enemy_IdleState(this, stateMachine, "Idle");
         moveState = new Enemy_MoveState(this, stateMachine, "Move");
         aggroState = new Enemy_AggroState(this, stateMachine, "Aggro");

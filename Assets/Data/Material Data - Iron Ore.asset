@@ -15,7 +15,10 @@ MonoBehaviour:
   itemName: Iron Ore
   icon: {fileID: 6142543257898026600, guid: fb18c8fc98ae8544bb390e4fefa0df65, type: 3}
   type: 0
-  rarity: 0
   maxStackSize: 3
   effect: {fileID: 0}
   craftRecipe: []
+  price: 100
+  minShopStackSize: 1
+  itemRarity: 200
+  dropChance: 15

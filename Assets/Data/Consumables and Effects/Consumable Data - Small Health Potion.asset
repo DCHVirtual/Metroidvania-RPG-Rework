@@ -15,6 +15,10 @@ MonoBehaviour:
   itemName: Small Health Potion
   icon: {fileID: -3237844493445452581, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 4
-  rarity: 0
   maxStackSize: 5
   effect: {fileID: 11400000, guid: 259a78a1f536cc84bbde079d854bd97c, type: 2}
+  craftRecipe: []
+  price: 100
+  minShopStackSize: 1
+  itemRarity: 103
+  dropChance: 20

@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, ISaveable
 {
+    [SerializeField] protected Data_ItemListSO itemDataBase;
+
     public event Action OnInventoryChange;
 
     public int maxInventorySize = 10;
@@ -93,4 +95,27 @@ public class Inventory : MonoBehaviour
     }
 
     public void UpdateUI() => OnInventoryChange?.Invoke();
+
+    public virtual void LoadData(GameData data)
+    {
+        
+    }
+
+    public virtual void SaveData(ref GameData data)
+    {
+        
+    }
+
+    protected void SaveItem(Inventory_Item item, ref SerializableDictionary<string, int> itemDict)
+    {
+        if (item != null && item.itemData != null)
+        {
+            string saveID = item.itemData.saveID;
+
+            if (itemDict.ContainsKey(saveID) == false)
+                itemDict[saveID] = 0;
+
+            itemDict[saveID] += item.stackSize;
+        }
+    }
 }

@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 2768340507372202723}
   - component: {fileID: 919063630778318553}
   - component: {fileID: 6020859370422251312}
+  - component: {fileID: 3050726506466366124}
   m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -463,9 +464,16 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 64
-  statusDuration: 2
-  chillSlowMultiplier: 0.7
-  electrifyChargeBuildup: 0.4
+  basicAttackScale:
+    physical: 1
+    elemental: 1
+    chillDuration: 3
+    chillSlowMultiplier: 0.4
+    burnDuration: 3
+    burnDamageScale: 1
+    shockDuration: 3
+    shockDamageScale: 1
+    shockCharge: 0.4
 --- !u!114 &6113226456432668137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,6 +663,23 @@ MonoBehaviour:
   lightningVFX: {fileID: 3868516037238911815, guid: ef787c6a34e7e5b49bac7512bc868adb, type: 3}
   currentCharge: 0
   maximumCharge: 1
+--- !u!114 &3050726506466366124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312581666784464436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e690a6e033fd9e34995745df0ab54064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDropPrefab: {fileID: 2352057079209469651, guid: d6ec9eb5d4a2a9c44b492fea84e8dbef, type: 3}
+  dropData: {fileID: 11400000, guid: 902214f9959c12b418087722dd58516c, type: 2}
+  maxRarityAmount: 1200
+  maxItemsToDrop: 5
+  dropChanceMultiplier: 1.504
 --- !u!1 &8733697975270596435
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Inventory_Storage : Inventory
 {
+    //[SerializeField] Data_ItemListSO itemDataBase;
     public Inventory_Player playerInventory { get; private set; }
     public List<Inventory_Item> materialList { get; private set; } = new List<Inventory_Item>();
     
@@ -124,5 +125,57 @@ public class Inventory_Storage : Inventory
         }
 
         UpdateUI();
+    }
+
+    public override void SaveData(ref GameData data)
+    {
+        data.storageItems.Clear();
+        data.storageMaterials.Clear();
+
+        foreach (var item in itemList)
+            SaveItem(item, ref data.storageItems);
+
+        foreach (var item in materialList)
+            SaveItem(item, ref data.storageMaterials);
+    }
+
+    
+
+    public override void LoadData(GameData data)
+    {
+        itemList.Clear();
+        materialList.Clear();
+
+        foreach (var item in data.storageItems)
+            LoadItem(item);
+
+        foreach (var item in data.storageMaterials)
+            LoadItem(item);
+
+        UpdateUI();
+    }
+
+    protected void LoadItem(KeyValuePair<string, int> item)
+    {
+        string saveID = item.Key;
+        int stackSize = item.Value;
+
+        Data_ItemSO itemData = itemDataBase.GetItemData(saveID);
+
+        if (itemData == null)
+        {
+            Debug.LogWarning("Item not found: " + saveID);
+            return;
+        }
+
+        Inventory_Item itemToLoad = new Inventory_Item(itemData);
+
+        for (int i = 0; i < stackSize; i++)
+        {
+            if (itemToLoad.itemData.type == ItemType.Material)
+                AddMaterialToStash(itemToLoad);
+            else
+                AddItemToInventory(itemToLoad);
+        }
     }
 }

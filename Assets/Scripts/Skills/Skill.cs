@@ -11,8 +11,8 @@ public class Skill : MonoBehaviour
     [SerializeField] protected SkillType skillType;
     [SerializeField] protected SkillUpgradeType upgradeType;
 
-    [SerializeField] protected float cooldown;
-    protected float lastTimeUsed;
+    [field: SerializeField] public float cooldown { get; protected set; }
+    public float lastTimeUsed { get; protected set; }
 
     protected virtual void Awake()
     {
@@ -28,11 +28,25 @@ public class Skill : MonoBehaviour
 
     }
 
-    public void SetSkillUpgrade(UpgradeData upgrade)
+    public void SetSkillUpgrade(SkillData_SO skillData)
     {
+        var upgrade = skillData.upgradeData;
         upgradeType = upgrade.upgradeType;
         cooldown = upgrade.cooldown;
         damageScale = upgrade.damageScale;
+
+        if (IsBaseSkill(skillData))
+            player.ui.uiInGame.AssignSkillSlot(skillData);
+    }
+
+    public bool IsBaseSkill(SkillData_SO skillData)
+    {
+        return skillData.upgradeData.upgradeType == SkillUpgradeType.Dash ||
+                skillData.upgradeData.upgradeType == SkillUpgradeType.TimeEcho ||
+                skillData.upgradeData.upgradeType == SkillUpgradeType.Shard ||
+                skillData.upgradeData.upgradeType == SkillUpgradeType.SwordThrow ||
+                skillData.upgradeData.upgradeType == SkillUpgradeType.Domain_Slowdown;
+                
     }
 
     protected bool Unlocked(SkillUpgradeType upgradeToCheck) => upgradeType == upgradeToCheck;

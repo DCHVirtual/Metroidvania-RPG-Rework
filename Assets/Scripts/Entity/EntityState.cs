@@ -7,7 +7,6 @@ public abstract class EntityState
     protected string animBoolName;
     protected Animator anim;
     protected Rigidbody2D rb;
-    protected Entity_Stats stats;
 
     protected float stateTimer;
     protected bool animTriggerCalled;
@@ -18,7 +17,6 @@ public abstract class EntityState
         this.animBoolName = animBoolName;
         anim = entity.anim;
         rb = entity.rb;
-        stats = entity.stats;
     }
 
     public virtual void Enter()
@@ -40,11 +38,6 @@ public abstract class EntityState
     public void CallAnimationTrigger()
     {
         animTriggerCalled = true;
-    }
-
-    public void SyncAttackSpeed()
-    {
-        anim.SetFloat("attackSpeed", stats.offense.attackSpeed.GetValue());
     }
 
     public override string ToString()

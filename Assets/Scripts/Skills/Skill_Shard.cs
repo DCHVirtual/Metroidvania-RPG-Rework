@@ -122,11 +122,23 @@ public class Skill_Shard : Skill
 
         while (currentCharges < maxCharges)
         {
+            lastTimeUsed = Time.time;
             yield return new WaitForSeconds(cooldown);
             currentCharges++;
         }
 
         isRecharging = false;
+    }
+
+    public override bool CanUseSkill()
+    {
+        if (upgradeType == SkillUpgradeType.None)
+            return false;
+
+        if (upgradeType != SkillUpgradeType.Shard_MultiCast && OnCooldown())
+            return false;
+
+        return true;
     }
 
     void HandleShardRegular()

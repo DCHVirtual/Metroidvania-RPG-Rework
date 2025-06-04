@@ -5,10 +5,12 @@ public abstract class PlayerState : EntityState
     protected Player player;
     protected PlayerInputSet.PlayerActions inputAction;
     protected Player_SkillManager skillManager;
+    protected Player_Stats stats;
 
     public PlayerState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
         this.player = player;
+        stats = player.stats;
         inputAction = player.input.Player;
         skillManager = player.GetComponent<Player_SkillManager>();
     }
@@ -72,5 +74,10 @@ public abstract class PlayerState : EntityState
             return false;
 
         return true;
+    }
+
+    public void SyncAttackSpeed()
+    {
+        anim.SetFloat("attackSpeed", stats.offense.attackSpeed.GetValue());
     }
 }

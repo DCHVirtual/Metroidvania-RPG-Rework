@@ -15,6 +15,10 @@ MonoBehaviour:
   itemName: Book of Forgetting
   icon: {fileID: 3653258361786527596, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 4
-  rarity: 2
   maxStackSize: 1
   effect: {fileID: 11400000, guid: 29bba1874e79e6c4cb83685725445547, type: 2}
+  craftRecipe: []
+  price: 100
+  minShopStackSize: 1
+  itemRarity: 924
+  dropChance: 7.7

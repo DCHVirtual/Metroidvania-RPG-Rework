@@ -20,7 +20,7 @@ public class Inventory_Item
         this.itemData = itemData;
         itemEffect = itemData.effect;
         buyPrice = itemData.price;
-        sellPrice = (int)(0.35f * buyPrice);
+        sellPrice = Mathf.RoundToInt(0.35f * buyPrice);
         ID = Guid.NewGuid();
         modifiers = (itemData as Data_EquipmentSO)?.modifiers;
     }

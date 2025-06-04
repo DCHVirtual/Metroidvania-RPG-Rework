@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public UI_SkillTooltip skillTooltip;
     [HideInInspector] public UI_ItemToolTip itemToolTip;
     [HideInInspector] public UI_StatToolTip statTooltip;
+    [HideInInspector] public UI_InGame uiInGame;
     [HideInInspector] public PlayerInputSet UI_Input;
     bool skillTreeEnabled = true;
     bool inventoryEnabled = true;
@@ -24,6 +25,7 @@ public class UI : MonoBehaviour
         uiStorage = GetComponentInChildren<UI_Storage>(true);
         uiCraft = GetComponentInChildren<UI_Craft>(true);
         uiMerchant = GetComponentInChildren<UI_Merchant>(true);
+        uiInGame = GetComponentInChildren<UI_InGame>();
         skillTooltip = GetComponentInChildren<UI_SkillTooltip>();
         itemToolTip = GetComponentInChildren<UI_ItemToolTip>();
         statTooltip = GetComponentInChildren<UI_StatToolTip>();
@@ -184,7 +186,6 @@ public class UI : MonoBehaviour
         {
             case StatType.AttackSpeed:
             case StatType.ArmorReduction:
-            case StatType.CritChance:
                 return 100;
             default: return 1;
         }

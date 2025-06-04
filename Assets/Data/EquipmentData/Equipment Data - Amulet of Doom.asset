@@ -15,8 +15,13 @@ MonoBehaviour:
   itemName: Amulet of Doom
   icon: {fileID: -5155006954947433709, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 3
-  rarity: 1
   maxStackSize: 1
+  effect: {fileID: 0}
+  craftRecipe: []
+  price: 1000
+  minShopStackSize: 1
+  itemRarity: 801
+  dropChance: 4
   modifiers:
   - statType: 2
     value: 10

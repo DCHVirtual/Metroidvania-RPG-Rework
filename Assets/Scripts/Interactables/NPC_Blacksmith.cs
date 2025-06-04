@@ -20,10 +20,13 @@ public class NPC_Blacksmith : NPC, IInteractable
         ui.player.input.Player.Attack.Disable();
     }
 
+    public bool CanInteract() => canInteract;
+
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
         playerInventory = player.GetComponent<Inventory_Player>();
+        canInteract = true;
     }
 
     protected override void OnTriggerExit2D(Collider2D collision)
@@ -32,5 +35,6 @@ public class NPC_Blacksmith : NPC, IInteractable
         ui.player.input.Player.Attack.Enable();
         ui.uiStorage.gameObject.SetActive(false);
         ui.uiCraft.gameObject.SetActive(false);
+        canInteract = false;
     }
 }

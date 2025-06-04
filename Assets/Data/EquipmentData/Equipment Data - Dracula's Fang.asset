@@ -15,7 +15,6 @@ MonoBehaviour:
   itemName: Dracula's Fang
   icon: {fileID: 8796641721362945431, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 1
-  rarity: 2
   maxStackSize: 1
   effect: {fileID: 11400000, guid: b37b288adda375843915f64e12d385c7, type: 2}
   craftRecipe:
@@ -27,6 +26,10 @@ MonoBehaviour:
     <stackSize>k__BackingField: 15
   - <itemData>k__BackingField: {fileID: 11400000, guid: 054d5e85528038841bb8aea53905a0ba, type: 2}
     <stackSize>k__BackingField: 1
+  price: 2500
+  minShopStackSize: 1
+  itemRarity: 959
+  dropChance: 3
   modifiers:
   - statType: 6
     value: 35

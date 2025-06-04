@@ -45,13 +45,20 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         if (itemInSlot == null || itemInSlot.itemData.type == ItemType.Material)
             return;
 
-        if (itemInSlot.itemData.type == ItemType.Consumable)
-        {
-            if (itemInSlot.itemEffect.CanBeUsed())
-                inventory.TryUseItem(itemInSlot);
-        }
+        bool destroyInput = Input.GetKey(KeyCode.LeftControl);
+
+        if (destroyInput)
+            inventory.RemoveItemFromInventory(itemInSlot);
         else
-            inventory.TryEquipItem(itemInSlot);
+        {
+            if (itemInSlot.itemData.type == ItemType.Consumable)
+            {
+                if (itemInSlot.itemEffect.CanBeUsed())
+                    inventory.TryUseItem(itemInSlot);
+            }
+            else
+                inventory.TryEquipItem(itemInSlot);
+        }
         
         ui.itemToolTip.ShowTooltip(false, null);
     }

@@ -40,6 +40,7 @@ public class Skill_TimeEcho : Skill
             return;
 
         CreateTimeEcho();
+        SetSkillOnCooldown();
     }
 
     public void CreateTimeEcho(Vector3? position = null)

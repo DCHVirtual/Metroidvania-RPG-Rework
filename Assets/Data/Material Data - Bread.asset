@@ -15,7 +15,10 @@ MonoBehaviour:
   itemName: Bread
   icon: {fileID: 9162415883458505674, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 0
-  rarity: 0
   maxStackSize: 3
   effect: {fileID: 0}
   craftRecipe: []
+  price: 100
+  minShopStackSize: 1
+  itemRarity: 450
+  dropChance: 10

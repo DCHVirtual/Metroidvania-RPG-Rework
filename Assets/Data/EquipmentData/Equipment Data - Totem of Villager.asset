@@ -15,8 +15,13 @@ MonoBehaviour:
   itemName: Totem of Villager
   icon: {fileID: 1018383391595562092, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 2
-  rarity: 2
   maxStackSize: 1
+  effect: {fileID: 0}
+  craftRecipe: []
+  price: 100
+  minShopStackSize: 1
+  itemRarity: 1000
+  dropChance: 0.1
   modifiers:
   - statType: 13
     value: 100000

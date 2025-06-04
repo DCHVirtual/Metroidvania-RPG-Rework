@@ -28,11 +28,14 @@ public class NPC_Merchant : NPC, IInteractable
         ui.player.input.Player.Attack.Disable();
     }
 
+    public bool CanInteract() => canInteract;
+
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
         playerInventory = player.GetComponent<Inventory_Player>();
         merchant.SetInventory(playerInventory);
+        canInteract = true;
     }
 
     protected override void OnTriggerExit2D(Collider2D collision)
@@ -41,5 +44,6 @@ public class NPC_Merchant : NPC, IInteractable
         ui.SwitchOffAllTooltips();
         ui.uiMerchant.gameObject.SetActive(false);
         ui.player.input.Player.Attack.Enable();
+        canInteract = false;
     }
 }

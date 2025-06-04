@@ -12,7 +12,7 @@ public abstract class Entity : MonoBehaviour, IAttackerTransform
     public Rigidbody2D rb { get; protected set; }
     public SpriteRenderer sr { get; protected set; }
     public Entity_StatusHandler statusHandler { get; protected set; }
-    public Entity_Stats stats { get; protected set; }
+    
     public Entity_Health health { get; protected set; }
 
     protected float originalMoveSpeed;
@@ -39,7 +39,6 @@ public abstract class Entity : MonoBehaviour, IAttackerTransform
         sr = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         statusHandler = GetComponent<Entity_StatusHandler>();
-        stats = GetComponent<Entity_Stats>();
         health = GetComponent<Entity_Health>();
         stateMachine = new StateMachine();
     }

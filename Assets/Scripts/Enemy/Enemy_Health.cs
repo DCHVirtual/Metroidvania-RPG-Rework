@@ -3,16 +3,20 @@ using UnityEngine;
 public class Enemy_Health : Entity_Health
 {
     Enemy enemy;
+    Entity_DropManager dropManager;
+
     protected override void Awake()
     {
         base.Awake();
         enemy = GetComponent<Enemy>();
+        dropManager = GetComponent<Entity_DropManager>();
     }
 
     protected override void Die()
     {
         base.Die();
-        enemy.EntityDeath();
+        dropManager.DropItems();
+        //enemy.EntityDeath();
     }
 
     public override bool TakeDamage(float dmg, Transform dmgDealer, 

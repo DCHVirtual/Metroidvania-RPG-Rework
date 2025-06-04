@@ -52,7 +52,7 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         skillTree.ApplyRedToDisabledConnex();
 
         Skill skill = skillTree.skillManager.GetSkillByType(skillData.skillType);
-        skill.SetSkillUpgrade(skillData.upgradeData);
+        skill.SetSkillUpgrade(skillData);
         skill.ResetCooldown();
     }
 

@@ -28,6 +28,12 @@ public class UI_Inventory : MonoBehaviour
         UpdateFontSize();
     }
 
+    private void OnEnable()
+    {
+        if (inventory != null && player.stats != null)
+            UpdateUI();
+    }
+
     private void Start()
     {
         UpdateUI();
@@ -41,7 +47,8 @@ public class UI_Inventory : MonoBehaviour
     }
     public void UpdateUI()
     {
-        uiHealthBar.value = player.health.GetHealthPercent();
+        if (player.health != null)
+            uiHealthBar.value = player.health.GetHealthPercent();
         uiItemSlotParent.UpdateSlots(inventory.itemList);
         uiEquipSlotParent.UpdateEquipmentSlots(inventory.equipList);
         UpdateStatSlots();

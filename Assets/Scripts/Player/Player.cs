@@ -14,7 +14,7 @@ public class Player : Entity
 
     public float dashDuration { get; private set; } = 0.3f;
 
-    UI ui;
+    public UI ui { get; private set; }
     
 
     public PlayerInputSet input { get; private set; }
@@ -25,6 +25,7 @@ public class Player : Entity
     public Player_SkillManager skillManager { get; private set; }
     public Player_Combat combat { get; private set; }
     public PlayerFX fx { get; private set; }
+    public Player_Stats stats { get; protected set; }
 
     #region States
     public Player_IdleState idleState { get; private set; }
@@ -68,6 +69,7 @@ public class Player : Entity
         fx = GetComponent<PlayerFX>();
         health = GetComponent<Entity_Health>();
         combat = GetComponent<Player_Combat>();
+        stats = GetComponent<Player_Stats>();
 
         idleState = new Player_IdleState(this, stateMachine, "Idle");
         moveState = new Player_MoveState(this, stateMachine, "Move");
@@ -116,7 +118,7 @@ public class Player : Entity
             .Select(hit => hit.GetComponent<IInteractable>())
             .FirstOrDefault();
 
-        if (closestInteractable != null)
+        if (closestInteractable != null && closestInteractable.CanInteract())
             closestInteractable.Interact();
     }
 

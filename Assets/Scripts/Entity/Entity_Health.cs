@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class Entity_Health : MonoBehaviour, IDamageable
 {
     public event Action OnTakingDamage;
+    public event Action OnHealthBarUpdate;
 
     [Header("Life Details")]
     [SerializeField] float currentHealth;
@@ -31,6 +32,8 @@ public class Entity_Health : MonoBehaviour, IDamageable
         fx = GetComponent<EntityFX>();
         healthBar = GetComponentInChildren<Slider>();
         stats = GetComponent<Entity_Stats>();
+        if (stats == null)
+            stats = GetComponent<Player_Stats>();
         
     }
 
@@ -78,6 +81,8 @@ public class Entity_Health : MonoBehaviour, IDamageable
 
     public void ReduceHealth(float damage)
     {
+        if (isDead) return;
+
         fx?.PlayDamageVFX();
         currentHealth -= damage;
         damageTaken += damage;
@@ -110,10 +115,14 @@ public class Entity_Health : MonoBehaviour, IDamageable
         UpdateHealthBar();
     }
 
+    public float GetCurrentHealth() => currentHealth;
+
     void UpdateHealthBar() 
     {
         if (stats == null) return;
-        healthBar.value = currentHealth / stats.GetMaxHealth(); 
+        if (!GetComponent<Player>())
+            healthBar.value = currentHealth / stats.GetMaxHealth(); 
+        OnHealthBarUpdate?.Invoke();
     }
 
     bool AttackEvaded()
@@ -121,6 +130,7 @@ public class Entity_Health : MonoBehaviour, IDamageable
         if (stats == null) return false;
         return Random.Range(0, 100) < stats.GetEvasion();
     }
+
     Vector2 KnockbackDirectedForce(Transform dmgDealer)
     {
         int dir = transform.position.x > dmgDealer.position.x ? 1 : -1;

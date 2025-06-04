@@ -10,6 +10,7 @@ public class UI_ItemToolTip : UI_ToolTip
 
     [SerializeField] TextMeshProUGUI itemPrice;
     [SerializeField] Transform merchantInfo;
+    [SerializeField] Transform inventoryInfo;
 
     public void ShowTooltip(bool show, RectTransform hoverRect, Inventory_Item item, bool buyPrice = false, bool showMerchInfo = false)
     {
@@ -23,6 +24,7 @@ public class UI_ItemToolTip : UI_ToolTip
         itemPrice.text = $"{text}{price}g";
 
         merchantInfo.gameObject.SetActive(showMerchInfo);
+        inventoryInfo.gameObject.SetActive(!showMerchInfo);
 
 
         base.ShowTooltip(show, hoverRect);

@@ -5,6 +5,7 @@ public class NPC : MonoBehaviour
     protected Transform player;
     protected UI ui;
     protected Animator anim;
+    protected bool canInteract = false;
 
     [SerializeField] Transform npc;
     [SerializeField] GameObject interactToolTip;

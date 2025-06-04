@@ -15,8 +15,13 @@ MonoBehaviour:
   itemName: Ring of Luck
   icon: {fileID: -5893210615866333270, guid: dff235a67a926e54891eaa41fb107979, type: 3}
   type: 3
-  rarity: 1
   maxStackSize: 1
+  effect: {fileID: 0}
+  craftRecipe: []
+  price: 100
+  minShopStackSize: 1
+  itemRarity: 789
+  dropChance: 4
   modifiers:
   - statType: 8
     value: 15

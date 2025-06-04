@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_SkillTree : MonoBehaviour
+public class UI_SkillTree : MonoBehaviour, ISaveable
 {
     public int skillPoints;
     [SerializeField] UI_NodeConnectHandler[] parentNodes;
+    List<SkillData_SO> unlockedNodes = new List<SkillData_SO>();
     public Player_SkillManager skillManager { get; private set; }
 
     public bool HaveEnoughSkillPoints(int cost) => skillPoints >= cost;
@@ -17,8 +19,6 @@ public class UI_SkillTree : MonoBehaviour
     {
         UpdateAllConnections();
     }
-
-    
 
     [ContextMenu("Update All Connections")]
     public void UpdateAllConnections()
@@ -35,5 +35,23 @@ public class UI_SkillTree : MonoBehaviour
         {
             node.SetDisabledConnection();
         }
+    }
+
+    public void GetUnlockedNodes(UI_NodeConnectHandler node)
+    {
+        if (node.treeNode.isUnlocked)
+        {
+            unlockedNodes.Add(node.treeNode.skillData);
+        }
+    }
+
+    public void LoadData(GameData data)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        throw new System.NotImplementedException();
     }
 }
