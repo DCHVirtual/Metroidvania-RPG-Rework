@@ -13,6 +13,7 @@ public class NPC_Blacksmith : NPC, IInteractable
 
     public void Interact()
     {
+        canInteract = false;
         storage.SetInventory(playerInventory);
         ui.uiStorage.SetupStorage(storage);
         ui.uiCraft.SetupCraftUI(storage);
@@ -33,8 +34,7 @@ public class NPC_Blacksmith : NPC, IInteractable
     {
         base.OnTriggerExit2D(collision);
         ui.player.input.Player.Attack.Enable();
-        ui.uiStorage.gameObject.SetActive(false);
-        ui.uiCraft.gameObject.SetActive(false);
-        canInteract = false;
+        ui.uiStorage?.gameObject.SetActive(false);
+        ui.uiCraft?.gameObject.SetActive(false);
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class GameData
@@ -16,6 +17,14 @@ public class GameData
     public List<string> skillNames;
     public int skillPoints;
 
+    //Checkpoints
+    public Vector3 respawnPosition;
+    public string respawnScene;
+
+    //Town Portal
+    public Vector3 portalPosition;
+    public string portalScene;
+
     public GameData()
     {
         inventory = new SerializableDictionary<string, int>();
@@ -23,5 +32,9 @@ public class GameData
         storageMaterials = new SerializableDictionary<string, int>();
         equipment = new List<string>();
         skillNames = new List<string>();
+        respawnPosition = Vector3.zero;
+        respawnScene = "Level_0";
+        portalPosition = Vector3.zero;
+        portalScene = "";
     }
 }

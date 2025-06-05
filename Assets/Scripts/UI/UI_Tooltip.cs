@@ -16,7 +16,7 @@ public class UI_ToolTip : MonoBehaviour
 
     public virtual void ShowTooltip(bool show, RectTransform hoverRect)
     {
-        if (!show)
+        if (!show && rect != null)
         {
             rect.position = new Vector2(9999, 9999);
             return;
@@ -27,6 +27,8 @@ public class UI_ToolTip : MonoBehaviour
 
     void UpdatePosition(RectTransform hoverRect)
     {
+        if (hoverRect == null) return;
+
         float screenCenterX = Screen.width / 2f;
         float screenTop = Screen.height;
         float screenBottom = 0;

@@ -3,14 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
+    public static SaveManager instance;
+
     public bool encryptData;
     FileDataHandler dataHandler;
     GameData gameData;
     List<ISaveable> allSaveables;
     [SerializeField] string fileName = "2D_Souls.json";
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public ref GameData GetGameData() => ref gameData;
 
     private IEnumerator Start()
     {
@@ -18,10 +28,12 @@ public class SaveManager : MonoBehaviour
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
         allSaveables = FindISaveables();
 
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForEndOfFrame();
+
         LoadGame();
     }
 
+    [ContextMenu("Save Game")]
     public void SaveGame()
     {
         DeleteSaveData();
@@ -43,6 +55,9 @@ public class SaveManager : MonoBehaviour
             return;
         }
 
+        if (gameData.respawnScene != SceneManager.GetActiveScene().name)
+            GameManager.instance.ChangeScene(gameData.respawnScene, RespawnType.Checkpoint);
+
         foreach (var saveable in allSaveables)
             saveable.LoadData(gameData);
     }
@@ -54,10 +69,10 @@ public class SaveManager : MonoBehaviour
         dataHandler.DeleteSaveData();
     }
 
-    void OnApplicationQuit()
+    /*void OnApplicationQuit()
     {
         SaveGame();
-    }
+    }*/
 
     List<ISaveable> FindISaveables()
     {

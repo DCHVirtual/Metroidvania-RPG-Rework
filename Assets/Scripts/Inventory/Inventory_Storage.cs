@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class Inventory_Storage : Inventory
 {
-    //[SerializeField] Data_ItemListSO itemDataBase;
     public Inventory_Player playerInventory { get; private set; }
     public List<Inventory_Item> materialList { get; private set; } = new List<Inventory_Item>();
-    
+    public void SetInventory(Inventory_Player inventory) => playerInventory = inventory; 
+
+    #region Crafting
     public void CraftItem(Inventory_Item itemToCraft)
     {
         foreach (var neededMaterial in itemToCraft.itemData.craftRecipe)
@@ -74,8 +75,9 @@ public class Inventory_Storage : Inventory
 
         return totalItemCount;
     }
-    public void SetInventory(Inventory_Player inventory) => playerInventory = inventory; 
+    #endregion
 
+    #region Storage Transfer Functions
     public void AddMaterialToStash(Inventory_Item itemToAdd)
     {
         var stackableItem = StackableInStash(itemToAdd);
@@ -84,6 +86,8 @@ public class Inventory_Storage : Inventory
             stackableItem.AddStack();
         else
             materialList.Add(itemToAdd);
+
+        materialList = materialList.OrderBy(t => t.itemData.itemName).ToList();
 
         UpdateUI();
     }
@@ -126,7 +130,9 @@ public class Inventory_Storage : Inventory
 
         UpdateUI();
     }
+    #endregion
 
+    #region Save / Load functions
     public override void SaveData(ref GameData data)
     {
         data.storageItems.Clear();
@@ -178,4 +184,5 @@ public class Inventory_Storage : Inventory
                 AddItemToInventory(itemToLoad);
         }
     }
+    #endregion
 }

@@ -56,6 +56,19 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         skill.ResetCooldown();
     }
 
+    public void UnlockSkillFromSave()
+    {
+        isUnlocked = true;
+        UpdateIconColor(Color.white);
+        DisableConflictNodes(true);
+        connectHandler.UnlockConnectionImage(true);
+        skillTree.ApplyRedToDisabledConnex();
+
+        Skill skill = skillTree.skillManager.GetSkillByType(skillData.skillType);
+        skill.SetSkillUpgrade(skillData);
+        skill.ResetCooldown();
+    }
+
     public void RefundSkill()
     {
         if (isUnlocked == false || skillData.unlockedByDefault) return;

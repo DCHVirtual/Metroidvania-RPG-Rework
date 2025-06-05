@@ -5,7 +5,6 @@ public class UI_SkillTree : MonoBehaviour, ISaveable
 {
     public int skillPoints;
     [SerializeField] UI_NodeConnectHandler[] parentNodes;
-    List<SkillData_SO> unlockedNodes = new List<SkillData_SO>();
     public Player_SkillManager skillManager { get; private set; }
 
     public bool HaveEnoughSkillPoints(int cost) => skillPoints >= cost;
@@ -37,21 +36,60 @@ public class UI_SkillTree : MonoBehaviour, ISaveable
         }
     }
 
-    public void GetUnlockedNodes(UI_NodeConnectHandler node)
+    #region Save / Load Functions
+    public List<string> GetAllUnlockedNodeNames()
+    {
+        List<string> unlockedNodeNames = new List<string>();
+
+        foreach (var node in parentNodes)
+            GetUnlockedNodeNames(node, unlockedNodeNames);
+
+        return unlockedNodeNames;
+    }
+
+    public void GetUnlockedNodeNames(UI_NodeConnectHandler node, List<string> unlockedNodeNames)
     {
         if (node.treeNode.isUnlocked)
         {
-            unlockedNodes.Add(node.treeNode.skillData);
+            unlockedNodeNames.Add(node.treeNode.skillData.displayName);
+            foreach (var detail in node.connectDetails)
+            {
+                if (detail.childNode != null)
+                    GetUnlockedNodeNames(detail.childNode, unlockedNodeNames);
+            }
         }
     }
 
     public void LoadData(GameData data)
     {
-        throw new System.NotImplementedException();
+        gameObject.SetActive(true);
+
+        skillPoints = data.skillPoints;
+
+        foreach (var node in parentNodes)
+            LoadNode(data, node);
+
+        gameObject.SetActive(false);
+    }
+
+    public void LoadNode(GameData data, UI_NodeConnectHandler node)
+    {
+        if (data.skillNames.Contains(node.treeNode.skillData.displayName))
+        {
+            node.treeNode.UnlockSkillFromSave();
+
+            foreach (var detail in node.connectDetails)
+            {
+                if (detail.childNode != null)
+                    LoadNode(data, detail.childNode);
+            }
+        }
     }
 
     public void SaveData(ref GameData data)
     {
-        throw new System.NotImplementedException();
+        data.skillNames = GetAllUnlockedNodeNames();
+        data.skillPoints = skillPoints;
     }
+    #endregion
 }

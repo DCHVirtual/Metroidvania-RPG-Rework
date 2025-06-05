@@ -23,6 +23,7 @@ public class NPC_Merchant : NPC, IInteractable
 
     public void Interact()
     {
+        canInteract = false;
         ui.uiMerchant.SetupMerchantUI(merchant, playerInventory);
         ui.uiMerchant.gameObject.SetActive(true);
         ui.player.input.Player.Attack.Disable();
@@ -42,7 +43,7 @@ public class NPC_Merchant : NPC, IInteractable
     {
         base.OnTriggerExit2D(collision);
         ui.SwitchOffAllTooltips();
-        ui.uiMerchant.gameObject.SetActive(false);
+        ui.uiMerchant?.gameObject.SetActive(false);
         ui.player.input.Player.Attack.Enable();
         canInteract = false;
     }

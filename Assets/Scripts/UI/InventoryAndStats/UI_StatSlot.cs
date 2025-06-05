@@ -20,13 +20,6 @@ public class UI_StatSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         playerStats = FindAnyObjectByType<Player>().GetComponent<Entity_Stats>();
     }
 
-    private void OnValidate()
-    {
-        ui = GetComponentInParent<UI>();
-        gameObject.name = "Stat - " + ui.GetStatNameByType(statType);
-        statName.text = ui.GetStatNameByType(statType);
-    }
-
     public float GetFontSize()
     {
         return statName.fontSize;

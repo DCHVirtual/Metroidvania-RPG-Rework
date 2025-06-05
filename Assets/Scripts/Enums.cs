@@ -90,3 +90,13 @@ public enum ItemRarity
     Rare,
     Legendary
 }
+
+public enum RespawnType
+{
+    Enter,
+    Exit,
+    Checkpoint,
+    PortalFromLevel,
+    PortalFromTown,
+    None
+}

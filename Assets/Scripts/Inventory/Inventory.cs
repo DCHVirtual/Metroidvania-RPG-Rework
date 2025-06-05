@@ -61,6 +61,8 @@ public class Inventory : MonoBehaviour, ISaveable
         else
             itemList.Add(itemToAdd);
 
+        itemList = itemList.OrderBy(item => item.itemData.type).ToList();
+
         UpdateUI();
     }
 
@@ -75,6 +77,8 @@ public class Inventory : MonoBehaviour, ISaveable
             itemInInventory.RemoveStack();
         else
             itemList.Remove(item);
+
+        itemList = itemList.OrderBy(item => item.itemData.type).ToList();
 
         UpdateUI();
     }
