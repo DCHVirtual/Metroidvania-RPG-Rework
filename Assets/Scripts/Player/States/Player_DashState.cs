@@ -13,6 +13,8 @@ public class Player_DashState : PlayerState
     {
         base.Enter();
 
+        player.sfx.PlayDash(.5f);
+
         skillManager.dash.OnStartEffect();
         player.fx.AfterImageEffect(player.dashDuration);
 

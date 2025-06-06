@@ -16,6 +16,8 @@ public class Player_CounterState : PlayerState
         stateTimer = combat.counterLockDuration;
         counteredSomebody = combat.AttemptCounterAttack();
         anim.SetBool("CounterSuccess", counteredSomebody);
+        if (counteredSomebody)
+            player.sfx.PlayCounter(.5f);
     }
 
     public override void Exit()

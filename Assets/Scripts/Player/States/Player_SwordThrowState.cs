@@ -27,7 +27,7 @@ public class Player_SwordThrowState : PlayerState
         if (inputAction.RangeAttack.WasReleasedThisFrame())
         {
             anim.SetBool("ThrowSword", true);
-
+            player.sfx.PlaySwordThrow();
             skillManager.swordThrow.EnableDots(false);
             skillManager.swordThrow.ConfirmTrajectory(dirToCursor);
         }

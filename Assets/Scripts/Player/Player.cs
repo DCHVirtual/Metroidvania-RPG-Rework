@@ -26,6 +26,7 @@ public class Player : Entity
     public Player_Combat combat { get; private set; }
     public PlayerFX fx { get; private set; }
     public Player_Stats stats { get; protected set; }
+    //public Entity_SFX sfx { get; private set; }
 
     #region States
     public Player_IdleState idleState { get; private set; }
@@ -70,6 +71,7 @@ public class Player : Entity
         health = GetComponent<Entity_Health>();
         combat = GetComponent<Player_Combat>();
         stats = GetComponent<Player_Stats>();
+        //sfx = GetComponent<Entity_SFX>();
 
         idleState = new Player_IdleState(this, stateMachine, "Idle");
         moveState = new Player_MoveState(this, stateMachine, "Move");

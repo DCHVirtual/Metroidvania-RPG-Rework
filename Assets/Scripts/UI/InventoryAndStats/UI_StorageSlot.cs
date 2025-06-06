@@ -21,6 +21,8 @@ public class UI_StorageSlot : UI_ItemSlot
 
         bool transferFullStack = Input.GetKey(KeyCode.LeftControl);
 
+        Player.playerTransform.GetComponent<Entity_SFX>().PlayStorageTransfer(.7f);
+
         if (slotType == StorageSlotType.Storage)
             storage.FromStorageToPlayer(itemInSlot, transferFullStack);
         else

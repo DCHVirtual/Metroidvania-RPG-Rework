@@ -75,6 +75,10 @@ public class UI : MonoBehaviour
         }
         if (UI_Input.UI.Inventory.WasPressedThisFrame())
         {
+            float timeScale = Time.timeScale;
+            Time.timeScale = 1;
+            player.sfx.PlayInventoryOpen();
+            Time.timeScale = timeScale;
             uiInventory.UpdateUI();
             if (skillTreeEnabled)
                 ToggleSkillTreeUI();

@@ -12,17 +12,21 @@ public class Entity_Combat : MonoBehaviour
     [SerializeField] LayerMask targetMask;
 
     EntityFX fx;
+    Entity_SFX sfx;
     Entity_Stats stats;
     public Data_DamageScale basicAttackScale;
 
     private void Awake()
     {
+        sfx = GetComponent<Entity_SFX>();
         fx = GetComponent<EntityFX>();
         stats = GetComponent<Entity_Stats>();
     }
 
     public void PerformAttack(/*Eventually write functionality to pass attack data here depending on attack*/)
     {
+        bool playHitFx = false;
+
         foreach (var target in GetDetectedColliders())
         {
             IDamageable damageable = target.GetComponent<IDamageable>();
@@ -38,12 +42,16 @@ public class Entity_Combat : MonoBehaviour
 
             if (targetGotHit)
             {
+                playHitFx = true;
                 OnDamageDealt?.Invoke(attackData.physicalDamage);
                 fx.PlayHitVFX(vfxPos, attackData.isCrit, attackData.element);
                 if (attackData.element != ElementType.None)
                     target.GetComponent<Entity_StatusHandler>()?.ApplyStatusEffect(attackData.element, attackData.elementData);
             }
         }
+
+        if (playHitFx)
+            sfx.PlayAttackHit(.5f);
     }
 
     protected Collider2D[] GetDetectedColliders()

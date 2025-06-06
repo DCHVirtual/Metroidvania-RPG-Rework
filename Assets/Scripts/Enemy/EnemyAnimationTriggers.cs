@@ -1,7 +1,7 @@
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class EnemyAnimationTriggers : MonoBehaviour
+public class EnemyAnimationTriggers : Entity_AnimationTriggers
 {
     Enemy enemy => GetComponentInParent<Enemy>();
     Entity_Combat entityCombat => GetComponentInParent<Entity_Combat>();

@@ -11,6 +11,7 @@ public class Player_WallJumpState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.sfx.PlayJump(.5f);
         player.SetVelocity(player.wallJumpForce.x * -player.xDir, player.wallJumpForce.y);
         stateTimer = forcedJumpTime;
     }

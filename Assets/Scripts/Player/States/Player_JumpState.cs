@@ -11,6 +11,7 @@ public class Player_JumpState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.sfx.PlayJump(.5f);
         stateTimer = forcedJumpTime;
         player.SetVelocity(player.moveInput.x * player.moveSpeed, player.jumpForce);
     }

@@ -12,6 +12,7 @@ public abstract class Entity : MonoBehaviour, IAttackerTransform
     public Rigidbody2D rb { get; protected set; }
     public SpriteRenderer sr { get; protected set; }
     public Entity_StatusHandler statusHandler { get; protected set; }
+    public Entity_SFX   sfx { get; protected set; }
     
     public Entity_Health health { get; protected set; }
 
@@ -41,6 +42,7 @@ public abstract class Entity : MonoBehaviour, IAttackerTransform
         statusHandler = GetComponent<Entity_StatusHandler>();
         health = GetComponent<Entity_Health>();
         stateMachine = new StateMachine();
+        sfx = GetComponent<Entity_SFX>();
     }
 
     protected virtual void Update()

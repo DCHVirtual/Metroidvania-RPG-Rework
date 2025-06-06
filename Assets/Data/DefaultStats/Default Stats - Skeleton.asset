@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0e538015761874c8164da8c0b3a277, type: 3}
   m_Name: Default Stats - Skeleton
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 100
   healthRegen: 0
   attackSpeed: 1
   damage: 10

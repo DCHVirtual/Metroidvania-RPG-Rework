@@ -56,6 +56,7 @@ public class Object_ItemPickup : MonoBehaviour
 
         if (inventory != null)
         {
+            Player.playerTransform.GetComponent<Entity_SFX>().PlayItemPickup();
             var itemToAdd = new Inventory_Item(itemData);
             var storage = inventory.storage;
 

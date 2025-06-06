@@ -23,6 +23,7 @@ public class Player_AirState : PlayerState
         //Ground Check
         if (player.IsGroundDetected()) 
         {
+            player.sfx.PlayJumpLand(.4f);
             player.SetZeroVelocity();
             stateMachine.ChangeState(player.idleState);
             return;
@@ -41,7 +42,10 @@ public class Player_AirState : PlayerState
 
         //Input checks
         if (inputAction.Attack.WasPerformedThisFrame())
+        {
+            player.sfx.PlayAttackSwing(.5f);
             stateMachine.ChangeState(player.jumpAttackState);
+        }
         else if (inputAction.Ultimate.WasPressedThisFrame())
             CreateDomain();
     }

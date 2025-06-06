@@ -14,6 +14,7 @@ public class UI_EquipSlot : UI_ItemSlot
     {
         if (itemInSlot == null) return;
 
+        Player.playerTransform.GetComponent<Entity_SFX>().PlayStorageTransfer(.5f);
         inventory.UnequipItem(itemInSlot);
 
         ui.itemToolTip.ShowTooltip(false, null);

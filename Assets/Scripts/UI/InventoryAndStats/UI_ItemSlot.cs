@@ -57,7 +57,10 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
                     inventory.TryUseItem(itemInSlot);
             }
             else
+            {
+                Player.playerTransform.GetComponent<Entity_SFX>().PlayEquip(.4f);
                 inventory.TryEquipItem(itemInSlot);
+            }
         }
         
         ui.itemToolTip.ShowTooltip(false, null);

@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 public class Object_Portal : MonoBehaviour
 {
     [SerializeField] RespawnType spawnType;
+    SpriteRenderer sr;
+
+    private void Awake()
+    {
+        sr = GetComponentInChildren<SpriteRenderer>();
+        sr.color = Color.clear;
+    }
 
     IEnumerator Start()
     {
@@ -28,6 +35,8 @@ public class Object_Portal : MonoBehaviour
         else if (portalPosition == Vector3.zero)        //Portal in town only active if portal in level exists
             gameObject.SetActive(false);
 
+        if (gameObject.activeSelf)
+            sr.color = Color.white;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,6 +44,8 @@ public class Object_Portal : MonoBehaviour
         var portalScene = SaveManager.instance.GetGameData().portalScene;
 
         UI.instance.player.input.Disable();
+
+        Player.playerTransform.GetComponent<Entity_SFX>().PlayPortalEnter(.5f);
 
         if (spawnType == RespawnType.PortalFromLevel)
             GameManager.instance.ChangeScene("Level_0", RespawnType.PortalFromLevel);

@@ -18,12 +18,15 @@ public class GameData
     public int skillPoints;
 
     //Checkpoints
-    public Vector3 respawnPosition;
-    public string respawnScene;
+    public Vector3 checkpointPosition;
+    public string checkpointScene;
 
     //Town Portal
     public Vector3 portalPosition;
     public string portalScene;
+
+    //Respawning
+    public string respawnScene;
 
     public GameData()
     {
@@ -32,9 +35,10 @@ public class GameData
         storageMaterials = new SerializableDictionary<string, int>();
         equipment = new List<string>();
         skillNames = new List<string>();
-        respawnPosition = Vector3.zero;
+        checkpointPosition = Vector3.zero;
         respawnScene = "Level_0";
         portalPosition = Vector3.zero;
         portalScene = "";
+        checkpointScene = "";
     }
 }

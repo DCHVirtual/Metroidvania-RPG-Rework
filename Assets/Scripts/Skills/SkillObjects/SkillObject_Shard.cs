@@ -48,6 +48,7 @@ public class SkillObject_Shard : SkillObject
 
     public void Explode()
     {
+        Player.playerTransform.GetComponent<Entity_SFX>().PlayShardExplode(.23f);
         DamageEnemiesInRadius(transform, checkRadius);
         var vfx = Instantiate(explodePrefab, transform.position, Quaternion.identity);
         vfx.GetComponentInChildren<SpriteRenderer>().color = 

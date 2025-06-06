@@ -13,6 +13,7 @@ public class NPC_Blacksmith : NPC, IInteractable
 
     public void Interact()
     {
+        Player.playerTransform.GetComponent<Entity_SFX>().PlayNPCInteract(.7f);
         canInteract = false;
         storage.SetInventory(playerInventory);
         ui.uiStorage.SetupStorage(storage);

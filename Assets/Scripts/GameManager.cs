@@ -38,7 +38,9 @@ public class GameManager : MonoBehaviour
             SaveManager.instance.GetGameData().portalPosition = Vector3.zero;
             Destroy(portalInstance.gameObject);
         }
+
         var pTransform = Player.playerTransform;
+        pTransform.GetComponent<Entity_SFX>().PlayPortalCreate(.5f);
         portalInstance = Instantiate(portalPrefab, pTransform.position + new Vector3(pTransform.localScale.x * 2, 0, 0), Quaternion.identity);
     }
 
@@ -47,14 +49,15 @@ public class GameManager : MonoBehaviour
         ChangeScene(SceneManager.GetActiveScene().name, RespawnType.Checkpoint);
     }
 
-    public void ChangeScene(string sceneName, RespawnType spawnType, bool fadeOut = true)
+    public void ChangeScene(string nextScene, RespawnType spawnType, bool fadeOut = true)
     {
-        SaveManager.instance.GetGameData().respawnScene = sceneName;
+        SaveManager.instance.GetGameData().respawnScene = nextScene;
         SaveManager.instance.SaveGame();
-        StartCoroutine(ChangeSceneCo(sceneName, spawnType, fadeOut));
+        AudioManager.instance.ChangeMusic(SceneManager.GetActiveScene().name, nextScene, 1f);
+        StartCoroutine(ChangeSceneCo(nextScene, spawnType, fadeOut));
     }
 
-    IEnumerator ChangeSceneCo(string sceneName, RespawnType respawnType, bool fadeOut = true)
+    IEnumerator ChangeSceneCo(string nextScene, RespawnType respawnType, bool fadeOut = true)
     {
         //Fade effect
         UI_FadeEffect fadeEffect;
@@ -66,7 +69,7 @@ public class GameManager : MonoBehaviour
             yield return fadeEffect.fadeCo;
         }
 
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(nextScene);
 
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
@@ -86,10 +89,7 @@ public class GameManager : MonoBehaviour
         if (position != Vector3.zero)
         {
             Player.playerTransform.position = position;
-            var cam = FindAnyObjectByType<CinemachineCamera>();
-            cam.Follow = Player.playerTransform;
-            cam.LookAt = Player.playerTransform;
-            cam.PreviousStateIsValid = false;
+            FindAnyObjectByType<CinemachineCamera>().PreviousStateIsValid = false;
         }
     }
 
@@ -110,8 +110,9 @@ public class GameManager : MonoBehaviour
 
         if (type == RespawnType.Checkpoint)
         {
-            if (gameData.respawnPosition != Vector3.zero)
-                return gameData.respawnPosition;
+            if (gameData.checkpointPosition != Vector3.zero &&
+                gameData.respawnScene == gameData.checkpointScene)
+                return gameData.checkpointPosition;
         }
         else if (type == RespawnType.PortalFromTown)
         {

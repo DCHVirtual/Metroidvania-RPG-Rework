@@ -44,10 +44,9 @@ public class Skill_Domain : Skill
     {
         spellCastTimer -= Time.deltaTime;
 
-        if (currentTarget == null)
-            currentTarget = FindNextTarget();
+        currentTarget = FindNextTarget();
 
-        if (currentTarget != null && spellCastTimer < 0)
+        if (currentTarget != null && !currentTarget.health.isDead && spellCastTimer < 0)
         {
             CastSpell(currentTarget.transform);
             spellCastTimer = 1 / spellsPerSecond;

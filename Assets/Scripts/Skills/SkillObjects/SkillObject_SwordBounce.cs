@@ -52,6 +52,7 @@ public class SkillObject_SwordBounce : SkillObject_Sword
             DamageEnemy(currentTarget);
             bounceCount--;
             enemyTargets.RemoveAt(0);
+            Player.playerTransform.GetComponent<Entity_SFX>().PlayAttackHit(.5f);
 
             if (enemyTargets.Count == 0 && bounceCount > 0)
                 enemyTargets = GetClosestEnemies();
@@ -94,5 +95,6 @@ public class SkillObject_SwordBounce : SkillObject_Sword
         rb.simulated = false;
         isBouncing = true;
         DamageEnemy(collision);
+        Player.playerTransform.GetComponent<Entity_SFX>().PlayAttackHit(.5f);
     }
 }

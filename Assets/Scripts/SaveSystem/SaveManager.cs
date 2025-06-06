@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -61,7 +62,15 @@ public class SaveManager : MonoBehaviour
         if (gameData.respawnScene != SceneManager.GetActiveScene().name)
             GameManager.instance.ChangeScene(gameData.respawnScene, RespawnType.Checkpoint, false);
         else
+        {
             UI.instance.uiFade.FadeIn(1f);
+            if (gameData.checkpointPosition != Vector3.zero && 
+                gameData.checkpointScene == SceneManager.GetActiveScene().name)
+            {
+                Player.playerTransform.position = gameData.checkpointPosition;
+                FindAnyObjectByType<CinemachineCamera>().PreviousStateIsValid = false;
+            }
+        }
     }
 
     public void LoadAllData()

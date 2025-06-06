@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAnimationTriggers : MonoBehaviour
+public class PlayerAnimationTriggers : Entity_AnimationTriggers
 {
     Player player;
     Entity_Combat entityCombat;

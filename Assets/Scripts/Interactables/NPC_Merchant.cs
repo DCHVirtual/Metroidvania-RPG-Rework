@@ -24,6 +24,7 @@ public class NPC_Merchant : NPC, IInteractable
     public void Interact()
     {
         canInteract = false;
+        Player.playerTransform.GetComponent<Entity_SFX>().PlayNPCInteract(.7f);
         ui.uiMerchant.SetupMerchantUI(merchant, playerInventory);
         ui.uiMerchant.gameObject.SetActive(true);
         ui.player.input.Player.Attack.Disable();
