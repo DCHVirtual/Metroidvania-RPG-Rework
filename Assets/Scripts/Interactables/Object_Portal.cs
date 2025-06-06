@@ -8,44 +8,37 @@ public class Object_Portal : MonoBehaviour
 
     IEnumerator Start()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();           //Waiting for SaveManager to instantiate GameData
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
 
         var gameData = SaveManager.instance.GetGameData();
         var portalPosition = gameData.portalPosition;
-        if (spawnType == RespawnType.PortalFromLevel)
-        {
-            if (portalPosition != Vector3.zero)
+
+        if (spawnType == RespawnType.PortalFromLevel)   //Portal created in level
+        {   
+            if (portalPosition != Vector3.zero)         //Portal from previous save
                 transform.position = portalPosition;
-            else
+            else                                        //New portal
             {
                 gameData.portalPosition = transform.position;
                 gameData.portalScene = SceneManager.GetActiveScene().name;
             }
         }
-        else if (portalPosition == Vector3.zero)
+        else if (portalPosition == Vector3.zero)        //Portal in town only active if portal in level exists
             gameObject.SetActive(false);
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var save = SaveManager.instance;
-        var data = save.GetGameData();
+        var portalScene = SaveManager.instance.GetGameData().portalScene;
+
+        UI.instance.player.input.Disable();
 
         if (spawnType == RespawnType.PortalFromLevel)
-        {
-            GetComponent<Collider2D>().isTrigger = false;
-            data.respawnScene = "Level_0";
-            save.SaveGame();
             GameManager.instance.ChangeScene("Level_0", RespawnType.PortalFromLevel);
-        }
         else
-        {
-            data.respawnScene = data.portalScene;
-            save.SaveGame();
-            GameManager.instance.ChangeScene(data.portalScene, RespawnType.PortalFromTown);
-        }
+            GameManager.instance.ChangeScene(portalScene, RespawnType.PortalFromTown);
     }
 }

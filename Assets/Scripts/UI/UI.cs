@@ -1,8 +1,11 @@
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
+    public static UI instance { get; private set; }
+
     [HideInInspector] public UI_SkillTree skillTree;
     [HideInInspector] public UI_Inventory uiInventory;
     [HideInInspector] public UI_Storage uiStorage;
@@ -12,6 +15,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public UI_ItemToolTip itemToolTip;
     [HideInInspector] public UI_StatToolTip statTooltip;
     [HideInInspector] public UI_InGame uiInGame;
+    [HideInInspector] public UI_FadeEffect uiFade;
     [HideInInspector] public PlayerInputSet UI_Input;
     bool skillTreeEnabled = true;
     bool inventoryEnabled = true;
@@ -19,6 +23,8 @@ public class UI : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+
         player = FindAnyObjectByType<Player>();
         skillTree = GetComponentInChildren<UI_SkillTree>(true);
         uiInventory = GetComponentInChildren<UI_Inventory>(true);
@@ -29,13 +35,17 @@ public class UI : MonoBehaviour
         skillTooltip = GetComponentInChildren<UI_SkillTooltip>();
         itemToolTip = GetComponentInChildren<UI_ItemToolTip>();
         statTooltip = GetComponentInChildren<UI_StatToolTip>();
+        uiFade = GetComponentInChildren<UI_FadeEffect>();
         UI_Input = new PlayerInputSet();
     }
 
     private void Start()
     {
-        ToggleSkillTreeUI();
-        ToggleInventoryUI();
+        if (SceneManager.GetActiveScene().name != "MainStart")
+        {
+            ToggleSkillTreeUI();
+            ToggleInventoryUI();
+        }
     }
 
     public void SwitchOffAllTooltips()

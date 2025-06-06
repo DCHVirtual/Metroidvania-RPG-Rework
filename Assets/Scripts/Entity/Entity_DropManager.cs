@@ -23,9 +23,7 @@ public class Entity_DropManager : MonoBehaviour
         int amountToDrop = Mathf.Min(itemsToDrop.Count, maxItemsToDrop);
 
         for (int i = 0; i < amountToDrop; i++)
-        {
             CreateItemDrop(itemsToDrop[i]);
-        }
     }
 
     protected void CreateItemDrop(Data_ItemSO itemToDrop)
@@ -60,8 +58,8 @@ public class Entity_DropManager : MonoBehaviour
         return finalDrops;
     }
 
-    public int Roll()
+    public float Roll()
     {
-        return Random.Range(0, 100);
+        return Random.value * 100;
     }
 }

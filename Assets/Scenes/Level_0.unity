@@ -674,7 +674,7 @@ Transform:
   m_GameObject: {fileID: 355167519}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.530563, y: -0.5648006, z: -9.930801}
+  m_LocalPosition: {x: -20.561562, y: -0.5648006, z: -9.930801}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3192,7 +3192,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.530563, y: -0.5648006, z: -9.930801}
+  m_LocalPosition: {x: -20.56166, y: -0.5648006, z: -9.930801}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3642,6 +3642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalPrefab: {fileID: 6680401779119328644, guid: d4f5dedc0f1fed84ebe7c5595ebe627a, type: 3}
+  cam: {fileID: 355167520}
 --- !u!4 &747622480
 Transform:
   m_ObjectHideFlags: 0
@@ -4445,7 +4446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5352089305504986709, guid: e18d5a46964ee7947ad69ec85378c9b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.79
+      value: -2.821
       objectReference: {fileID: 0}
     - target: {fileID: 5352089305504986709, guid: e18d5a46964ee7947ad69ec85378c9b2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5693,6 +5694,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6689292909833634063, guid: 9620dff06bb54dd4499bac43367f227c, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6908886005456143370, guid: 9620dff06bb54dd4499bac43367f227c, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6908886005456143370, guid: 9620dff06bb54dd4499bac43367f227c, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6926724539776852806, guid: 9620dff06bb54dd4499bac43367f227c, type: 3}

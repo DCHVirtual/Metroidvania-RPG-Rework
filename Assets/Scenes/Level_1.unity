@@ -2052,6 +2052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalPrefab: {fileID: 6680401779119328644, guid: d4f5dedc0f1fed84ebe7c5595ebe627a, type: 3}
+  cam: {fileID: 355167520}
 --- !u!4 &431537072
 Transform:
   m_ObjectHideFlags: 0
@@ -9324,6 +9325,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4444258734871671126, guid: 9620dff06bb54dd4499bac43367f227c, type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4559626634842025415, guid: 9620dff06bb54dd4499bac43367f227c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -9874,7 +9879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8489230078992795159, guid: 9620dff06bb54dd4499bac43367f227c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 8602255100763582537, guid: 9620dff06bb54dd4499bac43367f227c, type: 3}
       propertyPath: m_AnchoredPosition.x

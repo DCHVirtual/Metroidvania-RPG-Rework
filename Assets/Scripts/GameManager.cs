@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [SerializeField] GameObject portalPrefab;
+    [SerializeField] Transform cam;
+    GameObject portalInstance;
+    //public Coroutine ChangeSceneCo;
 
     private void Awake()
     {
@@ -22,46 +25,74 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
-            Instantiate(portalPrefab, Player.playerTransform.position + new Vector3(2,0,0), Quaternion.identity);
+        {
+            CreatePortal();
+        }
+    }
+
+    private void CreatePortal()
+    {
+        if (SceneManager.GetActiveScene().name == "Level_0") return;
+
+        if (portalInstance != null)
+        {
+            SaveManager.instance.GetGameData().portalPosition = Vector3.zero;
+            Destroy(portalInstance.gameObject);
+        }
+        var pTransform = Player.playerTransform;
+        portalInstance = Instantiate(portalPrefab, pTransform.position + new Vector3(pTransform.localScale.x * 2, 0, 0), Quaternion.identity);
     }
 
     public void RestartScene()
     {
-        SaveManager.instance.SaveGame();
-
         ChangeScene(SceneManager.GetActiveScene().name, RespawnType.Checkpoint);
     }
 
-    public void ChangeScene(string sceneName, RespawnType spawnType)
+    public void ChangeScene(string sceneName, RespawnType spawnType, bool fadeOut = true)
     {
-        StartCoroutine(ChangeSceneCo(sceneName, spawnType));
+        SaveManager.instance.GetGameData().respawnScene = sceneName;
+        SaveManager.instance.SaveGame();
+        StartCoroutine(ChangeSceneCo(sceneName, spawnType, fadeOut));
     }
 
-    IEnumerator ChangeSceneCo(string sceneName, RespawnType respawnType)
+    IEnumerator ChangeSceneCo(string sceneName, RespawnType respawnType, bool fadeOut = true)
     {
         //Fade effect
+        UI_FadeEffect fadeEffect;
 
-        //yield return new WaitForSeconds(1);
-        yield return new WaitForEndOfFrame();
+        if (fadeOut)
+        {
+            fadeEffect = UI.instance.uiFade;
+            fadeEffect.FadeOut(1);
+            yield return fadeEffect.fadeCo;
+        }
 
         SceneManager.LoadScene(sceneName);
 
-        //yield return new WaitForSeconds(0.2f);
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
 
+        //SaveManager.instance.LoadAllData();
+        fadeEffect = UI.instance.uiFade;
+        fadeEffect.FadeIn(1);
+        UI.instance.player.input.Enable();
 
         Vector3 position = GetSpawnPosition(respawnType);
 
         var gameData = SaveManager.instance.GetGameData();
-        SaveManager.instance.SaveGame();
 
         if (gameData.portalScene == SceneManager.GetActiveScene().name)
             Instantiate(portalPrefab, gameData.portalPosition, Quaternion.identity);
 
         if (position != Vector3.zero)
+        {
             Player.playerTransform.position = position;
+            var cam = FindAnyObjectByType<CinemachineCamera>();
+            cam.Follow = Player.playerTransform;
+            cam.LookAt = Player.playerTransform;
+            cam.PreviousStateIsValid = false;
+        }
     }
 
     Vector3 GetSpawnPosition(RespawnType type)

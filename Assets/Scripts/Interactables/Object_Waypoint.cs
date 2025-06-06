@@ -25,11 +25,9 @@ public class Object_Waypoint : MonoBehaviour
 
     private IEnumerator OnTriggerEnter2D(Collider2D collision)
     {
-
+        UI.instance.player.input.Disable();
         //Zero respawnPosition to load at start of level instead of checkpoint
         SaveManager.instance.GetGameData().respawnPosition = Vector3.zero;
-        SaveManager.instance.GetGameData().respawnScene = transferToScene;
-        SaveManager.instance.SaveGame();
         GameManager.instance.ChangeScene(transferToScene, connectedWaypointType);
 
         yield return null;

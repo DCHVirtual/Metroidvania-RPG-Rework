@@ -15,6 +15,7 @@ public class SaveManager : MonoBehaviour
     List<ISaveable> allSaveables;
     [SerializeField] string fileName = "2D_Souls.json";
 
+
     private void Awake()
     {
         instance = this;
@@ -24,7 +25,6 @@ public class SaveManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        Debug.Log(Application.persistentDataPath);
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
         allSaveables = FindISaveables();
 
@@ -52,12 +52,20 @@ public class SaveManager : MonoBehaviour
         {
             Debug.Log("No save data found, creating new save file");
             gameData = new GameData();
+            UI.instance.uiFade.FadeIn(1f);
             return;
         }
 
-        if (gameData.respawnScene != SceneManager.GetActiveScene().name)
-            GameManager.instance.ChangeScene(gameData.respawnScene, RespawnType.Checkpoint);
+        LoadAllData();
 
+        if (gameData.respawnScene != SceneManager.GetActiveScene().name)
+            GameManager.instance.ChangeScene(gameData.respawnScene, RespawnType.Checkpoint, false);
+        else
+            UI.instance.uiFade.FadeIn(1f);
+    }
+
+    public void LoadAllData()
+    {
         foreach (var saveable in allSaveables)
             saveable.LoadData(gameData);
     }

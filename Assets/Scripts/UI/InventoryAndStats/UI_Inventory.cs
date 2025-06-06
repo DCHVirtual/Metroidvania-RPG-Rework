@@ -30,8 +30,8 @@ public class UI_Inventory : MonoBehaviour
 
     private void OnEnable()
     {
-        if (inventory != null && player.stats != null)
-            UpdateUI();
+        /*if (inventory != null && player.stats != null)
+            UpdateUI();*/
     }
 
     private void Start()
