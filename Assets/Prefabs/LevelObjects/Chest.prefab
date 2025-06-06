@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 383886723
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3f4c31abd07c97d488b6687bccd4a35b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 3869554803956265811}
   - component: {fileID: 9213597690396361049}
   - component: {fileID: 3579920734516277565}
+  - component: {fileID: 3982823009881545941}
   m_Layer: 10
   m_Name: Chest
   m_TagString: Untagged
@@ -248,3 +249,20 @@ MonoBehaviour:
   OnHitVFXColor: {r: 1, g: 1, b: 1, a: 1}
   CounterVFX: {fileID: 0}
   CounterVFXColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &3982823009881545941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446313581955601751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e690a6e033fd9e34995745df0ab54064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDropPrefab: {fileID: 2352057079209469651, guid: d6ec9eb5d4a2a9c44b492fea84e8dbef, type: 3}
+  dropData: {fileID: 11400000, guid: e253e586ebfc2414fb57a992aee0e389, type: 2}
+  maxRarityAmount: 1200
+  maxItemsToDrop: 5
+  dropChanceMultiplier: 1.53

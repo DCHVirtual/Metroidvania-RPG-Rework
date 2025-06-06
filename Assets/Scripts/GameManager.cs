@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [SerializeField] GameObject portalPrefab;
-    [SerializeField] Transform cam;
     GameObject portalInstance;
     //public Coroutine ChangeSceneCo;
 
@@ -73,7 +72,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
 
-        //SaveManager.instance.LoadAllData();
         fadeEffect = UI.instance.uiFade;
         fadeEffect.FadeIn(1);
         UI.instance.player.input.Enable();

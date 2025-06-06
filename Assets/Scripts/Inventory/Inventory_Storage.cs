@@ -174,14 +174,12 @@ public class Inventory_Storage : Inventory
             return;
         }
 
-        Inventory_Item itemToLoad = new Inventory_Item(itemData);
-
         for (int i = 0; i < stackSize; i++)
         {
-            if (itemToLoad.itemData.type == ItemType.Material)
-                AddMaterialToStash(itemToLoad);
+            if (itemData.type == ItemType.Material)
+                AddMaterialToStash(new Inventory_Item(itemData));
             else
-                AddItemToInventory(itemToLoad);
+                AddItemToInventory(new Inventory_Item(itemData));
         }
     }
     #endregion

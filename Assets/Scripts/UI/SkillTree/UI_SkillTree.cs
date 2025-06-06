@@ -6,7 +6,7 @@ public class UI_SkillTree : MonoBehaviour, ISaveable
     public int skillPoints;
     [SerializeField] UI_NodeConnectHandler[] parentNodes;
     public Player_SkillManager skillManager { get; private set; }
-
+    int test = 0, test1 = 0;
     public bool HaveEnoughSkillPoints(int cost) => skillPoints >= cost;
     public void RemoveSkillPoints(int cost) => skillPoints -= cost;
     public void AddSkillPoints(int points) => skillPoints += points;
@@ -49,6 +49,7 @@ public class UI_SkillTree : MonoBehaviour, ISaveable
 
     public void GetUnlockedNodeNames(UI_NodeConnectHandler node, List<string> unlockedNodeNames)
     {
+        Debug.Log($"Getting Unlocked node {test}");
         if (node.treeNode.isUnlocked)
         {
             unlockedNodeNames.Add(node.treeNode.skillData.displayName);
@@ -74,6 +75,7 @@ public class UI_SkillTree : MonoBehaviour, ISaveable
 
     public void LoadNode(GameData data, UI_NodeConnectHandler node)
     {
+        Debug.Log($"Loading node {test1}");
         if (data.skillNames.Contains(node.treeNode.skillData.displayName))
         {
             node.treeNode.UnlockSkillFromSave();

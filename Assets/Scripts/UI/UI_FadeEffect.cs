@@ -14,11 +14,15 @@ public class UI_FadeEffect : MonoBehaviour
 
     public void FadeIn(float duration)
     {
+        if (fadeCo != null)
+            StopCoroutine(fadeCo);
         fadeCo = StartCoroutine(Fade(1, 0, duration));
     }
 
     public void FadeOut(float duration)
     {
+        if (fadeCo != null)
+            StopCoroutine(fadeCo);
         fadeCo = StartCoroutine (Fade(0, 1, duration));
     }
 
