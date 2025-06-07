@@ -10,7 +10,7 @@ public class Object_Waypoint : MonoBehaviour
     [SerializeField] string transferToScene;
     [SerializeField] Transform spawnPoint;
     bool canBeTriggered = true;
-
+    /*
     private void OnValidate()
     {
         gameObject.name = $"Object_Waypoint - {waypointType} - {transferToScene}";
@@ -19,7 +19,7 @@ public class Object_Waypoint : MonoBehaviour
             connectedWaypointType = RespawnType.Exit;
         else if (waypointType == RespawnType.Exit)
             connectedWaypointType = RespawnType.Enter;
-    }
+    }*/
 
     public Vector3 GetSpawnPoint() => spawnPoint.position;
 

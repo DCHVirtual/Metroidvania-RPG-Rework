@@ -1,4 +1,7 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "RPG Setup/Item Data/Material Item", fileName = "Material Data - ")]
@@ -26,13 +29,13 @@ public class Data_ItemSO : ScriptableObject
     [Range(0, 100f)]
     public float dropChance;
 
-    public string saveID { get; private set; }
+    [field: SerializeField] public string saveID { get; private set; }
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
-#if UNITY_EDITOR
         string path = AssetDatabase.GetAssetPath(this);
         saveID = AssetDatabase.AssetPathToGUID(path);
-#endif
     }
+#endif
 }

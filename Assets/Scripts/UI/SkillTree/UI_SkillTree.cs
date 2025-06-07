@@ -24,10 +24,19 @@ public class UI_SkillTree : MonoBehaviour, ISaveable
     {
         foreach (var node in parentNodes)
         {
+            node.SetStartConnexColor();
             node.UpdateAllConnections();
         }
     }
 
+    public void SetStartConnexColors()
+    {
+        foreach (var node in parentNodes)
+        {
+            node.SetStartConnexColor();
+        }
+    }
+    
     public void ApplyRedToDisabledConnex()
     {
         foreach (var node in parentNodes)
@@ -49,7 +58,6 @@ public class UI_SkillTree : MonoBehaviour, ISaveable
 
     public void GetUnlockedNodeNames(UI_NodeConnectHandler node, List<string> unlockedNodeNames)
     {
-        Debug.Log($"Getting Unlocked node {test}");
         if (node.treeNode.isUnlocked)
         {
             unlockedNodeNames.Add(node.treeNode.skillData.displayName);
@@ -75,7 +83,6 @@ public class UI_SkillTree : MonoBehaviour, ISaveable
 
     public void LoadNode(GameData data, UI_NodeConnectHandler node)
     {
-        Debug.Log($"Loading node {test1}");
         if (data.skillNames.Contains(node.treeNode.skillData.displayName))
         {
             node.treeNode.UnlockSkillFromSave();

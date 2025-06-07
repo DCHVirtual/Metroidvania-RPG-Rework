@@ -19,23 +19,21 @@ public class UI_NodeConnectHandler : MonoBehaviour
     [field: SerializeField] public UI_NodeConnectDetails[] connectDetails {  get; private set; }
 
     Image connectionImage;
-    Color originalConnectionColor;
+    Color originalConnectionColor = new Color(0.4213836f, 0.4213836f, 0.4213836f, 1);
 
     private void Awake()
     {
-        if (connectionImage != null)
-            originalConnectionColor = connectionImage.color;
         treeNode = GetComponent<UI_TreeNode>();
     }
 
-    private void OnValidate()
+    /*private void OnValidate()
     {
 
         if (connectDetails.Length == 0)
             return;
 
         UpdateConnections();
-    }
+    }*/
 
     public void UpdateConnections()
     {
@@ -93,4 +91,16 @@ public class UI_NodeConnectHandler : MonoBehaviour
     public void SetConnectionImage(Image image) => connectionImage = image;
 
     public void SetPosition(Vector2 position) => myRect.anchoredPosition = position;
+
+    internal void SetStartConnexColor()
+    {
+        if (connectionImage != null)
+            connectionImage.color = originalConnectionColor;
+
+        foreach (var detail in connectDetails)
+        {
+            if (detail.childNode != null)
+                detail.childNode.SetStartConnexColor();
+        }
+    }
 }

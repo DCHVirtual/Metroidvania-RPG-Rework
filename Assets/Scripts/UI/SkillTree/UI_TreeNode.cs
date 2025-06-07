@@ -156,7 +156,7 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (!isUnlocked && !isDisabled)
             UpdateBorderColor(skillBorderColor);
     }
-
+    /*
     void OnValidate()
     {
         if (skillData == null) return;
@@ -164,7 +164,7 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         skillName = skillData.displayName;
         skillIcon.sprite = skillData.icon;
         gameObject.name = "UI_Node - " + skillData.displayName;
-    }
+    }*/
 
     private void OnDisable()
     {

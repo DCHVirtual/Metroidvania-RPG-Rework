@@ -5,10 +5,10 @@ public class UI_EquipSlot : UI_ItemSlot
 {
     [field: SerializeField] public ItemType slotType { get; private set; }
 
-    private void OnValidate()
+    /*private void OnValidate()
     {
         gameObject.name = $"UI_EquipSlot - {slotType}";
-    }
+    }*/
 
     public override void OnPointerDown(PointerEventData eventData)
     {

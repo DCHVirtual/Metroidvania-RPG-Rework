@@ -16,6 +16,7 @@ public class Object_ItemPickup : MonoBehaviour
         itemToAdd = new Inventory_Item(itemData);
     }
 
+    /*
     private void OnValidate()
     {
         if (itemData == null) return;
@@ -23,7 +24,7 @@ public class Object_ItemPickup : MonoBehaviour
         SetupVisuals();
         //sr = GetComponent<SpriteRenderer>();
         
-    }
+    }*/
 
     public void SetupItem(Data_ItemSO itemData)
     {
@@ -56,6 +57,7 @@ public class Object_ItemPickup : MonoBehaviour
 
         if (inventory != null)
         {
+            Debug.Log($"Attempted to pick up item {itemData.itemName} with ID {itemData.saveID}");
             Player.playerTransform.GetComponent<Entity_SFX>().PlayItemPickup();
             var itemToAdd = new Inventory_Item(itemData);
             var storage = inventory.storage;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4758716976631423012}
   - component: {fileID: 2227081728368811649}
   m_Layer: 9
-  m_Name: Object_ItemPickup - Animal Leather
+  m_Name: Object_ItemPickup - Leather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
